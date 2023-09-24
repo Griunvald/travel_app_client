@@ -1,5 +1,6 @@
 import Button from  '../common/Button.jsx';
 import Logo from '../common/Logo.jsx';
+import Hamburger from '../common/Hamburger.jsx';
 
 function Navbar() {
     return (
@@ -11,6 +12,7 @@ function Navbar() {
                 <div className="flex justify-end gap-x-5 my-4 mr-4.5">
                 <Button name="Login" type="secondary"/>
                 <Button name="Join" type="primary"/>
+        <Hamburger />
                 </div>
             </div>
         </nav>
