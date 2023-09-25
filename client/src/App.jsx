@@ -1,5 +1,6 @@
 import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
 import Content from './components/layout/Content';
 import Footer from './components/layout/Footer';
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <ProvidersWrapper>
           <Navbar />
+          <Sidebar />
           <Content />
           <Footer />
       </ProvidersWrapper>
