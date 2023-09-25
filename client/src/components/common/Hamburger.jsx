@@ -4,7 +4,7 @@ import { useMenu } from  '../../contexts/MenuContext.jsx'
 function Hamburger() {
     const { toggleMenu } = useMenu();
     return (
-        <button onClick={toggleMenu}>
+        <button className="py-1.5" onClick={toggleMenu}>
             <img src={hamburgerIcon} alt="hamburger menu icon" />
         </button>
     )
