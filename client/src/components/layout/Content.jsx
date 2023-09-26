@@ -1,8 +1,10 @@
+import { Outlet } from 'react-router-dom';
+
 function Content() {
     return (
         <main className="flex-grow">
             <div className="px-2 mx-auto max-w-screen-xl">
-                <h1>Content</h1>
+                <Outlet />
             </div>
         </main>
     );
