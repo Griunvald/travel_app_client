@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Button from  '../common/Button.jsx';
+import LinkButton from  '../common/LinkButton.jsx';
 import Logo from '../common/Logo.jsx';
 import Hamburger from '../common/Hamburger.jsx';
 import { Link } from 'react-router-dom';
@@ -28,8 +28,8 @@ function Navbar() {
                 <div className="flex justify-end gap-x-5 my-4 mr-4.5">
         { windowWidth > 768 ? (
             <>
-                <Button name="Login" type="secondary"/>
-                <Button name="Join" type="primary"/>
+                <LinkButton name="Login" type="secondary" path="/login"/>
+                <LinkButton name="Join" type="primary" path="/join"/>
             </>
         ) : (
                 <Hamburger />
