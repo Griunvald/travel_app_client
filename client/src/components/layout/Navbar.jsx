@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from  '../common/Button.jsx';
 import Logo from '../common/Logo.jsx';
 import Hamburger from '../common/Hamburger.jsx';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
