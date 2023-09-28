@@ -7,7 +7,9 @@ export default {
   theme: {
       extend: {
           fontFamily: {
-              'pacifico': ['Pacifico', 'cursive']
+              'pacifico': ['Pacifico', 'cursive'],
+              'montserrat': ['Montserrat', 'sans-serif'],
+              'pt-serif': ['PT Serif', 'serif']
           },
           spacing: {
               '4.5':'1.125rem'
