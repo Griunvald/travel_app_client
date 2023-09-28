@@ -9,7 +9,9 @@ export default {
           fontFamily: {
               'pacifico': ['Pacifico', 'cursive'],
               'montserrat': ['Montserrat', 'sans-serif'],
-              'pt-serif': ['PT Serif', 'serif']
+              'pt-serif': ['PT Serif', 'serif'],
+              'playfair-display': ['Playfair Display', 'serif'],
+              'roboto': ['Roboto', 'sans-serif']
           },
           spacing: {
               '4.5':'1.125rem'
