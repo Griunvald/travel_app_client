@@ -28,8 +28,8 @@ function Navbar() {
                 <div className="flex justify-end gap-x-5 my-4 mr-4.5">
         { windowWidth > 768 ? (
             <>
-                <LinkButton name="Login" type="secondary" path="/login"/>
-                <LinkButton name="Join" type="primary" path="/join"/>
+                <LinkButton name="Login" variant="secondary" path="/login"/>
+                <LinkButton name="Join" variant="primary" path="/join"/>
             </>
         ) : (
                 <Hamburger />
