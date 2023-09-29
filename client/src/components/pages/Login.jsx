@@ -12,7 +12,7 @@ function Login() {
 
         <label htmlFor="password">Password</label>
         <input className="mb-5" type="password" name="password" />
-        <Button name="Log in" type="primary"/>
+        <Button name="Log in" variant="primary"/>
           </form>
         <p className="mt-4">Don't have an account? <Link name="Join" path="/join"/></p>
         </div>
