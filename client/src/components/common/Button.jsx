@@ -1,8 +1,8 @@
-function Button({ name, type }) {
+function Button({ name, variant, action }) {
   return (
     <button className={`px-8 py-2 text-lg font-semibold rounded 
-        ${type === 'primary' ? 'bg-black text-white' :
-                'bg-inherit text-black'}`}>
+        ${variant === 'primary' ? 'bg-black text-white' :
+                'bg-inherit text-black'}`} type={action}>
       {name}
     </button>
   );
