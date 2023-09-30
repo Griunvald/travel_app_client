@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import  Link  from '../common/Link'
 
@@ -10,16 +11,23 @@ function Join() {
         password: "",
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        postData('http://localhost:3003/api/v1/auth/register', formData)
-          .then((data) => console.log(data))
-          .catch((error) => console.log('Error:', error));
+        try {
+        const response = await postData('http://localhost:3003/api/v1/auth/register', formData)
+            if(response.message === 'User was created!' ) {
+               navigate('/');
+            }
+        } catch(err){
+           console.log(err);
+        }
     }
 
     const postData = async (url, data) => {
