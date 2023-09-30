@@ -34,6 +34,7 @@ function Join() {
       try {
         const response = await fetch(url, {
           method: 'POST', // HTTP method
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json', // Set the content type
           },
