@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import LinkButton from  '../common/LinkButton.jsx';
 import Logo from '../common/Logo.jsx';
 import Hamburger from '../common/Hamburger.jsx';
+import Avatar from '../common/Avatar';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
@@ -30,6 +31,7 @@ function Navbar() {
             <>
                 <LinkButton name="Login" variant="secondary" path="/login"/>
                 <LinkButton name="Join" variant="primary" path="/join"/>
+            <Avatar />
             </>
         ) : (
                 <Hamburger />
