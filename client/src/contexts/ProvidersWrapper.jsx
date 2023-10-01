@@ -1,9 +1,12 @@
 import { MenuProvider } from './MenuContext.jsx';
+import { UserProvider } from './UserContext.jsx';
 
 export const ProvidersWrapper = ({ children }) => {
     return (
-      <MenuProvider>
-        { children }
-      </MenuProvider>
+        <UserProvider>
+          <MenuProvider>
+            { children }
+          </MenuProvider>
+        </UserProvider>
     );
 };
