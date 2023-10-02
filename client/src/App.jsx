@@ -7,6 +7,7 @@ import TripsList from './components/pages/TripsList';
 import About from './components/pages/About';
 import Login from './components/pages/Login';
 import Join from './components/pages/Join';
+import Trip from './components/pages/Trip';
 import NotFound from './components/pages/NotFound';
 
 const NavbarWrapper = () => {
@@ -39,7 +40,12 @@ const router = createBrowserRouter([
             {
                 path: '/join',
                 element: <Join />
-            },{
+            },
+            {
+                path: '/trip',
+                element: <Trip />
+            },
+            {
                 path: '*',
                 element: <NotFound/>
             }

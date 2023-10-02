@@ -33,7 +33,7 @@ function Navbar() {
             username ? 
             (<>
                 <Avatar/>
-                <LinkButton name="Start Trip" variant="primary" path="/create-trip"/>
+                <LinkButton name="Start Trip" variant="primary" path="/trip"/>
             </>) 
             : 
             (<>
