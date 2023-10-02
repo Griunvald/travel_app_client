@@ -16,14 +16,15 @@ const Sidebar = () => {
           bg-gray-200 transform transition-transform duration-300
           ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-50`}>
       <div className="flex flex-col mx-4.5 gap-y-16 mt-16">
-      { username ? (
-<></>
-      ):(
-          <>
+      { username ? 
+         (<>
+                <LinkButton name="Start Trip" variant="primary" path="/create-trip"/>
+          </>)
+          :
+          (<>
            <LinkButton variant="secondary" name="Log in" path="/login" onClick={toggleMenu}/>
            <LinkButton variant="primary" name="Join" path="/join" onClick={toggleMenu}/>
-          </>
-      )
+          </>)
       }
       </div>
         

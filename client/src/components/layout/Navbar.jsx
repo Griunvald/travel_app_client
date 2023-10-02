@@ -30,8 +30,12 @@ function Navbar() {
             <div className="max-w-full bg-gray-200">
                 <div className="flex justify-end gap-x-5 my-4 mr-4.5">
         { windowWidth > 768 ? (
-            username ? (<Avatar/>) : 
-
+            username ? 
+            (<>
+                <Avatar/>
+                <LinkButton name="Start Trip" variant="primary" path="/create-trip"/>
+            </>) 
+            : 
             (<>
                 <LinkButton name="Login" variant="secondary" path="/login"/>
                 <LinkButton name="Join" variant="primary" path="/join"/>
