@@ -52,7 +52,7 @@ function Join() {
       }
 };
     return (
-        <div className="w-full md:w-[350px] mx-auto border-solid border-black border-x border-y px-12 pt-6 pb-6 mt-24">
+        <div className="w-full md:w-[350px] mx-auto shadow-md border-x border-y px-12 pt-6 pb-6 mt-24">
         <h2 className="font-playfair-display font-bold text-2xl text-center mb-6">Join Road Cronicles</h2>
           <form className="flex flex-col" onSubmit={handleSubmit}>
 
