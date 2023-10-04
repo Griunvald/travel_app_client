@@ -5,7 +5,7 @@ function Form({ children, onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="flex flex-col" onSubmit={handleSubmit}>
       {children}
     </form>
   );
