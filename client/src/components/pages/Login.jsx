@@ -22,7 +22,6 @@ function Login() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/login', formData)
             const username = JSON.parse(response);
