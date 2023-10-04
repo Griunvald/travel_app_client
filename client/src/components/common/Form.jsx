@@ -1,7 +1,7 @@
 function Form({ children, onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit(e);
   };
 
   return (
