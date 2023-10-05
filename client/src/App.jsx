@@ -7,7 +7,7 @@ import TripsList from './components/pages/TripsList';
 import About from './components/pages/About';
 import Login from './components/pages/Login';
 import Join from './components/pages/Join';
-import Trip from './components/pages/Trip';
+import StartTrip from './components/pages/StartTrip';
 import NotFound from './components/pages/NotFound';
 
 const NavbarWrapper = () => {
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
                 element: <Join />
             },
             {
-                path: '/trip',
-                element: <Trip />
+                path: '/start-trip',
+                element: <StartTrip />
             },
             {
                 path: '*',
