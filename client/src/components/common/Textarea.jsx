@@ -1,8 +1,9 @@
 function Textarea({ label, name, value, onChange, rows = 5, cols = 40 }) {
   return (
-    <div className="textarea-wrapper">
+    <div className="flex flex-col">
       {label && <label htmlFor={name}>{label}</label>}
       <textarea
+        className="mb-4"
         id={name}
         name={name}
         rows={rows}
