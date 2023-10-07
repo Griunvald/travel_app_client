@@ -27,7 +27,7 @@ const ImageUpload = ({ onUpload }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center p-4 mb-4 h-48" style={{
+    <div className="relative flex flex-col items-center justify-center mb-4 h-48" style={{
   border: '2px dashed',
   borderImage: `url(data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'
       width=\'10\' height=\'10\' viewBox=\'0 0 10 10\' ><rect width=\'10\' height=\'10\'
@@ -44,18 +44,12 @@ const ImageUpload = ({ onUpload }) => {
         className="absolute opacity-0 w-full h-full cursor-pointer"
       />
       {preview ? (
-        <>
-          <img src={preview} alt="Preview" className="max-w-full max-h-36" />
-          <button 
-            onClick={handleCancel} 
-            className="mt-2 text-red-500 text-sm"
-          >
-            Choose another image
-          </button>
+           <>
+          <img src={preview} alt="Preview" className="max-w-full max-h-full" />
         </>
       ) : (
         <div className="text-center text-gray-600">
-          <p>Capture your journey. Click or drag to upload</p>
+          <p>Click or drag to upload</p>
         </div>
       )}
     </div>
