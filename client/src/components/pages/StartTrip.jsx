@@ -4,6 +4,7 @@ import Button from '../common/Button';
 import  Link  from '../common/Link'
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
+import ImageUpload from '../common/ImageUpload';
 import { useUser } from '../../contexts/UserContext';
 
 
@@ -78,6 +79,10 @@ function StartTrip() {
                     value={formData.title}
                     onChange={handleChange}
                 
+            />
+
+            <ImageUpload
+                label="Upload image"
             />
 
 
