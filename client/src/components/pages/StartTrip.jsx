@@ -13,6 +13,7 @@ import { useImage } from '../../contexts/ImageContext';
 function StartTrip() {
     const [formData, setFormData] = useState({
         title: "",
+        description: "",
     });
 
     const { setUsername } = useUser();
@@ -77,9 +78,9 @@ function StartTrip() {
 
                 <Textarea
                     label="Trip Description"
-                    name="title"
+                    name="description"
                     rows="3" 
-                    value={formData.title}
+                    value={formData.description}
                     onChange={handleChange}
                 
             />
