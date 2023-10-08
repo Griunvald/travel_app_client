@@ -57,8 +57,8 @@ function Login() {
 };
 
     return (
-        <div className="w-full md:w-[350px] mx-auto border-x border-y shadow-md px-12 pt-6 pb-6 mt-24">
-            <h2 className="font-playfair-display font-bold text-2xl text-center mb-6">Log In to Road Cronicles</h2>
+        <div className="w-full md:w-[350px] mx-auto border-x border-y border-primary shadow-soft px-12 pt-6 pb-6 mt-24">
+            <h2 className="font-medium text-2xl text-center mb-6">Log In to Road Cronicles</h2>
 
             <Form onSubmit={handleSubmit}>
 
@@ -82,7 +82,7 @@ function Login() {
             <Button name="Log in" variant="primary" action="submit"/>
 
             </Form>
-            <p className="mt-4">Don't have an account? <Link name="Join" path="/join"/></p>
+            <p className="mt-4 text-sm">Don't have an account? <Link name="Join" path="/join"/></p>
         </div>
     );
 }
