@@ -1,9 +1,9 @@
 function Input({ label, name, value, onChange, type = 'text' }) {
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label className="text-gray-800" htmlFor={name}>{label}</label>
       <input 
-        className="mb-4"
+        className="mb-4 border border-secondary"
         id={name}
         name={name}
         type={type}
