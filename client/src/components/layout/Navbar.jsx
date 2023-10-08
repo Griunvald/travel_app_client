@@ -23,11 +23,11 @@ function Navbar() {
     }, []);
 
     return (
-        <nav className="bg-gray-200 flex justify-between">
+        <nav className="bg-secondary flex justify-between">
             <div className="flex justify-start items-center ml-4.5">
                <Logo />
             </div>
-            <div className="max-w-full bg-gray-200">
+            <div className="max-w-full">
                 <div className="flex justify-end gap-x-5 my-4 mr-4.5">
         { windowWidth > 768 ? (
             username ? 
