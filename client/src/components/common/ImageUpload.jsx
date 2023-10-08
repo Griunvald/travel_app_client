@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useImage } from '../../contexts/ImageContext.jsx';
 
-const ImageUpload = ({ onUpload }) => {
+const ImageUpload = ({ onUpload, label }) => {
   const { preview, setPreview } = useImage();
   const fileInputRef = useRef(null); 
 
@@ -31,6 +31,8 @@ const ImageUpload = ({ onUpload }) => {
   };
 
   return (
+      <>
+      <label htmlFor="imageUpload">{label}</label>
     <div className="relative flex flex-col items-center justify-center mb-4 h-48" 
       style={{
         border: '2px dashed',
@@ -44,6 +46,7 @@ const ImageUpload = ({ onUpload }) => {
         borderImageRepeat: 'stretch'
       }}>
       <input 
+        name="imageUpload"
         ref={fileInputRef} 
         type="file" 
         accept="image/*" 
@@ -60,6 +63,7 @@ const ImageUpload = ({ onUpload }) => {
         </div>
       )}
     </div>
+      </>
   );
 };
 

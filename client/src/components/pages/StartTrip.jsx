@@ -76,7 +76,7 @@ function StartTrip() {
             />
 
                 <Textarea
-                    label="Trip description"
+                    label="Trip Description"
                     name="title"
                     rows="3" 
                     value={formData.title}
@@ -85,13 +85,13 @@ function StartTrip() {
             />
 
             <ImageUpload
-                label="Upload image"
+                label="Cover Image"
             />
 
 
+             {preview && <LinkButton name="Remove Image" type="secondary" onClick={handleCancel} />}
             <Button name="Publish" variant="primary" action="submit"/>
 
-         {preview && <LinkButton name="Remove Image" type="secondary" onClick={handleCancel} />}
             </Form>
         </div>
     );
