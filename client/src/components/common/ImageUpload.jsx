@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useImage } from '../../contexts/ImageContext.jsx';
 
 const ImageUpload = ({ onUpload }) => {
-  const [preview, setPreview] = useState(null);
+  const {preview, setPreview} = useImage();
 
   const handleChange = (e) => {
     const file = e.target.files[0];

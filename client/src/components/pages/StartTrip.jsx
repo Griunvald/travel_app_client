@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
+import LinkButton from '../common/LinkButton';
 import  Link  from '../common/Link'
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
 import { useUser } from '../../contexts/UserContext';
+import { useImage } from '../../contexts/ImageContext';
 
 
 function StartTrip() {
@@ -14,6 +16,7 @@ function StartTrip() {
     });
 
     const { setUsername } = useUser();
+    const { handleCancel, preview } = useImage();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -88,6 +91,7 @@ function StartTrip() {
 
             <Button name="Publish" variant="primary" action="submit"/>
 
+         {preview && <LinkButton name="Replace Image" type="secondary" onClick={handleCancel} />}
             </Form>
         </div>
     );
