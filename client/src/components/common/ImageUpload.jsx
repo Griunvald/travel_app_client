@@ -35,15 +35,10 @@ const ImageUpload = ({ onUpload, label }) => {
       <label htmlFor="imageUpload">{label}</label>
     <div className="relative flex flex-col items-center justify-center mb-4 h-48" 
       style={{
-        border: '2px dashed',
-        borderImage: `url(data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' 
-          width='10' height='10' viewBox='0 0 10 10' >
-          <rect width='10' height='10' rx='5' fill='%23FFF'/>
-          <rect x='5' width='5' height='10' rx='5' fill='%23000'/></svg>)`,
-        borderImageSlice: 1,
-        borderImageWidth: 10,
-        borderImageOutset: 0,
-        borderImageRepeat: 'stretch'
+ backgroundImage: 'repeating-linear-gradient(13deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(103deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(193deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(283deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px)',
+    backgroundSize: '1px 100%, 100% 1px, 1px 100% , 100% 1px',
+    backgroundPosition: '0 0, 0 0, 100% 0, 0 100%',
+    backgroundRepeat: 'no-repeat'
       }}>
       <input 
         name="imageUpload"
