@@ -91,7 +91,7 @@ function StartTrip() {
 
             <Button name="Publish" variant="primary" action="submit"/>
 
-         {preview && <LinkButton name="Replace Image" type="secondary" onClick={handleCancel} />}
+         {preview && <LinkButton name="Remove Image" type="secondary" onClick={handleCancel} />}
             </Form>
         </div>
     );
