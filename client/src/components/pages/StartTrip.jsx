@@ -61,9 +61,8 @@ function StartTrip() {
 };
 
     return (
-        <div className="w-full md:w-[800px] mx-auto border-x border-y shadow-md px-12 pt-6 pb-6 mt-24">
-            <h2 className="font-playfair-display font-bold text-2xl text-center mb-6">Ready for a New Journey? Let’s Get Started!</h2>
-        <h3 className="font-monserrat font-normal text-xl text-left mb-6">Give your trip a name, tell us a bit about it, and upload a cover picture to get started.</h3>
+        <div className="w-full md:w-[800px] mx-auto border border-primary shadow-soft px-12 pt-6 pb-6 mt-24">
+            <h2 className="font-medium text-2xl text-center mb-6">Ready for a New Journey? Let’s Get Started!</h2>
 
             <Form onSubmit={handleSubmit}>
 
