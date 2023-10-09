@@ -88,9 +88,10 @@ function StartTrip() {
                 label="Cover Image"
             />
 
-
+<div className="flex justify-end gap-x-5">
              {preview && <LinkButton name="Remove Image" type="secondary" onClick={handleCancel} />}
             <Button name="Publish" variant="primary" action="submit"/>
+        </div>
 
             </Form>
         </div>
