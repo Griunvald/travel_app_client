@@ -54,7 +54,7 @@ function Join() {
       }
 };
     return (
-        <div className="w-full md:w-[350px] mx-auto shadow-md border border-primary px-12 pt-6 pb-6 mt-24">
+        <div className="w-full md:w-[400px] mx-auto md:shadow-soft md:border md:border-primary px-2 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
         <h2 className="font-medium text-2xl text-center mb-6">Join Road Cronicles</h2>
 
 
@@ -90,8 +90,9 @@ function Join() {
                     onChange={handleChange}
                 
             />
-
-            <Button name="Join" variant="primary" action="submit"/>
+            <div className="flex flex-col md:flex-row md:justify-end">
+                <Button name="Join" variant="primary" action="submit"/>
+            </div>
 
             </Form>
 
