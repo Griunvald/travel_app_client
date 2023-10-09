@@ -23,7 +23,7 @@ function Navbar() {
     }, []);
 
     return (
-        <nav className="h-20 bg-secondary flex justify-between">
+        <nav className="h-16 bg-secondary flex justify-between">
             <div className="flex justify-start items-center ml-4.5">
                <Logo />
             </div>
