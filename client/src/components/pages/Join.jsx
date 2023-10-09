@@ -54,8 +54,8 @@ function Join() {
       }
 };
     return (
-        <div className="w-full md:w-[350px] mx-auto shadow-md border-x border-y px-12 pt-6 pb-6 mt-24">
-        <h2 className="font-playfair-display font-bold text-2xl text-center mb-6">Join Road Cronicles</h2>
+        <div className="w-full md:w-[350px] mx-auto shadow-md border border-primary px-12 pt-6 pb-6 mt-24">
+        <h2 className="font-medium text-2xl text-center mb-6">Join Road Cronicles</h2>
 
 
             <Form onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ function Join() {
 
             </Form>
 
-        <p className="mt-4">Already have an account? <Link name="Log in" path="/login"/></p>
+        <p className="mt-4 text-sm">Already have an account? <Link name="Log in" path="/login"/></p>
         </div>
     );
 }
