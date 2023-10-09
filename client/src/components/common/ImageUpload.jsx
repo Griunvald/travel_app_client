@@ -32,8 +32,8 @@ const ImageUpload = ({ onUpload, label }) => {
 
   return (
       <>
-      <label htmlFor="imageUpload">{label}</label>
-    <div className="relative flex flex-col items-center justify-center mb-4 h-48" 
+      <label className="text-gray-800" htmlFor="imageUpload">{label}</label>
+    <div className="relative flex flex-col items-center justify-center mb-6 h-48" 
       style={{
  backgroundImage: 'repeating-linear-gradient(13deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(103deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(193deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(283deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px)',
     backgroundSize: '1px 100%, 100% 1px, 1px 100% , 100% 1px',
@@ -53,7 +53,7 @@ const ImageUpload = ({ onUpload, label }) => {
           <img src={preview} alt="Preview" className="max-w-full max-h-full" />
         </>
       ) : (
-        <div className="text-center text-gray-600">
+        <div className="text-center text-gray-700">
           <p>Click or drag to upload</p>
         </div>
       )}
