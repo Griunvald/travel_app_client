@@ -17,7 +17,7 @@ function StartTrip() {
     });
 
     const { setUsername } = useUser();
-    const { handleCancel, preview } = useImage();
+    const { handleCancel, preview, imageFile } = useImage();
     const navigate = useNavigate();
 
     const handleChange = (e) => {

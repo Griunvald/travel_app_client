@@ -2,12 +2,13 @@ import { useState, useRef } from 'react';
 import { useImage } from '../../contexts/ImageContext.jsx';
 
 const ImageUpload = ({ onUpload, label }) => {
-  const { preview, setPreview } = useImage();
+  const { preview, setPreview, imageFile, setImageFile } = useImage();
   const fileInputRef = useRef(null); 
 
   const handleChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
@@ -17,6 +18,7 @@ const ImageUpload = ({ onUpload, label }) => {
         onUpload(file);
       }
     } else {
+      setImageFile(null);
       setPreview(null);
     }
     fileInputRef.current.value = null;

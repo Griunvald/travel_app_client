@@ -9,13 +9,14 @@ export const useImage = () => {
 
 export const ImageProvider = ({ children }) => {
   const [preview, setPreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleCancel = () => {
     setPreview(null);
   };
 
   return (
-    <ImageContext.Provider value={{ preview, setPreview, handleCancel }}>
+    <ImageContext.Provider value={{ preview, setPreview, handleCancel, imageFile, setImageFile }}>
       {children}
     </ImageContext.Provider>
   );
