@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/UserContext';
 import Button from '../common/Button';
 import  Link  from '../common/Link'
 import Input from '../common/Input';
@@ -14,6 +15,7 @@ function Join() {
     });
 
     const navigate = useNavigate();
+    const { setUsername } = useUser();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,7 +26,8 @@ function Join() {
         e.preventDefault();
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/register', formData)
-            if(response.message === 'User was created!' ) {
+            if(username && response.message === 'User was created!') {
+                setUsername(username);
                navigate('/');
             }
         } catch(err){
