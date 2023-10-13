@@ -26,7 +26,7 @@ function StartTrip() {
 
 const handleSubmit = async (e) => {
     let awsData = {};
-    console.log("User ID:", userId);
+    console.log("User ID at Client Side:", userId);
 
     try {
         awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
@@ -96,14 +96,13 @@ const handleSubmit = async (e) => {
     }
   };
 
-  const getData = async (apiUrl, userId) => {
+  const getData = async (apiUrl) => {
     try {
       const response = await fetch(apiUrl, {
         method: 'GET',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'user-id': userId,
         },
       });
 
