@@ -13,7 +13,7 @@ function Login() {
         password: "",
     });
 
-    const { setUsername } = useUser();
+    const { setUsername, setUserId } = useUser();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -24,11 +24,11 @@ function Login() {
     const handleSubmit = async (e) => {
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/login', formData)
-            const username = JSON.parse(response);
-            if(username) {
-                setUsername(username);
+            const parsed = JSON.parse(response);
+            console.log(parsed);
+                setUsername(parsed.username);
+                setUserId(parsed.userId);
                navigate('/');
-            }
         } catch(err){
            console.log(err);
         }
