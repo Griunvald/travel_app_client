@@ -25,10 +25,11 @@ function Login() {
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/login', formData)
             const parsed = JSON.parse(response);
-            console.log(parsed);
+            if(parsed.username){
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
                navigate('/');
+            }
         } catch(err){
            console.log(err);
         }
