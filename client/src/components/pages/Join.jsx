@@ -15,7 +15,7 @@ function Join() {
     });
 
     const navigate = useNavigate();
-    const { setUsername } = useUser();
+    const { setUsername, setUserId } = useUser();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,8 +26,12 @@ function Join() {
         e.preventDefault();
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/register', formData)
-            if(username && response.message === 'User was created!') {
-                setUsername(username);
+            console.log(response);
+            const parsed = JSON.parse(response.userInfo);
+            console.log("Parsed from Join: ", parsed);
+            if(parsed.username) {
+                setUsername(parsed.username);
+                setUserId(parsed.userId);
                navigate('/');
             }
         } catch(err){
@@ -51,6 +55,7 @@ function Join() {
         }
 
         const result = await response.json(); // Parse the JSON response
+          console.log("Post data res:", result);
         return result;
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
