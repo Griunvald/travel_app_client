@@ -1,6 +1,6 @@
-function TripPreview(title, description, url) {
+function TripPreview({id, title, description, url, createdAt}) {
     return(
-        <div>
+        <div key={id}>
             <h2>{title}</h2>
             <p>{description}</p>
             <img src={url} alt="trip cover image" />
