@@ -26,7 +26,7 @@ function TripsList() {
             key={trip.id}
             title={trip.title}
             description={trip.description}
-            url="https://placehold.co/600x400"
+            url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
         />
         )) }
         </>
