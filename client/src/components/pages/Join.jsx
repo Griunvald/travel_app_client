@@ -26,9 +26,7 @@ function Join() {
         e.preventDefault();
         try {
         const response = await postData('http://localhost:3003/api/v1/auth/register', formData)
-            console.log(response);
-            const parsed = JSON.parse(response.userInfo);
-            console.log("Parsed from Join: ", parsed);
+            const parsed = JSON.parse(response);
             if(parsed.username) {
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
@@ -42,20 +40,19 @@ function Join() {
     const postData = async (url, data) => {
       try {
         const response = await fetch(url, {
-          method: 'POST', // HTTP method
+          method: 'POST', 
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json', // Set the content type
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data), // Convert the data object to a JSON string
+          body: JSON.stringify(data),
         });
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result = await response.json(); // Parse the JSON response
-          console.log("Post data res:", result);
+        const result = await response.json();
         return result;
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
