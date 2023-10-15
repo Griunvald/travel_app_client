@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const { username } = useUser();
+    const { username, currentTripId } = useUser();
 
     useEffect(() => {
         const handleResize = () => {
@@ -33,7 +33,11 @@ function Navbar() {
             username ? 
             (<>
                 <Avatar/>
+                {currentTripId ? (
+                <LinkButton name="Current Trip" variant="primary" path="/current-trip"/>
+                ):(
                 <LinkButton name="Start Trip" variant="primary" path="/start-trip"/>
+                )}
             </>) 
             : 
             (<>

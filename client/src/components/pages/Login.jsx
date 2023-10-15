@@ -13,9 +13,8 @@ function Login() {
         password: "",
     });
 
-    const { setUsername, setUserId } = useUser();
+    const { setUsername, setUserId, setCurrentTripId, currentTripId} = useUser();
     const navigate = useNavigate();
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,6 +27,7 @@ function Login() {
             if(parsed.username){
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
+                setCurrentTripId(currentTripId);
                navigate('/');
             }
         } catch(err){
