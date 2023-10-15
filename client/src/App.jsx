@@ -8,6 +8,7 @@ import About from './components/pages/About';
 import Login from './components/pages/Login';
 import Join from './components/pages/Join';
 import StartTrip from './components/pages/StartTrip';
+import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 
 const NavbarWrapper = () => {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: '/start-trip',
                 element: <StartTrip />
+            },
+            {
+                path: '/current-trip',
+                element: <CurrentTrip />
             },
             {
                 path: '*',
