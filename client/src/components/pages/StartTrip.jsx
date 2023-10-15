@@ -14,7 +14,7 @@ function StartTrip() {
     description: "",
   });
 
-  const { userId } = useUser();
+  const { userId, username } = useUser();
    console.log("User id from app state: ", userId);
   const { handleCancel, preview, imageFile } = useImage();
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ const handleSubmit = async (e) => {
 
         const newData = {
             userId,
+            username,
             ...formData,
             url: awsObjectKey 
         };
