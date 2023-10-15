@@ -47,7 +47,9 @@ const handleSubmit = async (e) => {
         };
 
         const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
-        console.log("Response from POST:", responseFromPost);
+        if(responseFromPost.message === 'Trip was created!') {
+           navigate('/current-trip');
+        }
         
     } catch (err) {
         console.error("Error in handleSubmit:", err);
