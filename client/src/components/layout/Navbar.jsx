@@ -23,7 +23,8 @@ function Navbar() {
     }, []);
 
     return (
-        <nav className="h-16 bg-secondary flex justify-between">
+        <div className="relative">
+        <nav className="h-16 bg-secondary flex justify-between fixed top-0 left-0 right-0">
             <div className="flex justify-start items-center ml-4.5">
                <Logo />
             </div>
@@ -51,6 +52,7 @@ function Navbar() {
                 </div>
             </div>
         </nav>
+0       </div>
     );
 } 
 
