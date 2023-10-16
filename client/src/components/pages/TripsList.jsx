@@ -19,11 +19,12 @@ function TripsList() {
     },[])
     return (
         <>
-        <h1>TripsList page</h1>
         { trips.map((trip)=> (
 
         <TripPreview 
             key={trip.id}
+            username={trip.username}
+            createdAt={trip.createdAt}
             title={trip.title}
             description={trip.description}
             url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
