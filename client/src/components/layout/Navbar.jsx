@@ -23,7 +23,7 @@ function Navbar() {
     }, []);
 
     return (
-        <div className="relative">
+        <div className="relative pb-20 md:pb-32">
         <nav className="h-16 bg-secondary flex justify-between fixed top-0 left-0 right-0">
             <div className="flex justify-start items-center ml-4.5">
                <Logo />
