@@ -4,7 +4,7 @@ import LinkButton from  '../common/LinkButton.jsx';
 
 const Sidebar = () => {
   const { isOpen, toggleMenu } = useMenu();
-  const { username } = useUser();
+  const { username, currentTripId } = useUser();
 
   return (
     <>
@@ -18,7 +18,12 @@ const Sidebar = () => {
       <div className="flex flex-col mx-4.5 gap-y-16 mt-16">
       { username ? 
          (<>
-                <LinkButton name="Start Trip" variant="primary" path="/create-trip"/>
+             {currentTripId ? 
+                (<LinkButton name="Current Trip" variant="primary" path="/current-trip" onClick={toggleMenu}/>):
+                 (
+                <LinkButton name="Start Trip" variant="primary" path="/create-trip" onClick={toggleMenu}/>
+                 )
+             }
           </>)
           :
           (<>
