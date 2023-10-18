@@ -1,8 +1,8 @@
 import avatarIcon from '../../assets/avatar.svg';
-function Avatar() {
+function Avatar({ avatar }) {
     return (
         <div>
-           <img src={avatarIcon} alt="user avatar" /> 
+           <img src={avatar ? avatar : avatarIcon} alt="user avatar" /> 
         </div>
     );
 };
