@@ -6,9 +6,9 @@ import {
 
 export const timeAgo = (date) => {
   const now = new Date();
-  const minutes = differenceInMinutes(now, date);
-  const hours = differenceInHours(now, date);
-  const days = differenceInDays(now, date);
+  const minutes = differenceInMinutes(now, new Date(date));
+  const hours = differenceInHours(now, new Date(date));
+  const days = differenceInDays(now, new Date(date));
 
   if (minutes < 60) {
     return `${minutes} minutes ago`;

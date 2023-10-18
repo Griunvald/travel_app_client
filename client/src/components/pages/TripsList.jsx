@@ -25,7 +25,7 @@ function TripsList() {
         <TripPreview 
             key={trip.id}
             username={trip.username}
-            createdAt={timeAgo(new Date(trip.createdAt))}
+            createdAt={timeAgo(trip.createdAt)}
             title={trip.title}
             description={trip.description}
             url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
