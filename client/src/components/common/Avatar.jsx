@@ -1,8 +1,10 @@
 import avatarIcon from '../../assets/avatar.svg';
-function Avatar({ avatar }) {
+
+function Avatar({ avatar, size }) {
+    const sizeClass = size === 'big' ? 'h-12 w-12' : 'h-10 w-10'
     return (
         <div>
-           <img className="h-9 w-9 md:h-12 md:w-12" src={avatar ? avatar : avatarIcon} alt="user avatar" /> 
+           <img className={`${sizeClass} object-cover rounded-full`} src={avatar ? avatar : avatarIcon} alt="user avatar" /> 
         </div>
     );
 };
