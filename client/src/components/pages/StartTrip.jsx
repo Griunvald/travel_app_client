@@ -14,7 +14,7 @@ function StartTrip() {
     description: "",
   });
 
-  const { userId, username } = useUser();
+  const { userId, username, setCurrentTripId } = useUser();
    console.log("User id from app state: ", userId);
   const { handleCancel, preview, imageFile } = useImage();
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ const handleSubmit = async (e) => {
         const parsed = JSON.parse(responseFromPost);
         console.log(parsed.tripId);
         if(parsed.tripId) {
+            setCurrentTripId(parsed.tripId);
            navigate('/current-trip');
         }
         
