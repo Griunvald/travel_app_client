@@ -47,7 +47,9 @@ const handleSubmit = async (e) => {
         };
 
         const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
-        if(responseFromPost.message === 'Trip was created!') {
+        const parsed = JSON.parse(responseFromPost);
+        console.log(parsed.tripId);
+        if(parsed.tripId) {
            navigate('/current-trip');
         }
         
