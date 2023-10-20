@@ -15,7 +15,6 @@ function StartTrip() {
   });
 
   const { userId, username, setCurrentTripId } = useUser();
-   console.log("User id from app state: ", userId);
   const { handleCancel, preview, imageFile } = useImage();
   const navigate = useNavigate();
 
@@ -26,14 +25,10 @@ function StartTrip() {
 
 const handleSubmit = async (e) => {
     let awsData = {};
-    console.log("User ID at Client Side:", userId);
 
     try {
         awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
         let { presignedAwsUrl, awsObjectKey } = awsData;
-
-        console.log("Presigned AWS URL:", presignedAwsUrl);
-        console.log("AWS Object Key:", awsObjectKey);
 
         awsObjectKey = awsObjectKey.replace('undefined', userId);
 
@@ -48,7 +43,6 @@ const handleSubmit = async (e) => {
 
         const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
         const parsed = JSON.parse(responseFromPost);
-        console.log(parsed.tripId);
         if(parsed.tripId) {
             setCurrentTripId(parsed.tripId);
            navigate('/current-trip');

@@ -6,10 +6,8 @@ import TripPreview from '../common/TripPreview';
 function CurrentTrip() {
     const { username, userId } = useUser();
     const [trip, setTrip] = useState('');
-    console.log("Out of useEffect: ", userId)
     useEffect(() => {
         const fetchData = async () => {
-    console.log("Inside of useEffect: ", userId);
             if (!userId){
                 return;
             }
