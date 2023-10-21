@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { timeAgo } from '../../utils/date.js';
-import TripPreview from '../common/TripPreview';
+import TripPreview from '../features/TripPreview';
 
 function TripsList() {
     const [trips, setTrips] = useState([]);

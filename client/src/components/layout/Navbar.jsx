@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import LinkButton from  '../common/LinkButton.jsx';
 import Logo from '../common/Logo.jsx';
-import Hamburger from '../common/Hamburger.jsx';
+import Hamburger from './Hamburger.jsx';
 import Avatar from '../common/Avatar';
 import { Link } from 'react-router-dom';
 

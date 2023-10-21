@@ -1,4 +1,4 @@
-import Avatar from './Avatar.jsx';
+import Avatar from '../common/Avatar.jsx';
 
 function TripPreview({id, username,  title, description, url, createdAt, avatar}) {
     return(
