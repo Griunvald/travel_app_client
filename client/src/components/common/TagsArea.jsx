@@ -37,7 +37,7 @@ const TagsArea = () => {
           onChange={e => setCurrentTag(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Add a tag"
-          className="flex-auto bg-transparent outline-none focus:ring-0 p-1"
+          className="flex-auto bg-transparent outline-none border-0 focus:ring-0 p-1"
         />
       </div>
       <div>
