@@ -10,7 +10,7 @@ function AddEntry(){
       const [activeTab, setActiveTab] = useState('textArea');
 
   return (
-    <>
+    <div className="w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 border border-2 shadow-soft p-2">
       <TabButton tabName="textArea" setActiveTab={setActiveTab} activeTab={activeTab} />
       <TabButton tabName="imageUpload" setActiveTab={setActiveTab} activeTab={activeTab} />
       <TabButton tabName="tagsArea" setActiveTab={setActiveTab} activeTab={activeTab} />
@@ -26,7 +26,7 @@ function AddEntry(){
           <TagsArea />
         </Tab>
       </TabContainer>
-    </>
+    </div>
   );
 }
 
