@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { timeAgo } from '../../utils/date.js';
 import { useUser } from '../../contexts/UserContext';
 import TripPreview from '../features/TripPreview';
+import AddEntry from '../features/AddEntry';
 
 function CurrentTrip() {
     const { username, userId } = useUser();
@@ -31,7 +32,7 @@ function CurrentTrip() {
         fetchData();
     },[userId])
     return (
-
+      <>
         <TripPreview 
             key={trip.id}
             username={username}
@@ -40,6 +41,9 @@ function CurrentTrip() {
             description={trip.description}
             url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
         />
+        
+        <AddEntry />
+    </>
     );
 };
 
