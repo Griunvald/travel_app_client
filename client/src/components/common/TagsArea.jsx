@@ -40,9 +40,6 @@ const TagsArea = () => {
           className="flex-auto bg-transparent outline-none border-0 focus:ring-0 p-1"
         />
       </div>
-      <div>
-        <button type="button" onClick={handleAddTag} className="mr-2 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Add Tag</button>
-      </div>
     </div>
   );
 };
