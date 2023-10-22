@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Tag from './Tag';
+import { useTags } from '../../contexts/TagsContext';
 
 const TagsArea = () => {
-  const [tags, setTags] = useState([]);
+  const { tags, setTags } = useTags();
   const [currentTag, setCurrentTag] = useState('');
 
   const handleAddTag = () => {

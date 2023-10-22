@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
+import { useTags } from '../../contexts/TagsContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
 import Textarea from '../common/TextArea';
@@ -11,10 +12,11 @@ import TagsArea from '../common/TagsArea';
 import Form from '../common/Form';
 
 const AddEntry = () => {
+  const { tags } = useTags();
   const [activeTab, setActiveTab] = useState('textArea');
   const [formData, setFormData] = useState({
     text: "",
-    tags: [],
+    tags: tags,
   });
   const { userId, currentTripId } = useUser();
   const { handleCancel, preview, imageFile } = useImage();
@@ -23,6 +25,10 @@ const AddEntry = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    setFormData((prevFormData) => ({ ...prevFormData, tags: tags }));
+  }, [tags]); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
