@@ -13,7 +13,6 @@ function AddEntry(){
     <div className="w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 border border-2 shadow-soft p-2">
       <TabButton tabName="textArea" setActiveTab={setActiveTab} activeTab={activeTab} />
       <TabButton tabName="imageUpload" setActiveTab={setActiveTab} activeTab={activeTab} />
-      <TabButton tabName="tagsArea" setActiveTab={setActiveTab} activeTab={activeTab} />
 
       <TabContainer activeTab={activeTab}>
         <Tab tabName="textArea">
@@ -22,10 +21,8 @@ function AddEntry(){
         <Tab tabName="imageUpload">
           <ImageUpload />
         </Tab>
-        <Tab tabName="tagsArea">
-          <TagsArea />
-        </Tab>
       </TabContainer>
+      <TagsArea />
     </div>
   );
 }
