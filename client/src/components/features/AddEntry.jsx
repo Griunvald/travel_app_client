@@ -19,7 +19,7 @@ const AddEntry = () => {
     tags: tags,
   });
   const { userId, currentTripId } = useUser();
-  const { handleCancel, preview, setPreview, imageFile } = useImage();
+  const { handleCancel, preview, setPreview, imageFile, setImageFile } = useImage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +28,14 @@ const AddEntry = () => {
 
   useEffect(() => {
     setFormData((prevFormData) => ({ ...prevFormData, tags: tags }));
-  }, [tags]); 
+      if(activeTab === "Text"){
+          setPreview(null);
+          setImageFile(null);
+      } 
+      if(activeTab === "Image") {
+          setFormData({ text: "", tags });
+      }
+  }, [tags, activeTab]); 
 
 const handleSubmit = async (e) => {
   try {
