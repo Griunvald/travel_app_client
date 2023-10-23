@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useImage } from '../../contexts/ImageContext.jsx';
-
+import CloseButton from './CloseButton';
+ 
 const ImageUpload = ({ onUpload, label }) => {
   const { preview, setPreview, imageFile, setImageFile } = useImage();
   const fileInputRef = useRef(null); 
@@ -46,6 +47,7 @@ const ImageUpload = ({ onUpload, label }) => {
       />
       {preview ? (
         <>
+          <CloseButton onClick={handleCancel}/>
           <img src={preview} alt="Preview" className="max-w-full max-h-full" />
         </>
       ) : (
