@@ -12,14 +12,14 @@ import TagsArea from '../common/TagsArea';
 import Form from '../common/Form';
 
 const AddEntry = () => {
-  const { tags } = useTags();
+  const { tags, setTags } = useTags();
   const [activeTab, setActiveTab] = useState('Text');
   const [formData, setFormData] = useState({
     text: "",
     tags: tags,
   });
   const { userId, currentTripId } = useUser();
-  const { handleCancel, preview, imageFile } = useImage();
+  const { handleCancel, preview, setPreview, imageFile } = useImage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +31,6 @@ const AddEntry = () => {
   }, [tags]); 
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
   try {
     let awsData;
     if (activeTab === "Image") {
@@ -48,7 +47,11 @@ const handleSubmit = async (e) => {
     };
 
     const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
-    // Handle the response as needed
+      if(responseFromPost.message === "Record created!"){
+          setFormData({ text: "" });
+          setPreview(null);
+          setTags([]);
+      }
   } catch (err) {
     console.error("Error in handleSubmit:", err);
   }
