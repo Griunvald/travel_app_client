@@ -30,29 +30,29 @@ const AddEntry = () => {
     setFormData((prevFormData) => ({ ...prevFormData, tags: tags }));
   }, [tags]); 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const newData = {
-        userId,
-        tripId: currentTripId,
-        tags: formData.tags,
-        type: activeTab === "textArea" ? "text" : "url",
-        data: activeTab === "textArea" ? formData.text : "",
-      };
-
-      if (activeTab === "imageUpload") {
-        const awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
-        await putData(awsData.presignedAwsUrl, imageFile);
-        newData.data = awsData.awsObjectKey;
-      }
-
-      const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
-      // Handle the response as needed
-    } catch (err) {
-      console.error("Error in handleSubmit:", err);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    let awsData;
+    if (activeTab === "Image") {
+      awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+      await putData(awsData.presignedAwsUrl, imageFile);
     }
-  };
+
+    const newData = {
+      userId,
+      tripId: currentTripId,
+      tags: formData.tags,
+      type: activeTab === "Text" ? "text" : "url",
+      data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
+    };
+
+    const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
+    // Handle the response as needed
+  } catch (err) {
+    console.error("Error in handleSubmit:", err);
+  }
+};
 
     const postData = async (apiUrl, data) => {
     try {
