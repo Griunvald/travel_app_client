@@ -123,11 +123,12 @@ const AddEntry = () => {
 
   return (
     <div className="w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 border border-2 shadow-soft p-2">
-      <TabButton tabName="textArea" setActiveTab={setActiveTab} activeTab={activeTab} />
-      <TabButton tabName="imageUpload" setActiveTab={setActiveTab} activeTab={activeTab} />
+      <TabButton tabName="Text" setActiveTab={setActiveTab} activeTab={activeTab} />
+      <TabButton tabName="Image" setActiveTab={setActiveTab} activeTab={activeTab} />
+
       <Form onSubmit={handleSubmit}>
         <TabContainer activeTab={activeTab}>
-          <Tab tabName="textArea">
+          <Tab tabName="Text">
             <Textarea
               name="text"
               rows="3"
@@ -135,7 +136,7 @@ const AddEntry = () => {
               onChange={handleChange}
             />
           </Tab>
-          <Tab tabName="imageUpload">
+          <Tab tabName="Image">
             <ImageUpload />
           </Tab>
         </TabContainer>
