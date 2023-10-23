@@ -13,7 +13,7 @@ import Form from '../common/Form';
 
 const AddEntry = () => {
   const { tags } = useTags();
-  const [activeTab, setActiveTab] = useState('textArea');
+  const [activeTab, setActiveTab] = useState('Text');
   const [formData, setFormData] = useState({
     text: "",
     tags: tags,
