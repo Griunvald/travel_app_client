@@ -35,13 +35,7 @@ const ImageUpload = ({ onUpload, label }) => {
   return (
       <>
       <label className="text-gray-800" htmlFor="imageUpload">{label}</label>
-    <div className="relative flex flex-col items-center justify-center mb-6 h-48" 
-      style={{
- backgroundImage: 'repeating-linear-gradient(13deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(103deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(193deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px), repeating-linear-gradient(283deg, #6b7280, #6b7280 24px, transparent 24px, transparent 35px, #6b7280 35px)',
-    backgroundSize: '1px 100%, 100% 1px, 1px 100% , 100% 1px',
-    backgroundPosition: '0 0, 0 0, 100% 0, 0 100%',
-    backgroundRepeat: 'no-repeat'
-      }}>
+    <div className="relative flex flex-col items-center justify-center mb-6 h-48 border border-primary">
       <input 
         name="imageUpload"
         ref={fileInputRef} 
