@@ -142,6 +142,7 @@ const handleSubmit = async (e) => {
             <Textarea
               name="text"
               rows="3"
+              height="48"
               value={formData.text}
               onChange={handleChange}
             />
