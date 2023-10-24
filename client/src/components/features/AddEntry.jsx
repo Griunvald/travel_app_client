@@ -132,7 +132,7 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className="w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 border border-2 shadow-soft p-2">
+    <div className="w-full md:w-[800px] mx-auto pt-2 mb-4 border border-2 shadow-soft p-2">
       <TabButton tabName="Text" setActiveTab={setActiveTab} activeTab={activeTab} />
       <TabButton tabName="Image" setActiveTab={setActiveTab} activeTab={activeTab} />
 
@@ -152,7 +152,7 @@ const handleSubmit = async (e) => {
           </Tab>
         </TabContainer>
         <TagsArea />
-        <div className="flex flex-col md:flex-row justify-end gap-x-5 gap-y-4">
+        <div className="flex flex-col md:flex-row justify-end gap-x-5 gap-y-4 pt-4">
           <Button name="Publish" variant="primary" type="submit" />
         </div>
       </Form>
