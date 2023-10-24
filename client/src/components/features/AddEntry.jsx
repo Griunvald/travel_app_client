@@ -156,7 +156,7 @@ const handleSubmit = async (e) => {
           <Button name="Publish" variant="primary" type="submit" />
         </div>
       </Form>
-      <div>1. Write Text or Upload Image, 2. Add tags, 3. Hit 'Publish' when done.</div>
+      <div className="mt-4">1. Write Text or Upload Image, 2. Add tags, 3. Hit 'Publish' when done.</div>
     </div>
   );
 };
