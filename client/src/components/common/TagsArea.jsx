@@ -20,17 +20,16 @@ const TagsArea = () => {
     }
   };
 
-  const handleRemoveTag = (index) => {
-    const newTags = [...tags];
-    newTags.splice(index, 1);
+  const handleRemoveTag = (tagToRemove) => {
+    const newTags = tags.filter(tag => tag !== tagToRemove); 
     setTags(newTags);
   };
 
   return (
     <div className="flex flex-col space-y-4">
       <div className="relative flex flex-wrap items-center p-2 space-x-2 border border-primary bg-white">
-        {tags.map((tag, index) => (
-          <Tag key={index} label={tag} onRemove={() => handleRemoveTag(index)} />
+        {tags.map((tag) => (
+          <Tag key={tag} label={tag} onRemove={() => handleRemoveTag(tag)} />
         ))}
         <input 
           type="text"
