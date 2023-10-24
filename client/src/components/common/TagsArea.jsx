@@ -28,7 +28,7 @@ const TagsArea = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="relative flex flex-wrap items-center p-2 space-x-2 border rounded bg-white">
+      <div className="relative flex flex-wrap items-center p-2 space-x-2 border border-primary bg-white">
         {tags.map((tag, index) => (
           <Tag key={index} label={tag} onRemove={() => handleRemoveTag(index)} />
         ))}
