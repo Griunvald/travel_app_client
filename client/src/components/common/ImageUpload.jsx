@@ -36,7 +36,7 @@ const ImageUpload = ({ onUpload, label }) => {
   return (
       <>
       <label className="text-gray-800" htmlFor="imageUpload">{label}</label>
-    <div className="relative flex flex-col items-center justify-center mb-6 h-48 border border-primary">
+    <div className="relative flex flex-col items-center justify-center mb-4 h-48 border border-primary">
       <input 
         name="imageUpload"
         ref={fileInputRef} 
