@@ -3,6 +3,7 @@ import { timeAgo } from '../../utils/date.js';
 import { useUser } from '../../contexts/UserContext';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
+import EntryList from '../features/EntryList';
 
 function CurrentTrip() {
     const { username, userId } = useUser();
@@ -42,6 +43,7 @@ function CurrentTrip() {
             url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
         />
         
+        <EntryList />
         <AddEntry />
     </>
     );
