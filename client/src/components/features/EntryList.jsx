@@ -5,7 +5,6 @@ import Entry from './Entry';
 function EntryList(){
     const [entryList, setEntryList] = useState([]);
     const { userId } = useUser();
-    console.log(userId);
 
 useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +12,6 @@ useEffect(() => {
         const response = await fetch(url);
         const list = await response.json()
         setEntryList(list);
-         console.log('Is entryList an array?', Array.isArray(entryList));
     }
     if(userId){
         fetchData()
@@ -25,8 +23,8 @@ useEffect(() => {
             entryList && (
                 entryList.map(entry => (
                 <div key={entry.id}>
-                    {entry.id}
                     <Entry  
+                      createdAt={entry.createdAt}
                       textValue={entry.textValue}
                       urlValue={entry.urlValue}
                       recordTags={entry.recordTags}
