@@ -3,7 +3,7 @@ import Avatar from '../common/Avatar.jsx';
 function TripPreview({id, username,  title, description, url, createdAt, avatar}) {
     return(
         <div className="w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 border border-2 shadow-soft p-2" key={id}>
-            <h1 className="font-bold text-gray-900 text-3xl md:text-4xl">{title}</h1>
+            <h1 className="font-bold text-gray-900 text-3xl md:text-4xl leading-snug md:leading-normal">{title}</h1>
             <div className="flex my-2 py-2 gap-2 items-end">
             <Avatar avatar={avatar} />
             <div>
