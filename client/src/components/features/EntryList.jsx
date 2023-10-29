@@ -8,10 +8,8 @@ function EntryList(){
     const { entryList, refreshEntries } = useEntries();
 
   useEffect(() => {
-    if (userId) {
       refreshEntries(); 
-    }
-  }, [userId, refreshEntries]);
+  }, [userId]);
 
     return(
         <div>{
