@@ -1,22 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
+import { useEntries } from '../../contexts/EntryContext';
 import Entry from './Entry';
 
 function EntryList(){
-    const [entryList, setEntryList] = useState([]);
     const { userId } = useUser();
+    const { entryList, refreshEntries } = useEntries();
 
-useEffect(() => {
-    const fetchData = async () => {
-        const url = `http://localhost:3003/api/v1/trip/get-current-trip-records-with-tags?userId=${userId}`
-        const response = await fetch(url);
-        const list = await response.json()
-        setEntryList(list);
+  useEffect(() => {
+    if (userId) {
+      refreshEntries(); 
     }
-    if(userId){
-        fetchData()
-    }
-},[userId]) 
+  }, [userId, refreshEntries]);
 
     return(
         <div>{

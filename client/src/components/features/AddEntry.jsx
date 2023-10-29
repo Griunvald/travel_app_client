@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
 import { useTags } from '../../contexts/TagsContext';
+import { useEntries } from '../../contexts/EntryContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
 import Textarea from '../common/TextArea';
@@ -20,6 +21,7 @@ const AddEntry = () => {
   });
   const { userId, currentTripId } = useUser();
   const { handleCancel, preview, setPreview, imageFile, setImageFile } = useImage();
+  const { refreshEntries } = useEntries(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,6 +60,7 @@ const handleSubmit = async (e) => {
           setFormData({ text: "" });
           setPreview(null);
           setTags([]);
+          refreshEntries();
       }
   } catch (err) {
     console.error("Error in handleSubmit:", err);
