@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import format from 'date-fns/format';
 import { timeAgo } from '../../utils/date.js';
 import { useUser } from '../../contexts/UserContext';
+import { useToast } from '../../contexts/ToastContext';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
 import EntryList from '../features/EntryList';
+import Toast from '../common/Toast';
 
 function CurrentTrip() {
     const { username, userId } = useUser();
+    const { addToast, toasts, removeToast } = useToast();
     const [trip, setTrip] = useState('');
     const formattedDate = trip ? format(new Date(trip.createdAt), "MMMM do, yyyy, hh:mm a") : '';
 
