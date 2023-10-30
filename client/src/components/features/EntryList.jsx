@@ -5,7 +5,7 @@ import Entry from './Entry';
 
 function EntryList(){
     const { userId } = useUser();
-    const { entryList, refreshEntries } = useEntries();
+    const { entryList, refreshEntries } = useEntries([]);
 
   useEffect(() => {
       refreshEntries(); 
@@ -14,7 +14,7 @@ function EntryList(){
     return(
         <div>{
             entryList && (
-                entryList.map(entry => (
+                Array.isArray(entryList) && entryList.map(entry => (
                 <div key={entry.id}>
                     <Entry  
                       createdAt={entry.createdAt}
