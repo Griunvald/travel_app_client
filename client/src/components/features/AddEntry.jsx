@@ -3,6 +3,7 @@ import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
 import { useTags } from '../../contexts/TagsContext';
 import { useEntries } from '../../contexts/EntryContext';
+import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
 import Textarea from '../common/TextArea';
@@ -13,6 +14,7 @@ import TagsArea from '../common/TagsArea';
 import Form from '../common/Form';
 
 const AddEntry = () => {
+  const { showToast } = useToast();
   const { tags, setTags } = useTags();
   const [activeTab, setActiveTab] = useState('Text');
   const [formData, setFormData] = useState({
@@ -61,6 +63,7 @@ const handleSubmit = async (e) => {
           setPreview(null);
           setTags([]);
           refreshEntries();
+          showToast('Success! Your entry has been added!', { duration: 5000 });
       }
   } catch (err) {
     console.error("Error in handleSubmit:", err);
