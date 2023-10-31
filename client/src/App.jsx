@@ -52,7 +52,7 @@ const router = createBrowserRouter([
                 element: <CurrentTrip />
             },
             {
-                path: '/full-trip/:id',
+                path: '/full-trip/:userId',
                 element: <FullTrip/>
             },
             {

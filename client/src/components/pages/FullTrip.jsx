@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import format from 'date-fns/format';
+import { useParams } from 'react-router-dom';
 import { timeAgo } from '../../utils/date.js';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
 import EntryList from '../features/EntryList';
 
 function FullTrip() {
-    const userId = 1;
+    const { userId } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
