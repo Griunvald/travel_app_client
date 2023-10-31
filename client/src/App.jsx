@@ -10,6 +10,7 @@ import Join from './components/pages/Join';
 import StartTrip from './components/pages/StartTrip';
 import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
+import FullTrip from './components/pages/FullTrip';
 
 const NavbarWrapper = () => {
     return (
@@ -51,9 +52,13 @@ const router = createBrowserRouter([
                 element: <CurrentTrip />
             },
             {
+                path: '/full-trip/:id',
+                element: <FullTrip/>
+            },
+            {
                 path: '*',
                 element: <NotFound/>
-            }
+            },
         ]
     }
 ])
