@@ -4,6 +4,7 @@ import TripPreview from '../features/TripPreview';
 
 function TripsList() {
     const [trips, setTrips] = useState([]);
+    console.log(trips);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,7 +30,7 @@ function TripsList() {
             title={trip.title}
             description={trip.description}
             url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
-            link={`/full-trip/${trip.id}`}
+            link={`/full-trip/${trip.userId}`}
         />
         )) }
         </>
