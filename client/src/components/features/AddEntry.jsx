@@ -16,6 +16,7 @@ import Form from '../common/Form';
 const AddEntry = () => {
   const { showToast } = useToast();
   const { tags, setTags } = useTags();
+  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('Text');
   const [formData, setFormData] = useState({
     text: "",
@@ -42,32 +43,35 @@ const AddEntry = () => {
   }, [tags, activeTab]); 
 
 const handleSubmit = async (e) => {
-  try {
-    let awsData;
-    if (activeTab === "Image") {
-      awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
-      await putData(awsData.presignedAwsUrl, imageFile);
-    }
+  setIsLoading(true);
+      try {
+        let awsData;
+        if (activeTab === "Image") {
+          awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+          await putData(awsData.presignedAwsUrl, imageFile);
+        }
 
-    const newData = {
-      userId,
-      tripId: currentTripId,
-      tags: formData.tags,
-      type: activeTab === "Text" ? "text" : "url",
-      data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
-    };
+        const newData = {
+          userId,
+          tripId: currentTripId,
+          tags: formData.tags,
+          type: activeTab === "Text" ? "text" : "url",
+          data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
+        };
 
-    const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
-      if(responseFromPost.message === "Record created!"){
-          setFormData({ text: "" });
-          setPreview(null);
-          setTags([]);
-          refreshEntries();
-          showToast('Success! Your entry has been added!', { duration: 5000 });
+        const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
+          if(responseFromPost.message === "Record created!"){
+              setFormData({ text: "" });
+              setPreview(null);
+              setTags([]);
+              refreshEntries();
+              showToast('Success! Your entry has been added!', { duration: 5000 });
+          }
+      } catch (err) {
+        console.error("Error in handleSubmit:", err);
+      } finally {
+          setIsLoading(false);
       }
-  } catch (err) {
-    console.error("Error in handleSubmit:", err);
-  }
 };
 
     const postData = async (apiUrl, data) => {
@@ -159,7 +163,8 @@ const handleSubmit = async (e) => {
         </TabContainer>
         <TagsArea />
         <div className="flex flex-col md:flex-row justify-end gap-x-5 gap-y-4 pt-4">
-          <Button name="Publish" variant="primary" type="submit" />
+          <Button name="Publish" variant="primary" type="submit" 
+              disabled={isLoading} inProgressText="Publishing..." />
         </div>
       </Form>
       <div className="mt-4">1. Write Text or Upload Image, 2. Add tags, 3. Hit 'Publish' when done.</div>
