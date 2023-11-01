@@ -9,6 +9,7 @@ function FullTrip() {
     const [ entryList, setEntryList ] = useState([]);
     const { userId } = useParams();
     console.log(tripDetails);
+    const formattedDate = format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a");
 
     
     useEffect(() => {
@@ -35,7 +36,7 @@ function FullTrip() {
         { tripDetails &&
         <TripPreview
             username={tripDetails.username}
-            createdAt={tripDetails.createdAt}
+            createdAt={formattedDate}
           title={tripDetails.title}
           description={tripDetails.description}
           url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${tripDetails.url}`}
