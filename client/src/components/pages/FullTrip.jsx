@@ -8,10 +8,9 @@ function FullTrip() {
     const [tripDetails, setTripDetails ] = useState({});
     const [ entryList, setEntryList ] = useState([]);
     const { userId } = useParams();
-    console.log(tripDetails);
-    const formattedDate = format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a");
+    const [formattedDate, setFormattedDate] = useState(null);
 
-    
+
     useEffect(() => {
         const fetchData = async () => {
             if (!userId){
@@ -24,7 +23,13 @@ function FullTrip() {
 
             setTripDetails(data.tripDetails)
             setEntryList(data.records.rows);
-
+            if (data.tripDetails && data.tripDetails.createdAt) {
+                        const dateToFormat = new Date(data.tripDetails.createdAt);
+                if (!isNaN(dateToFormat)) {
+                              setFormattedDate(format(dateToFormat, "MMMM do, yyyy, hh:mm a"));
+                            
+                }
+            }
            } catch (error) {
             console.error('Failed to fetch trips:', error);
       }
