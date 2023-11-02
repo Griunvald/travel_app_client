@@ -45,6 +45,7 @@ const handleInputChange = (e) => {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Add a tag"
+          spellCheck="false"
           className="flex-auto bg-transparent outline-none border-0 focus:ring-0 p-1"
         />
       </div>
