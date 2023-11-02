@@ -21,7 +21,7 @@ function Entry({ id, createdAt, textValue, urlValue, recordTags }) {
         <p className="text-base font-normal my-4 ">{textValue}</p>
       )}
       {urlValue && (
-        <img  className="w-full md:w-[800px] md:h-[600px] object-cover my-4" 
+        <img  className="w-full md:w-[800px] my-4" 
           src={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${urlValue}`} alt="" />
       )}
     </div>

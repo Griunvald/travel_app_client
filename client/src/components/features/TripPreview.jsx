@@ -14,7 +14,7 @@ function TripPreview({id, username,  title, description, url, createdAt, avatar,
             </div>
             </div>
             <p className="text-base font-normal">{description}</p>
-            <img className="w-full md:w-[800px] md:h-[600x] object-cover mt-4" src={url} alt="trip cover image" />
+            <img className="w-full md:w-[800px] mt-4" src={url} alt="trip cover image" />
         </>
     );
 
