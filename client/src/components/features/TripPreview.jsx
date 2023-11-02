@@ -14,12 +14,12 @@ function TripPreview({id, username,  title, description, url, createdAt, avatar,
             </div>
             </div>
             <p className="text-base font-normal">{description}</p>
-            <img className="w-full md:w-[800px] mt-4" src={url} alt="trip cover image" />
+            <img className="w-full md:w-[700px] mt-4" src={url} alt="trip cover image" />
         </>
     );
 
     return(
-        <div className={link ? "w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4 cursor-pointer" : "w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4"}>
+        <div className={link ? "w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4 cursor-pointer" : "w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4"}>
             {link ? (
                 <Link to={link}>
                     {Content}
