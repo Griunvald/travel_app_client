@@ -6,7 +6,7 @@ function Entry({ id, createdAt, textValue, urlValue, recordTags }) {
   const formattedDate = format(new Date(createdAt), "MMMM do, yyyy, hh:mm a");
 
   return (
-    <div className="w-full md:w-[800px] mx-auto">
+    <div className="w-full md:w-[700px] mx-auto">
       <div className="bg-secondary p-2">
       <p className="text-sm font-semibold mb-1 mt-2">{formattedDate}</p> {/* Use the formatted date here */}
       {recordTags && (

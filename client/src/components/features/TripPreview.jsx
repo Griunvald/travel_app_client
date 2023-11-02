@@ -19,7 +19,7 @@ function TripPreview({id, username,  title, description, url, createdAt, avatar,
     );
 
     return(
-        <div className={link ? "w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4 cursor-pointer" : "w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4"}>
+        <div className={link ? "w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4 cursor-pointer" : "w-full md:w-[800px] mx-auto pt-4 md:pt-6 mb-4"}>
             {link ? (
                 <Link to={link}>
                     {Content}
