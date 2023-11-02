@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
-import LinkButton from '../common/LinkButton';
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
@@ -142,7 +141,6 @@ const handleSubmit = async (e) => {
         />
         <ImageUpload label="Cover Image" />
         <div className="flex flex-col  md:flex-row justify-end gap-x-5 gap-y-4">
-          {preview && <LinkButton name="Remove Image" type="secondary" onClick={handleCancel} />}
           <Button name="Publish" variant="primary" action="submit" />
         </div>
       </Form>
