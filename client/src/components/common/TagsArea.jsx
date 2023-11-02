@@ -6,12 +6,20 @@ const TagsArea = () => {
   const { tags, setTags } = useTags();
   const [currentTag, setCurrentTag] = useState('');
 
-  const handleAddTag = () => {
-    if (currentTag.trim() !== '' && !tags.includes(currentTag.trim())) {
-      setTags([...tags, currentTag.trim()]);
-      setCurrentTag('');
-    }
-  };
+    const handleAddTag = () => {
+      const newTag = currentTag.trim().toLowerCase().replace(/\s+/g, '-');
+      if (newTag !== '' && !tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setCurrentTag('');
+  }
+};
+
+
+const handleInputChange = (e) => {
+  const formattedTag = e.target.value.toLowerCase().replace(/\s+/g, '');
+  setCurrentTag(formattedTag);
+};
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -34,7 +42,7 @@ const TagsArea = () => {
         <input 
           type="text"
           value={currentTag}
-          onChange={e => setCurrentTag(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Add a tag"
           className="flex-auto bg-transparent outline-none border-0 focus:ring-0 p-1"
