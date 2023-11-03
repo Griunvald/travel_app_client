@@ -129,6 +129,8 @@ const handleSubmit = async (e) => {
           label="Trip Title"
           name="title"
           rows="1"
+          maxLength={100}
+          showCharacterCount={true}
           value={formData.title}
           onChange={handleChange}
         />
@@ -136,6 +138,8 @@ const handleSubmit = async (e) => {
           label="Trip Description"
           name="description"
           rows="3"
+          maxLength={300}
+          showCharacterCount={true}
           value={formData.description}
           onChange={handleChange}
         />
