@@ -30,25 +30,25 @@ export function UserProvider({ children }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId })  // Assuming you have userId in scope
+        body: JSON.stringify({ userId })  
       });
 
-      const data = await response.json();
-
+const text = await response.text();
+      if (!text) return;
+      
+      const data = JSON.parse(text);
       if (data && data.id) {
-        setCurrentTripId(data.id);  // Assuming you have setCurrentTripId in scope
-        // Set your hasCurrentTrip state or context value here
+        setCurrentTripId(data.id); 
       }
     } catch (error) {
       console.error('Failed to fetch current trip:', error);
     }
   };
 
-  if (userId) {  // Only attempt to fetch if userId is set
+  if (userId) {
     fetchCurrentTrip();
   }
-}, [userId]);  // Re-run whenever userId changes
-
+}, [userId]); 
 
   return (
     <UserContext.Provider value={{ username, setUsername, userId, setUserId, currentTripId, setCurrentTripId}}>
