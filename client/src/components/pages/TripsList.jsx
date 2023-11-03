@@ -4,7 +4,6 @@ import TripPreview from '../features/TripPreview';
 
 function TripsList() {
     const [trips, setTrips] = useState([]);
-    console.log(trips);
 
     useEffect(() => {
         const fetchData = async () => {

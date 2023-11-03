@@ -29,8 +29,6 @@ function CurrentTrip() {
             const data = await response.json();
 
             setTrip(data);
-            console.log("data: ", data);
-            console.log("trip: ", trip);
            } catch (error) {
             console.error('Failed to fetch trips:', error);
       }
