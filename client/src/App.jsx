@@ -11,6 +11,7 @@ import StartTrip from './components/pages/StartTrip';
 import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
+import Profile from './components/pages/Profile';
 
 const NavbarWrapper = () => {
     return (
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: '/full-trip/:userId',
                 element: <FullTrip/>
+            },
+            {
+                path: '/profile',
+                element: <Profile/>
             },
             {
                 path: '*',
