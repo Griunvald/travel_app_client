@@ -20,7 +20,7 @@ function Textarea({
           value={value}
           onChange={onChange}
           maxLength={maxLength}
-          className={`resize-none overflow-hidden bg-white shadow-sm mt-1 block w-full mb-4  h-${height}`}
+          className={`resize-none overflow-hidden bg-white shadow-sm block w-full mb-4  h-${height}`}
         />
         {maxLength && (
           <span className="absolute bottom-2 right-2 pb-5 text-sm text-gray-600">
