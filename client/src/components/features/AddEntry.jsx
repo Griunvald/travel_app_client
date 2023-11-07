@@ -142,7 +142,7 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className="w-full md:w-[800px] mx-auto pt-2 mb-4 border border-2 shadow-soft p-2">
+    <div className="w-full md:w-[700px] mx-auto pt-2 mb-4 border border-2 shadow-soft p-2">
       <TabButton tabName="Text" setActiveTab={setActiveTab} activeTab={activeTab} />
       <TabButton tabName="Image" setActiveTab={setActiveTab} activeTab={activeTab} />
 
