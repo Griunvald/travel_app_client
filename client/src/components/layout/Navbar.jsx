@@ -33,7 +33,9 @@ function Navbar() {
         { windowWidth > 768 ? (
             username ? 
             (<>
-                <Avatar size="big"/>
+                <Link to="/profile">
+                    <Avatar size="big"/>
+                </Link>
                 {currentTripId ? (
                 <LinkButton name="Current Trip" variant="primary" path="/current-trip"/>
                 ):(
