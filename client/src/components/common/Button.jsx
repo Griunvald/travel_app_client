@@ -1,4 +1,4 @@
-function Button({ name, variant, action, disabled, inProgressText }) {
+function Button({ name, variant, action, disabled, inProgressText, onClick }) {
   return (
     <button 
       className={`md:max-w-max px-8 py-2 text-base font-medium rounded 
@@ -6,6 +6,7 @@ function Button({ name, variant, action, disabled, inProgressText }) {
                 'bg-inherit text-gray-900'}`} 
       type={action} 
       disabled={disabled}
+      onClick={onClick}
     >
       {disabled ? inProgressText : name}
     </button>
