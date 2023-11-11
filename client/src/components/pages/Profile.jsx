@@ -1,7 +1,9 @@
+import Logout from '../features/Logout';
 function Profile() {
     return (
        <div>
-        My profile page
+        <Logout/>
+        Profile page
         </div>
     )
 }
