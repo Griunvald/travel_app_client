@@ -28,6 +28,15 @@ const NavbarWrapper = () => {
     )
 }
 
+const ProfileLayout = () => {
+  return (
+    <>
+      <Profile />
+      <Outlet />
+    </>
+  );
+}
+
 const router = createBrowserRouter([
     {
         element: <NavbarWrapper />,
@@ -56,10 +65,15 @@ const router = createBrowserRouter([
                 path: '/full-trip/:userId',
                 element: <FullTrip/>
             },
-            {
-                path: '/profile',
-                element: <Profile/>
-            },
+             {
+                path: 'profile',
+                element: <ProfileLayout />,
+                children: [
+                  { index: true, element: <div>Profile Overview Content</div> }, 
+                  { path: 'manage-trip', element: <div>Manage Trip Content</div> },
+                  { path: 'logout', element: <div>Logout</div> },
+                ]
+          },
             {
                 path: '*',
                 element: <NotFound/>
