@@ -12,6 +12,7 @@ import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
+import Logout from './components/features/Logout';
 
 const NavbarWrapper = () => {
     return (
@@ -31,8 +32,9 @@ const NavbarWrapper = () => {
 const ProfileLayout = () => {
   return (
     <>
-      <Profile />
-      <Outlet />
+      <Profile>
+          <Outlet />
+      </Profile>
     </>
   );
 }
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
                 children: [
                   { index: true, element: <div>Profile Overview Content</div> }, 
                   { path: 'manage-trip', element: <div>Manage Trip Content</div> },
-                  { path: 'logout', element: <div>Logout</div> },
+                  { path: 'logout', element: <Logout/> },
                 ]
           },
             {
