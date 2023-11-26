@@ -15,7 +15,8 @@ export const ProfileProvider = ({ children }) => {
     const [gender, setGender] = useState('');
 
     return (
-        <ProfileContext.Provider value={{ about, avatar, country, homeTown, gender }} >
+        <ProfileContext.Provider value={{ 
+            about, setAbout, avatar, setAvatar, country, setCountry, homeTown, setHomeTown, gender, setGender }} >
             { children }
         </ProfileContext.Provider>
     );
