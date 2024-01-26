@@ -37,8 +37,6 @@ function Profile({ children }) {
         
         <ul className={`w-full ${sidebarOpen ? 'block' : 'hidden'}`}>
           <li className="p-2 hover:bg-gray-300"><Link to="/profile/about">About</Link></li>
-          <li className="p-2 hover:bg-gray-300"><Link to="/profile/settings">Settings</Link></li>
-          <li className="p-2 hover:bg-gray-300"><Link to="/profile/other">Other Section</Link></li>
           <li className="p-2 hover:bg-gray-300"><Link to="/profile/logout">Logout</Link></li>
         </ul>
         

@@ -74,6 +74,7 @@ const router = createBrowserRouter([
                   { index: true, element: <div>Profile Overview Content</div> }, 
                   { path: 'manage-trip', element: <div>Manage Trip Content</div> },
                   { path: 'logout', element: <Logout/> },
+                  { path: 'about', element: <About/> },
                 ]
           },
             {
