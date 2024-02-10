@@ -71,8 +71,7 @@ const router = createBrowserRouter([
                 path: 'profile',
                 element: <ProfileLayout />,
                 children: [
-                  { index: true, element: <div>Profile Overview Content</div> }, 
-                  { path: 'manage-trip', element: <div>Manage Trip Content</div> },
+                  { index: true, element: <About/> }, 
                   { path: 'logout', element: <Logout/> },
                   { path: 'about', element: <About/> },
                 ]
