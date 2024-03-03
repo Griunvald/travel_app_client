@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar.jsx';
+import Button from '../common/Button';
 
 function TripPreview({ id, username, title, description, url, createdAt, avatar, link = null }) {
     const UserInfo = (
-        <div className="flex my-2 py-2 gap-2 items-end">
-            <Avatar avatar={avatar} />
+        <div className="flex justify-between my-2 py-2 items-center w-full"> {/* Adjusted for full width and justify content */}
+            <div className="flex gap-2 items-end"> {/* Wrap the avatar and text in a div to align them separately from the button */}
+                <Avatar avatar={avatar} />
+                <div>
+                    <p className="font-semibold text-sm">{username}</p>
+                    <p className="text-sm">{createdAt}</p>
+                </div>
+            </div>
             <div>
-                <p className="font-semibold text-sm">{username}</p>
-                <p className="text-sm">{createdAt}</p>
+                <Button name="Follow" />
             </div>
         </div>
     );
