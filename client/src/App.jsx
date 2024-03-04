@@ -5,6 +5,7 @@ import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
 import TripsList from './components/pages/TripsList';
 import About from './components/pages/About';
+import Landing from './components/pages/Landing';
 import Login from './components/pages/Login';
 import Join from './components/pages/Join';
 import StartTrip from './components/pages/StartTrip';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                element: <Landing />
+            },
+            {
+                path: '/trips-list',
                 element: <TripsList />
             },
             {
