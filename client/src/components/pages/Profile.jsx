@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useProfile } from '../../contexts/ProfileContext';
+import { useUser } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 
 function Profile({ children }) {
   const { setAbout, setAvatar, setCountry, setHomeTown, setGender } = useProfile();
+  const { userId } = useUser();
+  console.log(userId);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
    useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch(`http://localhost:3003/api/v1/user/profile/get-profile?userId=1`);
+        const response = await fetch(`http://localhost:3003/api/v1/user/profile/get-profile?userId=${userId}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
