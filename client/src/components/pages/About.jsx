@@ -1,11 +1,14 @@
 import { useProfile } from '../../contexts/ProfileContext';
+import { useUser } from '../../contexts/UserContext';
 import Form from '../common/Form';
 import Textarea from '../common/Textarea';
 import Button from '../common/Button';
 
 function About() {
   const {about, setAbout} = useProfile();
+  const {userId} = useUser();
   console.log(about);
+  console.log(userId);
 
     const handleChange = (e) => {
       setAbout(e.target.value);
@@ -14,7 +17,7 @@ function About() {
     const handleSubmit = async () => {
         try {
       const data = {about}
-        const response = await postData('http://localhost:3003/api/v1/user/profile/update-profile?userId=1', data)
+        const response = await postData(`http://localhost:3003/api/v1/user/profile/update-profile?userId=${userId}`, data)
       console.log(response);
         } catch(err){
            console.error(err);
