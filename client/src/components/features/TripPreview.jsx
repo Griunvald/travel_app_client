@@ -4,8 +4,8 @@ import Button from '../common/Button';
 
 function TripPreview({ id, username, title, description, url, createdAt, avatar, link = null }) {
     const UserInfo = (
-        <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full"> {/* Adjusted for full width and justify content */}
-            <div className="flex gap-2 items-end"> {/* Wrap the avatar and text in a div to align them separately from the button */}
+        <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full"> 
+            <div className="flex gap-2 items-end"> 
                 <Avatar avatar={avatar} />
                 <div>
                     <p className="font-semibold text-sm">{username}</p>
