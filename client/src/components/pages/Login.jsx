@@ -28,7 +28,9 @@ function Login() {
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
                 setCurrentTripId(currentTripId);
-               navigate('/');
+               navigate('/trips-list');
+            } else {
+               navigate('/landing')     
             }
         } catch(err){
            console.error(err);

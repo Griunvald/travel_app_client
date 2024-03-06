@@ -49,6 +49,10 @@ const router = createBrowserRouter([
                 element: <Landing />
             },
             {
+                path: '/landing',
+                element: <Landing />
+            },
+            {
                 path: '/trips-list',
                 element: <TripsList />
             },
