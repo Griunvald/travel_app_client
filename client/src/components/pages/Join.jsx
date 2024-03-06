@@ -30,7 +30,7 @@ function Join() {
             if(parsed.username) {
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
-               navigate('/');
+               navigate('/trips-list');
             }
         } catch(err){
            console.error(err);
