@@ -9,8 +9,7 @@ function Landing() {
         <h1 className="font-bold text-gray-900 text-4xl md:text-6xl lg:text-8xl leading-tight mb-6">Trace Your Trails: Where Memories Map Out</h1>
         <h2 className="font-medium text-gray-900 text-xl md:text-2xl lg:text-3xl mb-12">From sunrise city walks to mountain mist sunsets, chart your experiences and share the story of every place.</h2>
         <div className="w-full flex flex-col md:flex-row justify-center gap-6 px-4 md:px-0">
-          {/* Adjusted button to be full-width on small screens and auto width on md screens */}
-          <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/login"} />
+          <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/join"} />
         </div>
       </section>
 
@@ -46,8 +45,7 @@ function Landing() {
 
         <p className="text-lg font-medium text-gray-800 mt-12 mb-12 text-center">Start documenting your travels today and inspire a community of wanderers tomorrow. Let the journey begin!</p>
         <div className="w-full flex flex-col md:flex-row justify-center gap-6 px-4 md:px-0">
-          {/* Ensured consistency by applying the same width adjustments as the first button */}
-          <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/login"} />
+          <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/join"} />
         </div>
       </section>
     </>
