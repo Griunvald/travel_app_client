@@ -48,6 +48,29 @@ function Landing() {
           <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/join"} />
         </div>
       </section>
+      <section className="py-20 px-4 md:px-10">
+        <h2 className="font-bold text-gray-900 text-3xl md:text-4xl text-center leading-snug md:leading-normal mb-10">Features</h2>
+        <div className="max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Live Logs</h3>
+              <p className="text-base text-gray-700">Document your journey as it unfolds.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Follow Paths</h3>
+              <p className="text-base text-gray-700">Get updates from favorite travelers.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Community Connect</h3>
+              <p className="text-base text-gray-700">Comment, like, and share within a community that celebrates travel.</p>
+            </div>
+          </div>
+        </div>
+        <div className="w-full flex flex-col md:flex-row justify-center gap-6 px-4 md:px-0 mt-10">
+          <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/join"} />
+        </div>
+      </section>
+
     </>
   );
 }
