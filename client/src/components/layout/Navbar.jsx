@@ -31,6 +31,7 @@ function Navbar() {
             </div>
             <div className="max-w-full flex content-center">
                 <div className="flex justify-end items-center gap-x-5 mr-4.5">
+                <LinkNavbar name="Discover Journeys" path="/trips-list" />
         { windowWidth > 768 ? (
             username ? 
             (<>
@@ -45,7 +46,6 @@ function Navbar() {
             </>) 
             : 
             (<>
-                <LinkNavbar name="Discover Journeys" path="/trips-list" />
                 <LinkButton name="Login" variant="secondary" path="/login"/>
                 <LinkButton name="Join" variant="primary" path="/join"/>
             </>)
