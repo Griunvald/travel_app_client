@@ -24,6 +24,7 @@ function TripsList() {
 
         <TripPreview 
             key={trip.id}
+            userId={trip.userId}
             username={trip.username}
             createdAt={timeAgo(trip.createdAt)}
             title={trip.title}

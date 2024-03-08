@@ -3,8 +3,15 @@ import Avatar from '../common/Avatar.jsx';
 import Button from '../common/Button';
 import { useUser} from '../../contexts/UserContext';
 
-function TripPreview({ id, username, title, description, url, createdAt, avatar, link = null }) {
-  const {username: currentUser } = useUser();
+function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
+
+  const {username: currentUser, userId: follower} = useUser();
+
+   const handleClick = () => {
+      console.log("leader is: ", leader);
+      console.log("follower is: ", follower);
+  };
+
     const UserInfo = (
         <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full"> 
             <div className="flex gap-2 items-end"> 
@@ -16,7 +23,7 @@ function TripPreview({ id, username, title, description, url, createdAt, avatar,
             </div>
       {currentUser === username  ? (null):(
             <div id={username}>
-                <Button name="Follow" />
+                <Button name="Follow" onClick={handleClick} />
             </div>
       )}
         </div>
