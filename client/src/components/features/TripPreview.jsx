@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar.jsx';
 import Button from '../common/Button';
 import { useUser} from '../../contexts/UserContext';
+import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
 
   const {username: currentUser, userId: follower} = useUser();
+  const { followUser } = useFollow();
 
    const handleClick = () => {
+    followUser(leader, follower);
       console.log("leader is: ", leader);
       console.log("follower is: ", follower);
   };
