@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import LinkButton from  '../common/LinkButton.jsx';
+import LinkNavbar from  '../common/LinkNavbar.jsx';
 import Logo from '../common/Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Avatar from '../common/Avatar';
@@ -44,6 +45,7 @@ function Navbar() {
             </>) 
             : 
             (<>
+                <LinkNavbar name="Discover Journeys" path="/trips-list" />
                 <LinkButton name="Login" variant="secondary" path="/login"/>
                 <LinkButton name="Join" variant="primary" path="/join"/>
             </>)
