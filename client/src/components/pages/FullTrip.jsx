@@ -45,6 +45,7 @@ function FullTrip() {
           title={tripDetails.title}
           description={tripDetails.description}
           url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${tripDetails.url}`}
+          userId={userId}
         />
 
         }
