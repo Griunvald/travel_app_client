@@ -7,12 +7,16 @@ import { useFollow } from '../../contexts/FollowContext';
 function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
 
   const {username: currentUser } = useUser();
-  const { followUser } = useFollow();
+  const { followUser, fetchFollowedUsers, followedUsers } = useFollow();
 
-   const handleClick = () => {
+  const isFollowing = followedUsers.includes(username);
+
+   const handleClick = async () => {
     followUser(leader);
-      console.log("leader is: ", leader);
+    console.log("leader is: ", leader);
+    await fetchFollowedUsers();
   };
+  console.log(followedUsers);
 
     const UserInfo = (
         <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full"> 
@@ -25,7 +29,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
             </div>
       {currentUser === username  ? (null):(
             <div id={username}>
-                <Button name="Follow" onClick={handleClick} />
+              <Button name={followedUsers.includes(username) && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
             </div>
       )}
         </div>
