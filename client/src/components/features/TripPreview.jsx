@@ -6,13 +6,12 @@ import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
 
-  const {username: currentUser, userId: follower} = useUser();
+  const {username: currentUser } = useUser();
   const { followUser } = useFollow();
 
    const handleClick = () => {
-    followUser(leader, follower);
+    followUser(leader);
       console.log("leader is: ", leader);
-      console.log("follower is: ", follower);
   };
 
     const UserInfo = (

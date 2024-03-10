@@ -6,16 +6,16 @@ export const useFollow = () => useContext(FollowContext);
 
 export const FollowProvider = ({ children }) => {
 
-  const followUser = async (leaderId, followerId) => {
+  const followUser = async (leaderId) => {
     try {
       const response = await fetch('http://localhost:3003/api/v1/follow/follow-user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
-        body: JSON.stringify({ leaderId, followerId })
+        body: JSON.stringify({ leaderId })
       })
       if(response.ok){
-        console.log("Start following user with id: ", followerId);
+        console.log("Start following user with id: ", leaderId);
         }
       } catch (err){
         console.log(err); 
