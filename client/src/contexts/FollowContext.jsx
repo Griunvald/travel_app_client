@@ -54,8 +54,28 @@ const fetchFollowedUsers = async () => {
         console.log(err); 
       }
   }
+
+
+  const unfollowUser = async (leaderId) => {
+    try {
+      const response = await fetch('http://localhost:3003/api/v1/follow/unfollow-user', {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({ leaderId })
+      })
+      if(response.ok){
+        await fetchFollowedUsers();
+        console.log("Stopped to unfollow user with id: ", leaderId);
+        } else {
+        console.error("Failed to unfollow user: ", err); 
+        }
+      } catch (err){
+        console.error("Error unfollowing user: ", err); 
+      }
+  }
   return (
-    <FollowContext.Provider value={{ followUser, fetchFollowedUsers, followedUsers, follower }}>
+    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower }}>
       { children }
     </FollowContext.Provider>
   )
