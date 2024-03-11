@@ -42,7 +42,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
                     <p className="text-sm">{createdAt}</p>
                 </div>
             </div>
-      {currentUser === username  ? (null):(
+      {currentUser === username || !userId ? (null):(
             <div id={username}>
               <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
               <ThreeDotsMenu menuItems={menuItems} />
