@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar.jsx';
 import Button from '../common/Button';
+import ThreeDotsMenu from '../common/ThreeDotsMenu';
 import { useUser} from '../../contexts/UserContext';
 import { useFollow } from '../../contexts/FollowContext';
 
@@ -17,6 +18,12 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
   console.log(follower);
   console.log(userId);
   console.log("-------");
+
+  const menuItems = [
+    { label: "Edit", action: () => console.log("Edit clicked") },
+    { label: "Delete", action: () => console.log("Delete clicked") },
+    // Add more menu items as needed
+  ];
 
 
    const handleClick = async () => {
@@ -38,6 +45,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
       {currentUser === username  ? (null):(
             <div id={username}>
               <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
+              <ThreeDotsMenu menuItems={menuItems} />
             </div>
       )}
         </div>
