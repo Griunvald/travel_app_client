@@ -7,6 +7,7 @@ export const useFollow = () => useContext(FollowContext);
 export const FollowProvider = ({ children }) => {
 
   const [followedUsers, setFollowedUsers] = useState([]);
+  const [follower, setFollower] = useState(null);
 
 
 const fetchFollowedUsers = async () => {
@@ -19,10 +20,11 @@ const fetchFollowedUsers = async () => {
 
     if(response.ok) {
       const data = await response.json();
-      const { following } = data;
-      const users = following.map(item => item.username);
-      setFollowedUsers(users); 
-      console.log(users); 
+      const { userId, followedUsersIds } = data.following;
+      console.log( userId, followedUsersIds );
+
+      setFollowedUsers(followedUsersIds); 
+      setFollower(userId);
     } else {
       console.error('Failed to fetch followed users with response status: ', response.status);
     }
@@ -53,7 +55,7 @@ const fetchFollowedUsers = async () => {
       }
   }
   return (
-    <FollowContext.Provider value={{ followUser, fetchFollowedUsers, followedUsers }}>
+    <FollowContext.Provider value={{ followUser, fetchFollowedUsers, followedUsers, follower }}>
       { children }
     </FollowContext.Provider>
   )

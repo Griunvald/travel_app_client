@@ -6,10 +6,18 @@ import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
 
-  const {username: currentUser } = useUser();
-  const { followUser, fetchFollowedUsers, followedUsers } = useFollow();
+  const {username: currentUser, userId } = useUser();
+  const { followUser, fetchFollowedUsers, followedUsers, follower } = useFollow();
 
-  const isFollowing = followedUsers.includes(username);
+
+  const isFollowing = followedUsers.includes(leader);
+  
+  console.log("-------");
+  console.log(isFollowing);
+  console.log(follower);
+  console.log(userId);
+  console.log("-------");
+
 
    const handleClick = async () => {
     followUser(leader);
@@ -29,7 +37,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
             </div>
       {currentUser === username  ? (null):(
             <div id={username}>
-              <Button name={followedUsers.includes(username) && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
+              <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
             </div>
       )}
         </div>
