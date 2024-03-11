@@ -8,7 +8,7 @@ import { useFollow } from '../../contexts/FollowContext';
 function TripPreview({ id, username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
 
   const {username: currentUser, userId } = useUser();
-  const { followUser, fetchFollowedUsers, followedUsers, follower } = useFollow();
+  const { followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower } = useFollow();
 
 
   const isFollowing = followedUsers.includes(leader);
@@ -19,19 +19,25 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
   console.log(userId);
   console.log("-------");
 
-  const menuItems = [
-    { label: "Edit", action: () => console.log("Edit clicked") },
-    { label: "Delete", action: () => console.log("Delete clicked") },
-    // Add more menu items as needed
-  ];
 
 
-   const handleClick = async () => {
+   const handleFollow = async () => {
     followUser(leader);
     console.log("leader is: ", leader);
     await fetchFollowedUsers();
   };
   console.log(followedUsers);
+ 
+
+   const handleUnfollow = async () => {
+    unfollowUser(leader);
+    await fetchFollowedUsers();
+  };
+
+
+  const menuItems = [
+    { label: "Unfollow", action: handleUnfollow },
+  ];
 
     const UserInfo = (
         <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full"> 
@@ -44,7 +50,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
             </div>
       {currentUser === username || !userId ? (null):(
             <div id={username}>
-              <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleClick} />
+              <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleFollow} />
               <ThreeDotsMenu menuItems={menuItems} />
             </div>
       )}
