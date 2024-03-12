@@ -5,6 +5,7 @@ import  Link  from '../common/Link'
 import Input from '../common/Input';
 import Form from '../common/Form';
 import { useUser } from '../../contexts/UserContext';
+import { useFollow } from '../../contexts/FollowContext';
 
 
 function Login() {
@@ -14,7 +15,10 @@ function Login() {
     });
 
     const { setUsername, setUserId, setCurrentTripId, currentTripId} = useUser();
+    const { fetchFollowedUsers } = useFollow();
+
     const navigate = useNavigate();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,6 +32,7 @@ function Login() {
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
                 setCurrentTripId(currentTripId);
+                fetchFollowedUsers();
                navigate('/trips-list');
             } else {
                navigate('/landing')     
