@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar.jsx';
-import Button from '../common/Button';
+import FollowButton from '../common/FollowButton';
 import ThreeDotsMenu from '../common/ThreeDotsMenu';
 import { useUser} from '../../contexts/UserContext';
 import { useFollow } from '../../contexts/FollowContext';
@@ -11,10 +11,8 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
   const { followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower } = useFollow();
 
 
-  const isFollowing = followedUsers.includes(leader);
   
   console.log("-------");
-  console.log(isFollowing);
   console.log(follower);
   console.log(userId);
   console.log("-------");
@@ -50,7 +48,7 @@ function TripPreview({ id, username, userId: leader, title, description, url, cr
             </div>
       {currentUser === username || !userId ? (null):(
             <div id={username}>
-              <Button name={follower === userId && isFollowing ? "Following" : "Follow"} onClick={handleFollow} />
+              <FollowButton  onClick={handleFollow} />
               <ThreeDotsMenu menuItems={menuItems} />
             </div>
       )}
