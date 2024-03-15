@@ -10,9 +10,12 @@ function FullTrip() {
     const [ entryList, setEntryList ] = useState([]);
     const { userId } = useParams();
     const [formattedDate, setFormattedDate] = useState(null);
-    const { leaderId } = useFollow();
+    const { leaderId, fetchFollowedUsers } = useFollow();
      
     console.log("Leader ID from FullTrip: ", leaderId);
+  useEffect(()=>{
+fetchFollowedUsers();
+  },[leaderId]);
 
     useEffect(() => {
         const fetchData = async () => {
