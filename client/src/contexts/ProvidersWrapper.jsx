@@ -6,6 +6,7 @@ import { EntryProvider } from './EntryContext.jsx';
 import { ToastProvider } from './ToastContext.jsx';
 import { ProfileProvider } from './ProfileContext.jsx';
 import { FollowProvider } from './FollowContext.jsx';
+import { TripsProvider } from './TripsPreviewContext.jsx';
 
 export const ProvidersWrapper = ({ children }) => {
     return (
@@ -13,15 +14,17 @@ export const ProvidersWrapper = ({ children }) => {
             <ToastProvider>
              <FollowProvider>
                 <MenuProvider>
-                  <ProfileProvider>
+                  <TripsProvider>
+                    <ProfileProvider>
                       <EntryProvider>
                           <ImageProvider>
                              <TagsProvider>
                                   { children }
                              </TagsProvider>
                           </ImageProvider>
-                      </EntryProvider>
-                  </ProfileProvider>
+                        </EntryProvider>
+                      </ProfileProvider>
+                    </TripsProvider>
                 </MenuProvider>
               </FollowProvider>
             </ToastProvider>
