@@ -8,6 +8,9 @@ export const FollowProvider = ({ children }) => {
 
   const [followedUsers, setFollowedUsers] = useState([]);
   const [follower, setFollower] = useState(null);
+  const [leaderId, setLeaderId] = useState(null);
+  
+  console.log("Leader ID from Context: ",leaderId);
 
 
 const fetchFollowedUsers = async () => {
@@ -75,7 +78,7 @@ const fetchFollowedUsers = async () => {
       }
   }
   return (
-    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower }}>
+    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower, leaderId, setLeaderId }}>
       { children }
     </FollowContext.Provider>
   )

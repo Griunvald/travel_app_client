@@ -6,15 +6,17 @@ import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
   const { username: currentUser, userId } = useUser();
-  const { followUser, unfollowUser, fetchFollowedUsers } = useFollow();
+  const { followUser, unfollowUser, fetchFollowedUsers, leaderId, setLeaderId } = useFollow();
 
   const handleFollow = async () => {
     followUser(leader);
+    setLeaderId(leader);
     await fetchFollowedUsers();
   };
 
   const handleUnfollow = async () => {
     unfollowUser(leader);
+    setLeaderId(leader);
     await fetchFollowedUsers();
   };
 
