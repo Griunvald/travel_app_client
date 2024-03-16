@@ -11,8 +11,10 @@ function FullTrip() {
     const { userId } = useParams();
     const [formattedDate, setFormattedDate] = useState(null);
     const { leaderId, fetchFollowedUsers } = useFollow();
+   const ID = Number(userId);
      
     console.log("Leader ID from FullTrip: ", leaderId);
+    console.log("!!!!!!!", typeof(userId));
   useEffect(()=>{
 fetchFollowedUsers();
   },[leaderId]);
@@ -51,7 +53,7 @@ fetchFollowedUsers();
           title={tripDetails.title}
           description={tripDetails.description}
           url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${tripDetails.url}`}
-          userId={userId}
+          userId={ID}
         />
 
         }

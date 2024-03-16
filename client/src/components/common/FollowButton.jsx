@@ -1,17 +1,9 @@
-import { useFollow } from '../../contexts/FollowContext';
-
-function FollowButton({ onClick }) {
-  const { followedUsers, leaderId } = useFollow();
-
-  console.log("Leader ID from FollowButton: ",leaderId);
-
-  // TODO: Get id of followed user 
-   const isFollowing = followedUsers.includes(leaderId);
+function FollowButton({ leaderId, onFollowClick, isFollowing }) {
 
   return (
     <button className={`md:max-w-max px-8 py-2 text-base font-medium rounded
       bg-inherit text-gray-900 border border-primary`}
-      onClick={onClick}
+      onClick={ () => onFollowClick(leaderId)}
     >
       {isFollowing ? 'Following':'Follow'}
     </button>

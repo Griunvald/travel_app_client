@@ -6,7 +6,7 @@ import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
   const { username: currentUser, userId } = useUser();
-  const { followUser, unfollowUser, fetchFollowedUsers, leaderId, setLeaderId } = useFollow();
+  const { followUser, unfollowUser, fetchFollowedUsers, followedUsers, setLeaderId } = useFollow();
 
   const handleFollow = async () => {
     followUser(leader);
@@ -29,7 +29,7 @@ function TripPreview({ username, userId: leader, title, description, url, create
   const Content = (
     <>
       <h1 className="font-bold text-gray-900 text-3xl md:text-4xl leading-snug md:leading-normal">{title}</h1>
-      <p className="text-base font-normal">{description}</p>
+      <p className="text-base font-normal">{description}</p> 
       <img className="w-full md:w-[700px] mt-4" src={url} alt="trip cover image" />
     </>
   );
@@ -37,12 +37,14 @@ function TripPreview({ username, userId: leader, title, description, url, create
   return (
     <div className="w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4">
       <UserInfo 
+        leader={leader}
         avatar={avatar}
         username={username}
         createdAt={createdAt}
-        handleFollow={handleFollow}
+        onFollowClick={handleFollow}
         menuItems={menuItems}
         showFollowButton={showFollowButton}
+        followedUsers={followedUsers}
       />
       {link ? (
         <Link to={link} className="cursor-pointer">
