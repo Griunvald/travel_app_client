@@ -18,7 +18,7 @@ const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowBu
       {showFollowButton && (
         <div>
           <FollowButton leaderId={leader} onFollowClick={onFollowClick} isFollowing={isFollowing} />
-          <ThreeDotsMenu menuItems={menuItems} />
+          { isFollowing ? <ThreeDotsMenu menuItems={menuItems} /> : null }
         </div>
       )}
     </div>
