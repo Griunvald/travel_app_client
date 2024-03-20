@@ -15,7 +15,7 @@ function Login() {
     });
 
     const { setUsername, setUserId, setCurrentTripId, currentTripId} = useUser();
-    const { fetchFollowedUsers } = useFollow();
+    const { fetchFollowingUsers } = useFollow();
 
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function Login() {
                 setUsername(parsed.username);
                 setUserId(parsed.userId);
                 setCurrentTripId(currentTripId);
-                fetchFollowedUsers();
+                fetchFollowingUsers();
                navigate('/trips-list');
             } else {
                navigate('/landing')     

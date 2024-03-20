@@ -6,14 +6,14 @@ export const useFollow = () => useContext(FollowContext);
 
 export const FollowProvider = ({ children }) => {
 
-  const [followedUsers, setFollowedUsers] = useState([]);
+  const [followingUsers, setFollowingUsers] = useState([]);
   const [follower, setFollower] = useState(null);
   const [leaderId, setLeaderId] = useState(null);
   
   console.log("Leader ID from Context: ",leaderId);
 
 
-const fetchFollowedUsers = async () => {
+const fetchFollowingUsers = async () => {
   try {
     const response = await fetch('http://localhost:3003/api/v1/follow/get-following', {
       method: 'GET',
@@ -23,10 +23,10 @@ const fetchFollowedUsers = async () => {
 
     if(response.ok) {
       const data = await response.json();
-      const { userId, followedUsersIds } = data.following;
-      console.log( userId, followedUsersIds );
+      const { userId, followingUsersIds } = data.following;
+      console.log( userId, followingUsersIds );
 
-      setFollowedUsers(followedUsersIds); 
+      setFollowingUsers(followingUsersIds); 
       setFollower(userId);
     } else {
       console.error('Failed to fetch followed users with response status: ', response.status);
@@ -37,7 +37,7 @@ const fetchFollowedUsers = async () => {
 }
 
   useEffect(() => {
-    fetchFollowedUsers();
+    fetchFollowingUsers();
   }, []);
 
 
@@ -50,7 +50,7 @@ const fetchFollowedUsers = async () => {
         body: JSON.stringify({ leaderId })
       })
       if(response.ok){
-        await fetchFollowedUsers();
+        await fetchFollowingUsers();
         console.log("Start following user with id: ", leaderId);
         }
       } catch (err){
@@ -68,7 +68,7 @@ const fetchFollowedUsers = async () => {
         body: JSON.stringify({ leaderId })
       })
       if(response.ok){
-        await fetchFollowedUsers();
+        await fetchFollowingUsers();
         console.log("Stopped to unfollow user with id: ", leaderId);
         } else {
         console.error("Failed to unfollow user: ", err); 
@@ -78,7 +78,7 @@ const fetchFollowedUsers = async () => {
       }
   }
   return (
-    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowedUsers, followedUsers, follower, leaderId, setLeaderId }}>
+    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowingUsers, followingUsers, follower, leaderId, setLeaderId }}>
       { children }
     </FollowContext.Provider>
   )

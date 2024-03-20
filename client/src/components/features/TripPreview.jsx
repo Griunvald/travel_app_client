@@ -6,18 +6,18 @@ import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
   const { username: currentUser, userId } = useUser();
-  const { followUser, unfollowUser, fetchFollowedUsers, followedUsers, setLeaderId } = useFollow();
+  const { followUser, unfollowUser, fetchFollowingUsers, followingUsers, setLeaderId } = useFollow();
 
   const handleFollow = async () => {
     followUser(leader);
     setLeaderId(leader);
-    await fetchFollowedUsers();
+    await fetchFollowingUsers();
   };
 
   const handleUnfollow = async () => {
     unfollowUser(leader);
     setLeaderId(leader);
-    await fetchFollowedUsers();
+    await fetchFollowingUsers();
   };
 
   const menuItems = [
@@ -44,7 +44,7 @@ function TripPreview({ username, userId: leader, title, description, url, create
         onFollowClick={handleFollow}
         menuItems={menuItems}
         showFollowButton={showFollowButton}
-        followedUsers={followedUsers}
+        followingUsers={followingUsers}
       />
       {link ? (
         <Link to={link} className="cursor-pointer">

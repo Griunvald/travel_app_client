@@ -4,8 +4,8 @@ import Avatar from './Avatar';
 import FollowButton from './FollowButton';
 import ThreeDotsMenu from './ThreeDotsMenu';
 
-const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowButton, onFollowClick, followedUsers }) => {
-  const isFollowing = followedUsers.includes(leader);
+const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowButton, onFollowClick, followingUsers }) => {
+  const isFollowing = followingUsers.includes(leader);
   return (
     <div className="flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full">
       <div className="flex gap-2 items-end">
