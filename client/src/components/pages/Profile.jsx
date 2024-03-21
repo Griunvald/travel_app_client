@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useProfile } from '../../contexts/ProfileContext';
+import { useFollow } from '../../contexts/FollowContext';
 import { useUser } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 
 function Profile({ children }) {
   const { setAbout, setAvatar, setCountry, setHomeTown, setGender } = useProfile();
+  const { getFollowStats } = useFollow();
   const { userId } = useUser();
   console.log(userId);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  useEffect(() => {
+    getFollowStats();
+  },[]);
 
    useEffect(() => {
     const fetchProfileData = async () => {

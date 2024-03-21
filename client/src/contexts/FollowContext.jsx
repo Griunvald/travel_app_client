@@ -9,6 +9,7 @@ export const FollowProvider = ({ children }) => {
   const [followingUsers, setFollowingUsers] = useState([]);
   const [follower, setFollower] = useState(null);
   const [leaderId, setLeaderId] = useState(null);
+  const [followStats, setFollowStats] = useState({});
   
   console.log("Leader ID from Context: ",leaderId);
 
@@ -78,8 +79,26 @@ const fetchFollowingUsers = async () => {
         console.error("Error unfollowing user: ", err); 
       }
   }
+
+
+  const getFollowStats = async () => {
+    try {
+      const response = await fetch('http://localhost:3003/api/v1/follow/get-follow-stats', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+      })
+      if(response.ok){
+          const data = await response.json();
+          setFollowStats(data);
+        }
+
+      } catch (err){
+        console.log(err); 
+      }
+  }
   return (
-    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowingUsers, followingUsers, follower, leaderId, setLeaderId }}>
+    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowingUsers, getFollowStats, followingUsers, follower, leaderId, setLeaderId }}>
       { children }
     </FollowContext.Provider>
   )
