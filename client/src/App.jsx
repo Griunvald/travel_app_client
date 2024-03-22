@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
-import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
 import TripsList from './components/pages/TripsList';
-import About from './components/pages/About';
 import Landing from './components/pages/Landing';
 import Login from './components/pages/Login';
 import Join from './components/pages/Join';
@@ -13,7 +11,6 @@ import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
-import Logout from './components/features/Logout';
 
 const NavbarWrapper = () => {
     return (
@@ -24,20 +21,9 @@ const NavbarWrapper = () => {
                 <Outlet />
             </div>
         </main>
-                <Sidebar />
                 <Footer />
         </>
     )
-}
-
-const ProfileLayout = () => {
-  return (
-    <>
-      <Profile>
-          <Outlet />
-      </Profile>
-    </>
-  );
 }
 
 const router = createBrowserRouter([
@@ -77,14 +63,9 @@ const router = createBrowserRouter([
                 element: <FullTrip/>
             },
              {
-                path: 'profile',
-                element: <ProfileLayout />,
-                children: [
-                  { index: true, element: <About/> }, 
-                  { path: 'logout', element: <Logout/> },
-                  { path: 'about', element: <About/> },
-                ]
-          },
+                path: '/profile',
+                element: <Profile />
+            },
             {
                 path: '*',
                 element: <NotFound/>
