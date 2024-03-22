@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useProfile } from '../../contexts/ProfileContext';
 import { useFollow } from '../../contexts/FollowContext';
 import { useUser } from '../../contexts/UserContext';
@@ -6,7 +5,7 @@ import { useState, useEffect } from 'react';
 import About from '../features/About';
 import Logout from '../features/Logout';
 
-function Profile({ children }) {
+function Profile() {
   const { setAbout, setAvatar, setCountry, setHomeTown, setGender } = useProfile();
   const { getFollowStats } = useFollow();
   const { userId } = useUser();
