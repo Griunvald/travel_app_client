@@ -98,7 +98,7 @@ const fetchFollowingUsers = async () => {
       }
   }
   return (
-    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowingUsers, getFollowStats, followingUsers, follower, leaderId, setLeaderId }}>
+    <FollowContext.Provider value={{ followUser, unfollowUser, fetchFollowingUsers, getFollowStats, followingUsers, followStats, follower, leaderId, setLeaderId }}>
       { children }
     </FollowContext.Provider>
   )

@@ -4,6 +4,7 @@ import { useUser } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 import About from '../features/About';
 import Logout from '../features/Logout';
+import FollowStats from '../features/FollowStats';
 
 function Profile() {
   const { setAbout, setAvatar, setCountry, setHomeTown, setGender } = useProfile();
@@ -40,6 +41,7 @@ function Profile() {
   return (
     <div className="w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4">
       <About />
+      <FollowStats />
       <Logout />
     </div>
   );
