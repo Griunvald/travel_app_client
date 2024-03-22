@@ -3,7 +3,7 @@ import { useProfile } from '../../contexts/ProfileContext';
 import { useFollow } from '../../contexts/FollowContext';
 import { useUser } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
-import About from './About';
+import About from '../features/About';
 import Logout from '../features/Logout';
 
 function Profile({ children }) {
