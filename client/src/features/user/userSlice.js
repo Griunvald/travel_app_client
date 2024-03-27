@@ -1,46 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCurrentTrip } from './userThunks.js';
+import { initializeUser } from './userThunks';
 
 const initialState = {
-  username: '',
   userId: null,
+  username: '',
   currentTripId: null,
-  status: 'idle',
-  error: null,
+  loading: 'idle',
+  error: null
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserInfo: (state, action) => {
-      const { username, userId } = action.payload;
-      state.username = username;
-      state.userId = userId;
+    setUserId(state, action){
+      state.userId = action.payload;
     },
-    clearUserInfo: (state) => {
-      state.username = '';
-      state.userId = null;
-      state.currentTripId = null;
+    setUsername(state, action){
+      state.username = action.payload;
+    },
+    setCurrentTripId(state, action){
+      state.currentTripId = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCurrentTrip.pending, (state) => {
-        state.status = 'loading';
+      .addCase(initializeUser.pending, (state) => {
+        state.loading = 'pending';
       })
-      .addCase(fetchCurrentTrip.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.currentTripId = action.payload.id;
+      .addCase(initializeUser.fulfilled, (state, action) => {
+        state.username = action.payload.username;
+        state.userId = action.payload.userId;
+        state.loading = 'idle';
       })
-      .addCase(fetchCurrentTrip.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
+      .addCase(initializeUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
       });
   },
 });
 
-export const { setUserInfo, clearUserInfo } = userSlice.actions;
-
+export const { setUserId, setUsername, setCurrentTripId } = userSlice.actions;
 export default userSlice.reducer;
-

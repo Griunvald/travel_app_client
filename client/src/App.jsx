@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { initializeUser } from './features/user/userThunks';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
@@ -75,6 +78,10 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(initializeUser());
+  }, [dispatch]);
   return (
     <>
         <div className="flex flex-col min-h-screen">
