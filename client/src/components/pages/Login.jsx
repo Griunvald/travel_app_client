@@ -4,6 +4,8 @@ import Button from '../common/Button';
 import  Link  from '../common/Link'
 import Input from '../common/Input';
 import Form from '../common/Form';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../features/user/userThunks';
 import { useUser } from '../../contexts/UserContext';
 import { useFollow } from '../../contexts/FollowContext';
 
@@ -17,52 +19,28 @@ function Login() {
     const { setUsername, setUserId, setCurrentTripId, currentTripId} = useUser();
     const { fetchFollowingUsers } = useFollow();
 
-    const navigate = useNavigate();
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         try {
-        const response = await postData('http://localhost:3003/api/v1/auth/login', formData)
-            const parsed = JSON.parse(response);
-            if(parsed.username){
-                setUsername(parsed.username);
-                setUserId(parsed.userId);
-                setCurrentTripId(currentTripId);
-                fetchFollowingUsers();
-               navigate('/trips-list');
-            } else {
-               navigate('/landing')     
+          const actionResult = await  dispatch(loginUser(formData));
+      console.log("actionResult",actionResult);
+      console.log("actionResult.type",actionResult.type);
+           if (actionResult.type.includes('fulfilled')){
+               navigate('/trips-list')     
             }
-        } catch(err){
+               navigate('/landing')     
+            } catch(err){
            console.error(err);
         }
     }
 
-    const postData = async (url, data) => {
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data), 
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        return result;
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      }
-};
 
     return (
         <div className="w-full md:w-[400px] mx-auto md:border md:border-primary md:shadow-soft px-1 md:px-12 pt-6 pb-6 mt-6 md:mt-24">

@@ -49,3 +49,29 @@ export const fetchCurrentTrip = createAsyncThunk(
   }
 );
 
+export const loginUser = createAsyncThunk(
+  'user/loginUser',
+  async ( formData, thunkAPI) => {
+   const url =  'http://localhost:3003/api/v1/auth/login';
+    try {
+      const response = await fetch(url,{
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Failed to login', error);
+      return thunkAPI.rejectWithValue(error.message || 'Failed to login');
+    }
+  }
+);
+
