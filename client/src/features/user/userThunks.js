@@ -90,13 +90,12 @@ export const loginUser = createAsyncThunk(
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          thunkAPI.dispatch(setUsername(''));
-          thunkAPI.dispatch(setUserId(null));
+          //thunkAPI.dispatch(setUsername(''));
+          //thunkAPI.dispatch(setUserId(null));
+//      return response;
         } catch (error) {
           console.error('Error during logout:', error);
           return thunkAPI.rejectWithValue(error.message || 'Unable to log out');
         }
     }
-    
-
   ); 
