@@ -13,13 +13,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserId(state, action){
+    setUserId(state, action) {
       state.userId = action.payload;
     },
-    setUsername(state, action){
+    setUsername(state, action) {
       state.username = action.payload;
     },
-    setCurrentTripId(state, action){
+    setCurrentTripId(state, action) {
       state.currentTripId = action.payload;
     },
   },
@@ -38,16 +38,19 @@ const userSlice = createSlice({
         state.error = action.payload;
         state.loading = 'idle';
       })
-    // Login User
+      // Login User
       .addCase(loginUser.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.username = action.payload?.username ?? '';
-        state.userId = action.payload?.userId ?? null;
+        console.log("ACTION: ", action);
+        const payload = JSON.parse(action.payload);
+        state.username = payload?.username ?? '';
+        state.userId = payload?.userId ?? null;
         state.loading = 'idle';
       })
+
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';

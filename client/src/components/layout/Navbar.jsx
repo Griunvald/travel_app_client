@@ -6,10 +6,15 @@ import Logo from '../common/Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Avatar from '../common/Avatar';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Navbar() {
+  const dispatch = useDispatch();
+
+
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const { username, currentTripId } = useUser();
+    const { currentTripId } = useUser();
+    const username = useSelector(store => store.user.username);
 
     useEffect(() => {
         const handleResize = () => {
