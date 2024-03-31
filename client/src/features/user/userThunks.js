@@ -75,3 +75,28 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+  export const logoutUser = createAsyncThunk(
+    'user/logoutUser',
+     async (_, thunkAPI) => {
+        const url = 'http://localhost:3003/api/v1/auth/logout';
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          thunkAPI.dispatch(setUsername(''));
+          thunkAPI.dispatch(setUserId(null));
+        } catch (error) {
+          console.error('Error during logout:', error);
+          return thunkAPI.rejectWithValue(error.message || 'Unable to log out');
+        }
+    }
+    
+
+  ); 
