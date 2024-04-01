@@ -37,11 +37,14 @@ export const fetchCurrentTrip = createAsyncThunk(
       }
 
       const text = await response.text();
+      console.log(text);
       if (!text) {
         return null;
       }
 
       const data = JSON.parse(text);
+      console.log(data);
+      console.log(data.id);
       return data.id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch current trip');
@@ -90,9 +93,6 @@ export const loginUser = createAsyncThunk(
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          //thunkAPI.dispatch(setUsername(''));
-          //thunkAPI.dispatch(setUserId(null));
-//      return response;
         } catch (error) {
           console.error('Error during logout:', error);
           return thunkAPI.rejectWithValue(error.message || 'Unable to log out');

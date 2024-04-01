@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initializeUser, loginUser, logoutUser } from './userThunks';
+import { initializeUser, loginUser, logoutUser, fetchCurrentTrip } from './userThunks';
 
 const initialState = {
   userId: null,
@@ -35,6 +35,21 @@ const userSlice = createSlice({
         state.loading = 'idle';
       })
       .addCase(initializeUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
+      })
+      // Fetch Current Trip
+      .addCase(fetchCurrentTrip.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(fetchCurrentTrip.fulfilled, (state, action) => {
+        //const payload = JSON.parse(action.payload);
+        state.currentTripId = action.payload ?? null;
+        state.loading = 'idle';
+      })
+
+      .addCase(fetchCurrentTrip.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
       })
