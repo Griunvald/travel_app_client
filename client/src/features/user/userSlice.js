@@ -78,6 +78,7 @@ const userSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.username = '';
         state.userId = null;
+        state.currentTripId = null,
         state.loading = 'idle';
       })
 
