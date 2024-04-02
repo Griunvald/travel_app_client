@@ -1,13 +1,18 @@
-// In your TripsList component
-import { useTrips } from '../../contexts/TripsPreviewContext';
-import TripPreview from '../features/TripPreview';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTripsPreview } from '../../features/trip/tripThunks';
 import { timeAgo } from '../../utils/date.js';
+import TripPreview from '../features/TripPreview';
 
 function TripsList() {
-    const { trips, isLoading, error } = useTrips();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading trips!</p>;
+    const dispatch = useDispatch();
+    const trips = useSelector(store => store.trip.trips);
+    //TODO: add loader and error message
+    //if (isLoading) return <p>Loading...</p>;
+    //if (error) return <p>Error loading trips!</p>;
+    useEffect(()=> {
+       dispatch(getAllTripsPreview()); 
+    },[]);
 
     return (
         <>
