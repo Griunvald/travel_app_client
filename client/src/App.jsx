@@ -14,6 +14,7 @@ import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
+import Toast from './components/common/Toast';
 
 const NavbarWrapper = () => {
     return (
@@ -85,6 +86,7 @@ const dispatch = useDispatch();
   return (
     <>
         <div className="flex flex-col min-h-screen">
+        <Toast/>
                 <ProvidersWrapper>
                 <RouterProvider router={router} />
                 </ProvidersWrapper>
