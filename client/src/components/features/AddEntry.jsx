@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
-import { useTags } from '../../contexts/TagsContext';
+//import { useTags } from '../../contexts/TagsContext';
+import { addTags } from '../../features/tag/tagsSlice';
+import { useSelector } from 'react-redux';
 import { useEntries } from '../../contexts/EntryContext';
 import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
@@ -15,7 +17,8 @@ import Form from '../common/Form';
 
 const AddEntry = () => {
   const { showToast } = useToast();
-  const { tags, setTags } = useTags();
+ // const { tags, setTags } = useTags();
+  const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('Text');
   const [formData, setFormData] = useState({
@@ -63,7 +66,7 @@ const handleSubmit = async (e) => {
           if(responseFromPost.message === "Record created!"){
               setFormData({ text: "" });
               setPreview(null);
-              setTags([]);
+              addTags([]);
               refreshEntries();
               showToast('Success! Your entry has been added!', { duration: 5000 });
           }

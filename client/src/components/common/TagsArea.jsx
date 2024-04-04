@@ -1,23 +1,36 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTags, addCurrentTag } from '../../features/tag/tagsSlice';
 import Tag from './Tag';
 import { useTags } from '../../contexts/TagsContext';
 
+// 
+// tags X
+// setTags X
+// currentTag X
+// setCurrentTag X
+
+// newTag
+// formattedTag
+
 const TagsArea = () => {
-  const { tags, setTags } = useTags();
-  const [currentTag, setCurrentTag] = useState('');
+//  const { tags, setTags } = useTags(); replace with tags state / addTags reducer
+//  const [currentTag, setCurrentTag] = useState(''); replace with currentTag state / addCurrentTag reducer
+  const dispatch = useDispatch();
+  const { tags, currentTag } = useSelector(store => store.tag);
 
     const handleAddTag = () => {
       const newTag = currentTag.trim().toLowerCase().replace(/\s+/g, '-');
       if (newTag !== '' && !tags.includes(newTag)) {
-        setTags([...tags, newTag]);
-        setCurrentTag('');
+        dispatch(addTags([...tags, newTag]));
+        dispatch(addCurrentTag(''));
   }
 };
 
 
 const handleInputChange = (e) => {
   const formattedTag = e.target.value.toLowerCase().replace(/\s+/g, '');
-  setCurrentTag(formattedTag);
+  dispatch(addCurrentTag(formattedTag));
 };
 
 
@@ -30,7 +43,7 @@ const handleInputChange = (e) => {
 
   const handleRemoveTag = (tagToRemove) => {
     const newTags = tags.filter(tag => tag !== tagToRemove); 
-    setTags(newTags);
+    dispatch(addTags(newTags));
   };
 
   return (
