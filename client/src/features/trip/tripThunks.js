@@ -11,7 +11,7 @@ export const getAllTripsPreview = createAsyncThunk(
         return data;
     } catch (error) {
         console.error('Failed to fetch trips:', error);
-        rejectWithValue(error.message);
+        return rejectWithValue(error.message);
     }    
   }
 );
