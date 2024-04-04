@@ -13,8 +13,7 @@ function Navbar() {
 
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const { currentTripId } = useUser();
-    const username = useSelector(store => store.user.username);
+    const { username, currentTripId }  = useSelector(store => store.user);
 
     useEffect(() => {
         const handleResize = () => {
