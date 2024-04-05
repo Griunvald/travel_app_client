@@ -1,56 +1,30 @@
-import { useProfile } from '../../contexts/ProfileContext';
-import { useUser } from '../../contexts/UserContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAbout } from '../../features/profile/profileSlice';
+import { updateProfile } from '../../features/profile/profileThunks';
 import Form from '../common/Form';
 import Textarea from '../common/Textarea';
 import Button from '../common/Button';
 
 function About() {
-  const {about, setAbout} = useProfile();
-  const {userId} = useUser();
+  const about = useSelector(store => store.profile.about);
   console.log(about);
-  console.log(userId);
+  const userId = useSelector(store => store.user.userId);
+  const dispatch = useDispatch();
 
     const handleChange = (e) => {
-      setAbout(e.target.value);
+      dispatch(setAbout(e.target.value));
     };
 
-    const handleSubmit = async () => {
-        try {
-      const data = {about}
-        const response = await postData(`http://localhost:3003/api/v1/user/profile/update-profile?userId=${userId}`, data)
-      console.log(response);
-        } catch(err){
-           console.error(err);
-        }
+    const handleSubmit = () => {
+      dispatch(updateProfile({userId, about}))
     }
 
-    const postData = async (url, data) => {
-      try {
-        const response = await fetch(url, {
-          method: 'PUT',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data), 
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        return result;
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      }
-};
     return (
     <>
         <h1>About page</h1>
         <Form onSubmit={handleSubmit}>
         <Textarea
-          value={about}
+          value={about.about}
           onChange={handleChange}
         />
         <div className="flex flex-col md:flex-row md:justify-end">
