@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setAbout } from '../../features/profile/profileSlice';
-import { updateProfile } from '../../features/profile/profileThunks';
+import { updateProfile, getProfile } from '../../features/profile/profileThunks';
 import Form from '../common/Form';
 import Textarea from '../common/Textarea';
 import Button from '../common/Button';
@@ -15,8 +15,10 @@ function About() {
       dispatch(setAbout(e.target.value));
     };
 
-    const handleSubmit = () => {
-      dispatch(updateProfile({userId, about}))
+    const handleSubmit = async () => {
+      await dispatch(updateProfile({userId, data: {about} }))
+      dispatch(getProfile(userId));
+
     }
 
     return (
@@ -24,7 +26,7 @@ function About() {
         <h1>About page</h1>
         <Form onSubmit={handleSubmit}>
         <Textarea
-          value={about.about}
+          value={about}
           onChange={handleChange}
         />
         <div className="flex flex-col md:flex-row md:justify-end">

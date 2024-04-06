@@ -12,38 +12,42 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setAbout: (state, action) => {
+      //const { about } = action.payload;
+      //state.about = about || '';
       state.about = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder
-    // getProfile
-    .addCase(getProfile.pending, (state)=> {
-       state.loading = 'pending';
-    })
-    .addCase(getProfile.fulfilled, (state, action)=> {
-       state.about = action.payload // 
-       //state.about = action.payload.about; // about: ""
-       state.loading = 'idle';
-    })
-    .addCase(getProfile.rejected, (state, action)=> {
-       state.loading = 'idle';
-       state.error = action.payload;
-    })
+      // getProfile
+      .addCase(getProfile.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getProfile.fulfilled, (state, action) => {
+        const { about } = action.payload;
+        state.about = about || '';
+        //state.about = action.payload.about; // about: ""
+        state.loading = 'idle';
+      })
+      .addCase(getProfile.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.payload;
+      })
 
 
-     // updateProfile
-    .addCase(updateProfile.pending, (state)=> {
-       state.loading = 'pending';
-    })
-    .addCase(updateProfile.fulfilled, (state, action)=> {
-       state.about = action.payload;
-       state.loading = 'idle';
-    })
-    .addCase(updateProfile.rejected, (state, action)=> {
-       state.loading = 'idle';
-       state.error = action.payload;
-    })
+      // updateProfile
+      .addCase(updateProfile.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.about = action.payload.about;
+        state.loading = 'idle';
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.payload;
+      })
   }
 });
 
