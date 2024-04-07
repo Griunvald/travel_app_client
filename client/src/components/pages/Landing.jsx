@@ -1,8 +1,10 @@
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
+import { useSelector } from 'react-redux';
 import LinkButtonCTA from '../common/LinkButtonCTA';
 
 function Landing() {
-  const { userId } = useUser();
+  //const { userId } = useUser();
+  const userId = useSelector(store => store.user.userId);
   return (
     <>
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 md:px-10">
