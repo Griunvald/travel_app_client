@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { initializeUser } from './features/user/userThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeUser, fetchCurrentTrip } from './features/user/userThunks';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
@@ -80,9 +80,11 @@ const router = createBrowserRouter([
 
 function App() {
 const dispatch = useDispatch();
+const userId = useSelector(store => store.user.userId);
   useEffect(() => {
     dispatch(initializeUser());
-  }, [dispatch]);
+    dispatch(fetchCurrentTrip(userId));
+  }, [dispatch, userId]);
   return (
     <>
         <div className="flex flex-col min-h-screen">
