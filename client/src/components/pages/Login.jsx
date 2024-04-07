@@ -21,7 +21,7 @@ function Login() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//  const userId = useSelector(store => store.user.userId);
+ //const userId = useSelector(store => store.user.userId);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,9 +42,9 @@ function Login() {
            navigate('/trips-list')
         }
       }
-      navigate('/landing')
     } catch (err) {
       console.error(err);
+      navigate('/landing')
     }
   }
 
