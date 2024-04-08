@@ -4,6 +4,7 @@ import { initializeUser, fetchCurrentTrip } from './features/user/userThunks';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
 import TripsList from './components/pages/TripsList';
 import Landing from './components/pages/Landing';
@@ -20,6 +21,7 @@ const NavbarWrapper = () => {
     return (
         <>
          <Navbar/ >
+        <Sidebar />
         <main className="flex-grow">
             <div className="px-2 mx-auto max-w-screen-xl">
                 <Outlet />
