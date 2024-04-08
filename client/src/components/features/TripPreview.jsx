@@ -1,11 +1,12 @@
 // TripPreview.jsx
 import { Link } from 'react-router-dom';
 import UserInfo from '../common/UserInfo';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
+import { useSelector } from 'react-redux';
 import { useFollow } from '../../contexts/FollowContext';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
-  const { username: currentUser, userId } = useUser();
+  const { username: currentUser, userId } = useSelector(store => store.user);
   const { followUser, unfollowUser, fetchFollowingUsers, followingUsers, setLeaderId } = useFollow();
 
   const handleFollow = async () => {
