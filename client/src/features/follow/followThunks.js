@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reactjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 export const getFollowingUsers = createAsyncThunk(
   'follow/getFollowingUsers',
   async (_, thunkApi) => {
@@ -13,7 +13,7 @@ export const getFollowingUsers = createAsyncThunk(
         const data = await response.json();
         const { userId, followingUsersIds } = data.following;
         console.log(userId, followingUsersIds);
-        return userId, followingUsersIds;
+        return { userId: data.following.userId, followingUsersIds: data.following.followingUsersIds}
         //setFollowingUsers(followingUsersIds);
         //setFollower(userId);
       } else {

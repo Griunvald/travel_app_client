@@ -1,4 +1,4 @@
-import { createSlice } from '@reactjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getFollowingUsers, followUser, unfollowUser, getFollowStats } from './followThunks';
 
 const initialState = {
@@ -15,7 +15,7 @@ const followSlice = createSlice({
   initialState,
   reducers: {
     setFollowingUsers: (state, action) => {
-      state.followingUsers = action.payload;
+      state.followingUsersIds = action.payload;
     },
     setFollower: (state, action) => {
       state.follower = action.payload;
@@ -36,9 +36,8 @@ const followSlice = createSlice({
       })
       .addCase(getFollowingUsers.fulfilled, (state, action) => {
         state.loading = 'idle';
-        const { followingUsersIds, userId } = action.payload;
-        state.followingUsers = followingUsersIds;
-        state.follower = userId;
+        state.followingUsersIds = action.payload.followingUsersIds;
+        state.follower = action.payload.userId;
       })
       .addCase(getFollowingUsers.rejected, (state, action) => {
         state.loading = 'idle';
@@ -52,7 +51,7 @@ const followSlice = createSlice({
       .addCase(followUser.fulfilled, (state, action) => {
         state.loading = 'idle';
         const { followingUsersIds, userId } = action.payload;
-        state.followingUsers = followingUsersIds;
+        state.followingUsersIds = followingUsersIds;
         state.follower = userId;
       })
       .addCase(followUser.rejected, (state, action) => {
@@ -67,10 +66,23 @@ const followSlice = createSlice({
       .addCase(unfollowUser.fulfilled, (state, action) => {
         state.loading = 'idle';
         const { followingUsersIds, userId } = action.payload;
-        state.followingUsers = followingUsersIds;
+        state.followingUsersIds = followingUsersIds;
         state.follower = userId;
       })
-      .addCase(followUser.rejected, (state, action) => {
+      .addCase(unfollowUser.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.payload;
+      })
+
+      // getFollowStats
+      .addCase(getFollowStats.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getFollowStats.fulfilled, (state, action) => {
+        state.loading = 'idle';
+        state.followStats = action.payload;
+      })
+      .addCase(getFollowStats.rejected, (state, action) => {
         state.loading = 'idle';
         state.error = action.payload;
       })
