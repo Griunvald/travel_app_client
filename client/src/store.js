@@ -6,6 +6,7 @@ import tagsReducer from './features/tag/tagsSlice.js';
 import profileReducer from './features/profile/profileSlice.js';
 import menuReducer from './features/menu/menuSlice.js';
 import followReducer from './features/follow/followSlice.js';
+import entryReducer from './features/entry/entrySlice.js';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     profile: profileReducer,
     menu: menuReducer,
     follow: followReducer,
+    entry: entryReducer,
   },
   devTools: process.env.NODE_ENV !== 'production', 
 });
