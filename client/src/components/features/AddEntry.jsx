@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
 //import { useTags } from '../../contexts/TagsContext';
 import { addTags } from '../../features/tag/tagsSlice';
-import { useSelector } from 'react-redux';
-import { useEntries } from '../../contexts/EntryContext';
+import { useSelector, useDispatch } from 'react-redux';
+//import { useEntries } from '../../contexts/EntryContext';
 import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
@@ -14,10 +14,12 @@ import TabContainer from '../common/TabContainer';
 import Tab from '../common/Tab';
 import TagsArea from '../common/TagsArea';
 import Form from '../common/Form';
+import { getEntryList } from '../../features/entry/entryThunks';
 
 const AddEntry = () => {
   const { showToast } = useToast();
  // const { tags, setTags } = useTags();
+  const dispatch = useDispatch();
   const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('Text');
@@ -25,9 +27,10 @@ const AddEntry = () => {
     text: "",
     tags: tags,
   });
-  const { userId, currentTripId } = useUser();
+ // const { userId, currentTripId } = useUser();
+  const { userId, currentTripId } = useSelector(store => store.user);
   const { handleCancel, preview, setPreview, imageFile, setImageFile } = useImage();
-  const { refreshEntries } = useEntries(); 
+  //const { refreshEntries } = useEntries(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +70,7 @@ const handleSubmit = async (e) => {
               setFormData({ text: "" });
               setPreview(null);
               addTags([]);
-              refreshEntries();
+              dispatch(getEntryList(userId));
               showToast('Success! Your entry has been added!', { duration: 5000 });
           }
       } catch (err) {
