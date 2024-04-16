@@ -1,10 +1,11 @@
 //import { useProfile } from '../../contexts/ProfileContext';
-import { useFollow } from '../../contexts/FollowContext';
+//import { useFollow } from '../../contexts/FollowContext';
 //import { useUser } from '../../contexts/UserContext';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAbout } from '../../features/profile/profileSlice';
 import { getProfile } from '../../features/profile/profileThunks';
+import { getFollowStats } from '../../features/follow/followThunks';
 import About from '../features/About';
 import Logout from '../features/Logout';
 import FollowStats from '../features/FollowStats';
@@ -14,7 +15,7 @@ function Profile() {
   const userId = useSelector(store => store.user.userId);
   //const { setAbout, setAvatar, setCountry, setHomeTown, setGender } = useProfile();
   //const { userId } = useUser();
-  const { getFollowStats } = useFollow();
+ // const { getFollowStats } = useFollow();
   useEffect(() => {
     getFollowStats();
   },[]);
