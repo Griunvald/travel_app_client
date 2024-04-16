@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-//import { useUser } from '../../contexts/UserContext';
 import { useImage } from '../../contexts/ImageContext';
-//import { useTags } from '../../contexts/TagsContext';
 import { addTags } from '../../features/tag/tagsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-//import { useEntries } from '../../contexts/EntryContext';
 import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
-import Textarea from '../common/TextArea';
+import Textarea from '../common/Textarea';
 import ImageUpload from '../common/ImageUpload';
 import TabContainer from '../common/TabContainer';
 import Tab from '../common/Tab';
@@ -18,7 +15,6 @@ import { getEntryList } from '../../features/entry/entryThunks';
 
 const AddEntry = () => {
   const { showToast } = useToast();
- // const { tags, setTags } = useTags();
   const dispatch = useDispatch();
   const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +23,8 @@ const AddEntry = () => {
     text: "",
     tags: tags,
   });
- // const { userId, currentTripId } = useUser();
   const { userId, currentTripId } = useSelector(store => store.user);
-  const { handleCancel, preview, setPreview, imageFile, setImageFile } = useImage();
-  //const { refreshEntries } = useEntries(); 
+  const { setPreview, imageFile, setImageFile } = useImage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,48 +33,48 @@ const AddEntry = () => {
 
   useEffect(() => {
     setFormData((prevFormData) => ({ ...prevFormData, tags: tags }));
-      if(activeTab === "Text"){
-          setPreview(null);
-          setImageFile(null);
-      } 
-      if(activeTab === "Image") {
-          setFormData({ text: "", tags });
+    if (activeTab === "Text") {
+      setPreview(null);
+      setImageFile(null);
+    }
+    if (activeTab === "Image") {
+      setFormData({ text: "", tags });
+    }
+  }, [tags, activeTab]);
+
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
+    try {
+      let awsData;
+      if (activeTab === "Image") {
+        awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+        await putData(awsData.presignedAwsUrl, imageFile);
       }
-  }, [tags, activeTab]); 
 
-const handleSubmit = async (e) => {
-  setIsLoading(true);
-      try {
-        let awsData;
-        if (activeTab === "Image") {
-          awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
-          await putData(awsData.presignedAwsUrl, imageFile);
-        }
+      const newData = {
+        userId,
+        tripId: currentTripId,
+        tags: formData.tags,
+        type: activeTab === "Text" ? "text" : "url",
+        data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
+      };
 
-        const newData = {
-          userId,
-          tripId: currentTripId,
-          tags: formData.tags,
-          type: activeTab === "Text" ? "text" : "url",
-          data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
-        };
-
-        const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
-          if(responseFromPost.message === "Record created!"){
-              setFormData({ text: "" });
-              setPreview(null);
-              addTags([]);
-              dispatch(getEntryList(userId));
-              showToast('Success! Your entry has been added!', { duration: 5000 });
-          }
-      } catch (err) {
-        console.error("Error in handleSubmit:", err);
-      } finally {
-          setIsLoading(false);
+      const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
+      if (responseFromPost.message === "Record created!") {
+        setFormData({ text: "" })
+        setPreview(null);
+        addTags([]);
+        dispatch(getEntryList(userId));
+        showToast('Success! Your entry has been added!', { duration: 5000 });
       }
-};
+    } catch (err) {
+      console.error("Error in handleSubmit:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const postData = async (apiUrl, data) => {
+  const postData = async (apiUrl, data) => {
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -135,12 +129,12 @@ const handleSubmit = async (e) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-        const result = await response.json();
+      const result = await response.json();
 
-   return {
+      return {
         presignedAwsUrl: result.signedUrl.url,
         awsObjectKey: result.signedUrl.key
-    };
+      };
 
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -169,8 +163,8 @@ const handleSubmit = async (e) => {
         </TabContainer>
         <TagsArea />
         <div className="flex flex-col md:flex-row justify-end gap-x-5 gap-y-4 pt-4">
-          <Button name="Publish" variant="primary" type="submit" 
-              disabled={isLoading} inProgressText="Publishing..." />
+          <Button name="Publish" variant="primary" type="submit"
+            disabled={isLoading} inProgressText="Publishing..." />
         </div>
       </Form>
       <div className="mt-4">1. Write Text or Upload Image, 2. Add tags, 3. Hit 'Publish' when done.</div>
