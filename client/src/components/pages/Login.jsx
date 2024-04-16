@@ -4,11 +4,8 @@ import Button from '../common/Button';
 import Link from '../common/Link'
 import Input from '../common/Input';
 import Form from '../common/Form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUser, fetchCurrentTrip } from '../../features/user/userThunks';
-//import { useUser } from '../../contexts/UserContext';
-//import { useFollow } from '../../contexts/FollowContext';
-
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -16,12 +13,8 @@ function Login() {
     password: "",
   });
 
-  //const { setUsername, setUserId, setCurrentTripId, currentTripId } = useUser();
-  //const { fetchFollowingUsers } = useFollow();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
- //const userId = useSelector(store => store.user.userId);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,15 +24,11 @@ function Login() {
   const handleSubmit = async () => {
     try {
       const actionResult = await dispatch(loginUser(formData));
-      console.log("actionResult", actionResult);
-      console.log("actionResult.type", actionResult.type);
       if (actionResult.type.includes('fulfilled')) {
         const { userId } = JSON.parse(actionResult.payload);
-        console.log("USER_ID: ",userId);
-        console.log("ACTION_RESULT: ",actionResult);
-        if(userId) {
-           await dispatch(fetchCurrentTrip(userId));
-           navigate('/trips-list')
+        if (userId) {
+          await dispatch(fetchCurrentTrip(userId));
+          navigate('/trips-list')
         }
       }
     } catch (err) {
@@ -47,7 +36,6 @@ function Login() {
       navigate('/landing')
     }
   }
-
 
   return (
     <div className="w-full md:w-[400px] mx-auto md:border md:border-primary md:shadow-soft px-1 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
