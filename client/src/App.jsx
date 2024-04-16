@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser, fetchCurrentTrip } from './features/user/userThunks';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
-import { ProvidersWrapper } from './contexts/ProvidersWrapper.jsx';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
@@ -91,9 +90,7 @@ const userId = useSelector(store => store.user.userId);
     <>
         <div className="flex flex-col min-h-screen">
         <Toast/>
-                <ProvidersWrapper>
                 <RouterProvider router={router} />
-                </ProvidersWrapper>
             </div>
         </>
       )
