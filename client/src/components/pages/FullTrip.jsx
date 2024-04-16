@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import TripPreview from '../features/TripPreview';
 import Entry from '../features/Entry';
-import { useFollow } from '../../contexts/FollowContext';
+//import { useFollow } from '../../contexts/FollowContext';
 
 function FullTrip() {
     const [tripDetails, setTripDetails ] = useState({});
     const [ entryList, setEntryList ] = useState([]);
     const { userId } = useParams();
     const [formattedDate, setFormattedDate] = useState(null);
-    const { leaderId, fetchFollowingUsers } = useFollow();
+ //   const { leaderId, fetchFollowingUsers } = useFollow();
    const ID = Number(userId);
      
     console.log("Leader ID from FullTrip: ", leaderId);

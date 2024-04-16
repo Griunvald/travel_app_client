@@ -6,8 +6,8 @@ import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, fetchCurrentTrip } from '../../features/user/userThunks';
-import { useUser } from '../../contexts/UserContext';
-import { useFollow } from '../../contexts/FollowContext';
+//import { useUser } from '../../contexts/UserContext';
+//import { useFollow } from '../../contexts/FollowContext';
 
 
 function Login() {
@@ -16,8 +16,8 @@ function Login() {
     password: "",
   });
 
-  const { setUsername, setUserId, setCurrentTripId, currentTripId } = useUser();
-  const { fetchFollowingUsers } = useFollow();
+  //const { setUsername, setUserId, setCurrentTripId, currentTripId } = useUser();
+  //const { fetchFollowingUsers } = useFollow();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

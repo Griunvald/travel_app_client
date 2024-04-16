@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTags, addCurrentTag } from '../../features/tag/tagsSlice';
 import Tag from './Tag';
-import { useTags } from '../../contexts/TagsContext';
+//import { useTags } from '../../contexts/TagsContext';
 
 // 
 // tags X

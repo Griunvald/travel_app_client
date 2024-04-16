@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useImage } from '../../contexts/ImageContext';
+//import { useImage } from '../../contexts/ImageContext';
 import { addTags } from '../../features/tag/tagsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { useToast } from '../../contexts/ToastContext';
+//import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
 import Textarea from '../common/Textarea';
@@ -14,17 +14,19 @@ import Form from '../common/Form';
 import { getEntryList } from '../../features/entry/entryThunks';
 
 const AddEntry = () => {
-  const { showToast } = useToast();
+  //const { showToast } = useToast();
   const dispatch = useDispatch();
   const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('Text');
+  const [preview, setPreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState({
     text: "",
     tags: tags,
   });
   const { userId, currentTripId } = useSelector(store => store.user);
-  const { setPreview, imageFile, setImageFile } = useImage();
+ // const { setPreview, imageFile, setImageFile } = useImage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;

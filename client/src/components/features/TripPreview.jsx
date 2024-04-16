@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserInfo from '../common/UserInfo';
 //import { useUser } from '../../contexts/UserContext';
 import { useSelector, useDispatch } from 'react-redux';
-import { useFollow } from '../../contexts/FollowContext';
+//import { useFollow } from '../../contexts/FollowContext';
 import { followUser, unfollowUser, getFollowingUsers } from '../../features/follow/followThunks';
 import { setLeaderId } from '../../features/follow/followSlice';
 

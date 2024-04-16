@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
 import Button from '../common/Button';
 import  Link  from '../common/Link'
 import Input from '../common/Input';
@@ -15,7 +15,7 @@ function Join() {
     });
 
     const navigate = useNavigate();
-    const { setUsername, setUserId } = useUser();
+ //   const { setUsername, setUserId } = useUser();
 
     const handleChange = (e) => {
         const { name, value } = e.target;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
 import LinkButton from  '../common/LinkButton.jsx';
 import LinkNavbar from  '../common/LinkNavbar.jsx';
 import Logo from '../common/Logo.jsx';

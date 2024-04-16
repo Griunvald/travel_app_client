@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react';
-import { useImage } from '../../contexts/ImageContext.jsx';
+//import { useImage } from '../../contexts/ImageContext.jsx';
 import CloseButton from './CloseButton';
  
 const ImageUpload = ({ onUpload, label }) => {
-  const { preview, setPreview, imageFile, setImageFile } = useImage();
+ // const { preview, setPreview, imageFile, setImageFile } = useImage();
   const fileInputRef = useRef(null); 
+  const [preview, setPreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+
 
   const handleChange = (e) => {
     const file = e.target.files[0];

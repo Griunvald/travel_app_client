@@ -4,8 +4,8 @@ import Button from '../common/Button';
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
-import { useUser } from '../../contexts/UserContext';
-import { useImage } from '../../contexts/ImageContext';
+//import { useUser } from '../../contexts/UserContext';
+//import { useImage } from '../../contexts/ImageContext';
 
 function StartTrip() {
   const [formData, setFormData] = useState({
@@ -13,8 +13,8 @@ function StartTrip() {
     description: "",
   });
 
-  const { userId, username, setCurrentTripId } = useUser();
-  const { handleCancel, preview, imageFile } = useImage();
+ // const { userId, username, setCurrentTripId } = useUser();
+  //const { handleCancel, preview, imageFile } = useImage();
   const navigate = useNavigate();
 
   const handleChange = (e) => {

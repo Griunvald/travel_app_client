@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import format from 'date-fns/format';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
+import { useSelector } from 'react-redux';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
 import EntryList from '../features/EntryList';
 
 function CurrentTrip() {
-    const { username, userId } = useUser();
+ //   const { username, userId } = useUser();
+  const { username, userId } = useSelector(store => store.user);
     const [trip, setTrip] = useState(null); // Initialize trip as null
 
     useEffect(() => {
