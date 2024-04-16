@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initializeUser, loginUser, logoutUser, fetchCurrentTrip } from './userThunks';
+import { initializeUser, joinUser, loginUser, logoutUser, fetchCurrentTrip } from './userThunks';
 
 const initialState = {
   userId: null,
@@ -83,6 +83,23 @@ const userSlice = createSlice({
       })
 
       .addCase(logoutUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
+      })
+
+      // Join User
+      .addCase(joinUser.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(joinUser.fulfilled, (state, action) => {
+        const payload = JSON.parse(action.payload);
+        state.username = payload?.username ?? '';
+        state.userId = payload?.userId ?? null;
+        state.loading = 'idle';
+      })
+
+      .addCase(joinUser.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
       })

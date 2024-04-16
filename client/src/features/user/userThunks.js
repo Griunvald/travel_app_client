@@ -54,10 +54,10 @@ export const fetchCurrentTrip = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async ( formData, thunkAPI) => {
-   const url =  'http://localhost:3003/api/v1/auth/login';
+  async (formData, thunkAPI) => {
+    const url = 'http://localhost:3003/api/v1/auth/login';
     try {
-      const response = await fetch(url,{
+      const response = await fetch(url, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -78,24 +78,50 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-  export const logoutUser = createAsyncThunk(
-    'user/logoutUser',
-     async (_, thunkAPI) => {
-        const url = 'http://localhost:3003/api/v1/auth/logout';
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-        } catch (error) {
-          console.error('Error during logout:', error);
-          return thunkAPI.rejectWithValue(error.message || 'Unable to log out');
-        }
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, thunkAPI) => {
+    const url = 'http://localhost:3003/api/v1/auth/logout';
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+      return thunkAPI.rejectWithValue(error.message || 'Unable to log out');
     }
-  ); 
+  }
+);
+
+export const joinUser = createAsyncThunk(
+  'user/joinUser',
+  async (data, thunkAPI) => {
+    const url = 'http://localhost:3003/api/v1/auth/register';
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('There was a problem with the join operation:', error);
+      return thunkAPI.rejectWithValue(error.message || 'Unable to join');
+    }
+  }
+);
+
