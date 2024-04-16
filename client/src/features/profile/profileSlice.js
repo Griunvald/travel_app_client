@@ -12,8 +12,6 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setAbout: (state, action) => {
-      //const { about } = action.payload;
-      //state.about = about || '';
       state.about = action.payload;
     }
   },
@@ -26,7 +24,6 @@ export const profileSlice = createSlice({
       .addCase(getProfile.fulfilled, (state, action) => {
         const { about } = action.payload;
         state.about = about || '';
-        //state.about = action.payload.about; // about: ""
         state.loading = 'idle';
       })
       .addCase(getProfile.rejected, (state, action) => {

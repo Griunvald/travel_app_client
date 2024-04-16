@@ -1,7 +1,3 @@
-// Add two functions: getProfile and updateProfile
-// Use getProfile in Profile component
-// Use updatePfofile in About component
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getProfile = createAsyncThunk(

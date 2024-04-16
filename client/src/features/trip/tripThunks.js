@@ -29,7 +29,6 @@ export const getAllTripsPreview = createAsyncThunk(
       if (response.ok) {
         const data = await response.json();
         return data;
-        //setTripsCount(data); - add this function to the trip's slice reducer
       } 
     } catch (err) {
         console.error('Failed to get trips count: ', err);

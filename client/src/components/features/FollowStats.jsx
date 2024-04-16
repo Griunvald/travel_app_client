@@ -1,14 +1,10 @@
-import { useFollow } from '../../contexts/FollowContext';
 import { getFollowStats } from '../../features/follow/followThunks';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { getTripsCount } from '../../features/trip/tripThunks';
 import { setTripsCount } from '../../features/trip/tripSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function FollowStats() {
-  //const { followStats } = useFollow();
-  //const { followingCount, followersCount} = followStats;
-  //const [tripsCount, setTripsCount] = useState();
   const dispatch = useDispatch();
   const { tripsCount } = useSelector(store => store.trip);
   const { followingCount, followersCount } = useSelector(store => store.follow.followStats);
@@ -32,7 +28,3 @@ function FollowStats() {
 
 export default FollowStats;
 
-
-// TODO: Replace follow context with Slice
-        //<div>Followers: {followersCount}</div>
-        //<div>Following: {followingCount}</div>
