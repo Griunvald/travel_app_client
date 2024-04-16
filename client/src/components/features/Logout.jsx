@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../contexts/UserContext';
+//import { useUser } from '../../contexts/UserContext';
 //import { useToast } from '../../contexts/ToastContext';
 import { logoutUser } from '../../features/user/userThunks';
 import { useDispatch } from 'react-redux';
@@ -7,7 +7,7 @@ import Button from '../common/Button';
 import { useToast } from '../../hooks/useToast';
 
 function Logout() {
-  const { setUsername, setUserId, setCurrentTripId } = useUser();
+  //const { setUsername, setUserId, setCurrentTripId } = useUser();
 //  const { showToast } = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
