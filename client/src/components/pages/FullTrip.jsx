@@ -5,20 +5,16 @@ import format from 'date-fns/format';
 import TripPreview from '../features/TripPreview';
 import Entry from '../features/Entry';
 import { getFollowingUsers } from '../../features/follow/followThunks';
-//import { useFollow } from '../../contexts/FollowContext';
 
 function FullTrip() {
   const [tripDetails, setTripDetails] = useState({});
   const [entryList, setEntryList] = useState([]);
   const { userId } = useParams();
   const [formattedDate, setFormattedDate] = useState(null);
-  //   const { leaderId, fetchFollowingUsers } = useFollow();
   const dispatch = useDispatch();
   const leaderId = useSelector(store => store.follow.leaderId);
   const ID = Number(userId);
 
-  //console.log("Leader ID from FullTrip: ", leaderId);
-  //console.log("!!!!!!!", typeof(userId));
   useEffect(() => {
     dispatch(getFollowingUsers());
   }, [leaderId]);
@@ -28,7 +24,6 @@ function FullTrip() {
       if (!userId) {
         return;
       }
-
       try {
         const response = await fetch(`http://localhost:3003/api/v1/trip/get-full-trip?userId=${userId}`);
         const data = await response.json();
@@ -39,7 +34,6 @@ function FullTrip() {
           const dateToFormat = new Date(data.tripDetails.createdAt);
           if (!isNaN(dateToFormat)) {
             setFormattedDate(format(dateToFormat, "MMMM do, yyyy, hh:mm a"));
-
           }
         }
       } catch (error) {
@@ -59,10 +53,8 @@ function FullTrip() {
           url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${tripDetails.url}`}
           userId={ID}
         />
-
       }
       {
-
         entryList && (
           Array.isArray(entryList) && entryList.map(entry => (
             <div key={entry.id}>
@@ -73,15 +65,11 @@ function FullTrip() {
                 recordTags={entry.recordTags}
               />
             </div>
-
           ))
         )
       }
-
     </>
   );
 };
 
 export default FullTrip;
-
-
