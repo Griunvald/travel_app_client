@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 //import { useImage } from '../../contexts/ImageContext';
-import { addTags } from '../../features/tag/tagsSlice';
+import { addTag, clearTags } from '../../features/tag/tagsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 //import { useToast } from '../../contexts/ToastContext';
 import TabButton from '../common/TabButton';
@@ -65,7 +65,8 @@ const AddEntry = () => {
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })
         setPreview(null);
-        addTags([]);
+        dispatch(addTag([]));
+        dispatch(clearTags());
         dispatch(getEntryList(userId));
         showToast('Success! Your entry has been added!', { duration: 5000 });
       }
