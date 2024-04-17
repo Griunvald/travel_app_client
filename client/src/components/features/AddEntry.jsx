@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { addTag, clearTags } from '../../features/tag/tagsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 //import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '../../hooks/useToast';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
 import Textarea from '../common/Textarea';
@@ -14,7 +15,7 @@ import Form from '../common/Form';
 import { getEntryList } from '../../features/entry/entryThunks';
 
 const AddEntry = () => {
-  //const { showToast } = useToast();
+  const { toast } = useToast();
   const dispatch = useDispatch();
   const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ const AddEntry = () => {
     tags: tags,
   });
   const { userId, currentTripId } = useSelector(store => store.user);
- // const { setPreview, imageFile, setImageFile } = useImage();
+  // const { setPreview, imageFile, setImageFile } = useImage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,7 +69,7 @@ const AddEntry = () => {
         dispatch(addTag([]));
         dispatch(clearTags());
         dispatch(getEntryList(userId));
-        showToast('Success! Your entry has been added!', { duration: 5000 });
+        toast({message:'Success! Your entry has been added!',  duration: 5000 });
       }
     } catch (err) {
       console.error("Error in handleSubmit:", err);
