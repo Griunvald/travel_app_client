@@ -5,43 +5,29 @@ import format from 'date-fns/format';
 import TripPreview from '../features/TripPreview';
 import Entry from '../features/Entry';
 import { getFollowingUsers } from '../../features/follow/followThunks';
+import { getFullTrip } from '../../features/trip/tripThunks';
 
 function FullTrip() {
-  const [tripDetails, setTripDetails] = useState({});
-  const [entryList, setEntryList] = useState([]);
+//  const [tripDetails, setTripDetails] = useState({});
+ // const [entryList, setEntryList] = useState([]);
   const { userId } = useParams();
-  const [formattedDate, setFormattedDate] = useState(null);
+  //const [formattedDate, setFormattedDate] = useState(null);
   const dispatch = useDispatch();
   const leaderId = useSelector(store => store.follow.leaderId);
   const ID = Number(userId);
+
+const { tripDetails, entryList } = useSelector((state) => state.trip);
+
+const formattedDate = tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
 
   useEffect(() => {
     dispatch(getFollowingUsers());
   }, [leaderId]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!userId) {
-        return;
-      }
-      try {
-        const response = await fetch(`http://localhost:3003/api/v1/trip/get-full-trip?userId=${userId}`);
-        const data = await response.json();
-
-        setTripDetails(data.tripDetails)
-        setEntryList(data.records.rows);
-        if (data.tripDetails && data.tripDetails.createdAt) {
-          const dateToFormat = new Date(data.tripDetails.createdAt);
-          if (!isNaN(dateToFormat)) {
-            setFormattedDate(format(dateToFormat, "MMMM do, yyyy, hh:mm a"));
-          }
-        }
-      } catch (error) {
-        console.error('Failed to fetch trips:', error);
-      }
-    }
-    fetchData();
-  }, [userId])
+    dispatch(getFullTrip(userId));
+  }, [userId]);
+  
   return (
     <>
       {tripDetails &&

@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllTripsPreview, getTripsCount } from './tripThunks';
+import { getAllTripsPreview, getTripsCount, getFullTrip } from './tripThunks';
 
 const initialState = {
   trips: [],
+  tripDetails: {},
+  entryList: [],
   tripsCount: 0,
   loading: 'idle',
   error: null
@@ -14,7 +16,7 @@ const tripSlice = createSlice({
   reducers: {
     setTripsCount: (state, action) => {
       state.tripsCount = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,8 +45,21 @@ const tripSlice = createSlice({
         state.loading = 'idle';
         state.error = action.payload;
       })
+    // GetFullTrip
+    .addCase(getFullTrip.pending,(state) => {
+        state.loading = 'pending'
+      })
+    .addCase(getFullTrip.fulfilled,(state, action) => {
+        state.tripDetails = action.payload.tripDetails;
+        state.entryList = action.payload.records.rows;
+        state.loading = 'idle'
+      })
+    .addCase(getFullTrip.rejected,(state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle'
+      })
   }
 });
 
-export const { setTripsCount } = tripSlice.actions;
+export const { setTripsCount, setTripDetails, setEntryList } = tripSlice.actions;
 export default tripSlice.reducer;
