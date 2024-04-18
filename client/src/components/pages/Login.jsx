@@ -5,7 +5,9 @@ import Link from '../common/Link'
 import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch } from 'react-redux';
-import { loginUser, fetchCurrentTrip } from '../../features/user/userThunks';
+import { loginUser  } from '../../features/user/userThunks';
+
+import { fetchCurrentTrip } from '../../features/trip/tripThunks';
 
 function Login() {
   const [formData, setFormData] = useState({

@@ -51,3 +51,35 @@ export const getFullTrip = createAsyncThunk(
     }
   }
 );
+
+export const fetchCurrentTrip = createAsyncThunk(
+  'user/fetchCurrentTrip',
+  async (userId, thunkAPI) => {
+    try {
+      const response = await fetch('http://localhost:3003/api/v1/trip/get-trip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const text = await response.text();
+      console.log(text);
+      if (!text) {
+        return null;
+      }
+
+      const data = JSON.parse(text);
+      console.log(data);
+      console.log(data.id);
+      return data.id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message || 'Failed to fetch current trip');
+    }
+  }
+);

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeUser, fetchCurrentTrip } from './features/user/userThunks';
+import { initializeUser } from './features/user/userThunks';
+import { fetchCurrentTrip  } from './features/trip/tripThunks';
+
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';

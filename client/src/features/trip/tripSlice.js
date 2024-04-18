@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllTripsPreview, getTripsCount, getFullTrip } from './tripThunks';
+import { getAllTripsPreview, getTripsCount, getFullTrip, fetchCurrentTrip } from './tripThunks';
 
 const initialState = {
   trips: [],
+  currentTripId: null,
   tripDetails: {},
   entryList: [],
   tripsCount: 0,
@@ -57,6 +58,21 @@ const tripSlice = createSlice({
     .addCase(getFullTrip.rejected,(state, action) => {
         state.error = action.payload;
         state.loading = 'idle'
+      })
+      // Fetch Current Trip
+      .addCase(fetchCurrentTrip.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(fetchCurrentTrip.fulfilled, (state, action) => {
+        //const payload = JSON.parse(action.payload);
+        state.currentTripId = action.payload ?? null;
+        state.loading = 'idle';
+      })
+
+      .addCase(fetchCurrentTrip.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
       })
   }
 });
