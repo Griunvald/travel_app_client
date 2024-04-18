@@ -45,12 +45,6 @@ export const getFullTrip = createAsyncThunk(
       const data = await response.json();
       console.log(data);
       return data;
-//      if (data.tripDetails && data.tripDetails.createdAt) {
-//         const dateToFormat = new Date(data.tripDetails.createdAt);
-//        if (!isNaN(dateToFormat)) {
-//          setFormattedDate(format(dateToFormat, "MMMM do, yyyy, hh:mm a"));
-//        }
-//      }
     } catch (err) {
       console.error('Failed to fetch trips:', err);
       return rejectWithValue(err.message);
