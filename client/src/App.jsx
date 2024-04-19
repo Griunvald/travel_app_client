@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser } from './features/user/userThunks';
-import { fetchCurrentTrip  } from './features/trip/tripThunks';
+import { getCurrentTrip } from './features/trip/tripThunks';
 
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
@@ -19,83 +19,83 @@ import Profile from './components/pages/Profile';
 import Toast from './components/common/Toast';
 
 const NavbarWrapper = () => {
-    return (
-        <>
-         <Navbar/ >
-        <Sidebar />
-        <main className="flex-grow">
-            <div className="px-2 mx-auto max-w-screen-xl">
-                <Outlet />
-            </div>
-        </main>
-                <Footer />
-        </>
-    )
+  return (
+    <>
+      <Navbar />
+      <Sidebar />
+      <main className="flex-grow">
+        <div className="px-2 mx-auto max-w-screen-xl">
+          <Outlet />
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
 }
 
 const router = createBrowserRouter([
-    {
-        element: <NavbarWrapper />,
-        children: [
-            {
-                path: '/',
-                element: <Landing />
-            },
-            {
-                path: '/landing',
-                element: <Landing />
-            },
-            {
-                path: '/trips-list',
-                element: <TripsList />
-            },
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/join',
-                element: <Join />
-            },
-            {
-                path: '/start-trip',
-                element: <StartTrip />
-            },
-            {
-                path: '/current-trip',
-                element: <CurrentTrip />
-            },
-            {
-                path: '/full-trip/:userId',
-                element: <FullTrip/>
-            },
-             {
-                path: '/profile',
-                element: <Profile />
-            },
-            {
-                path: '*',
-                element: <NotFound/>
-            },
-        ]
-    }
+  {
+    element: <NavbarWrapper />,
+    children: [
+      {
+        path: '/',
+        element: <Landing />
+      },
+      {
+        path: '/landing',
+        element: <Landing />
+      },
+      {
+        path: '/trips-list',
+        element: <TripsList />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/join',
+        element: <Join />
+      },
+      {
+        path: '/start-trip',
+        element: <StartTrip />
+      },
+      {
+        path: '/current-trip',
+        element: <CurrentTrip />
+      },
+      {
+        path: '/full-trip/:userId',
+        element: <FullTrip />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
+      },
+      {
+        path: '*',
+        element: <NotFound />
+      },
+    ]
+  }
 ])
 
 function App() {
-const dispatch = useDispatch();
-const userId = useSelector(store => store.user.userId);
+  const dispatch = useDispatch();
+  const userId = useSelector(store => store.user.userId);
   useEffect(() => {
     dispatch(initializeUser());
-    dispatch(fetchCurrentTrip(userId));
+    dispatch(getCurrentTrip(userId));
   }, [dispatch, userId]);
   return (
     <>
-        <div className="flex flex-col min-h-screen">
-        <Toast/>
-                <RouterProvider router={router} />
-            </div>
-        </>
-      )
-    }
+      <div className="flex flex-col min-h-screen">
+        <Toast />
+        <RouterProvider router={router} />
+      </div>
+    </>
+  )
+}
 
 export default App

@@ -5,9 +5,9 @@ import Link from '../common/Link'
 import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch } from 'react-redux';
-import { loginUser  } from '../../features/user/userThunks';
+import { loginUser } from '../../features/user/userThunks';
 
-import { fetchCurrentTrip } from '../../features/trip/tripThunks';
+import { getCurrentTrip } from '../../features/trip/tripThunks';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ function Login() {
       if (actionResult.type.includes('fulfilled')) {
         const { userId } = JSON.parse(actionResult.payload);
         if (userId) {
-          await dispatch(fetchCurrentTrip(userId));
+          await dispatch(getCurrentTrip(userId));
           navigate('/trips-list')
         }
       }
