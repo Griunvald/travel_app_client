@@ -4,8 +4,6 @@ import Button from '../common/Button';
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
-//import { useUser } from '../../contexts/UserContext';
-//import { useImage } from '../../contexts/ImageContext';
 
 function StartTrip() {
   const [formData, setFormData] = useState({
@@ -13,8 +11,6 @@ function StartTrip() {
     description: "",
   });
 
- // const { userId, username, setCurrentTripId } = useUser();
-  //const { handleCancel, preview, imageFile } = useImage();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,37 +18,35 @@ function StartTrip() {
     setFormData({ ...formData, [name]: value });
   };
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     let awsData = {};
 
     try {
-        awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
-        let { presignedAwsUrl, awsObjectKey } = awsData;
+      awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+      let { presignedAwsUrl, awsObjectKey } = awsData;
 
-        awsObjectKey = awsObjectKey.replace('undefined', userId);
+      awsObjectKey = awsObjectKey.replace('undefined', userId);
 
-        await putData(presignedAwsUrl, imageFile);
+      await putData(presignedAwsUrl, imageFile);
 
-        const newData = {
-            userId,
-            username,
-            ...formData,
-            url: awsObjectKey 
-        };
+      const newData = {
+        userId,
+        username,
+        ...formData,
+        url: awsObjectKey
+      };
 
-        const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
-        const parsed = JSON.parse(responseFromPost);
-        if(parsed.tripId) {
-            setCurrentTripId(parsed.tripId);
-           navigate('/current-trip');
-        }
-        
+      const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
+      const parsed = JSON.parse(responseFromPost);
+      if (parsed.tripId) {
+        setCurrentTripId(parsed.tripId);
+        navigate('/current-trip');
+      }
+
     } catch (err) {
-        console.error("Error in handleSubmit:", err);
+      console.error("Error in handleSubmit:", err);
     }
-};
-
-
+  };
 
   const postData = async (apiUrl, data) => {
     try {
@@ -109,12 +103,12 @@ const handleSubmit = async (e) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-        const result = await response.json();
+      const result = await response.json();
 
-   return {
+      return {
         presignedAwsUrl: result.signedUrl.url,
         awsObjectKey: result.signedUrl.key
-    };
+      };
 
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
