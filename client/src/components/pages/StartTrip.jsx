@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from '../common/Button';
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
 
 function StartTrip() {
+  const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
 
   const navigate = useNavigate();
+  const { userId, username } = useSelector(store => store.user);
 
+  const handleFileSelect = (file) => {
+    setImageFile(file); // Set the file when it is selected in ImageUpload
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,7 +45,7 @@ function StartTrip() {
       const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
       const parsed = JSON.parse(responseFromPost);
       if (parsed.tripId) {
-        setCurrentTripId(parsed.tripId);
+        //setCurrentTripId(parsed.tripId); // Do I need it?
         navigate('/current-trip');
       }
 
@@ -137,7 +143,7 @@ function StartTrip() {
           value={formData.description}
           onChange={handleChange}
         />
-        <ImageUpload label="Cover Image" />
+        <ImageUpload onFileSelect={handleFileSelect} />
         <div className="flex flex-col  md:flex-row justify-end gap-x-5 gap-y-4">
           <Button name="Publish" variant="primary" action="submit" />
         </div>
