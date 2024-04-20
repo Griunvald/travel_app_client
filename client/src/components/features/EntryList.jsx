@@ -8,11 +8,12 @@ function EntryList() {
   const dispatch = useDispatch();
   const userId = useSelector(store => store.user.userId);
   const entryList = useSelector(store => store.entry.entryList);
+  const currentTripId = useSelector(store => store.trip.currentTripId);
 
   useEffect(() => {
     if (userId) {
       dispatch(getEntryList(userId));
-      dispatch(setEntryList());
+      dispatch(setEntryList(currentTripId));
     }
   }, [userId, useDispatch]);
 
