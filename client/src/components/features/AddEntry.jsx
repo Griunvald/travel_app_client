@@ -26,7 +26,9 @@ const AddEntry = () => {
     text: "",
     tags: tags,
   });
-  const { userId, currentTripId } = useSelector(store => store.user);
+
+  const { userId } = useSelector(store => store.user);
+  const { currentTripId } = useSelector(store => store.trip);
   // const { setPreview, imageFile, setImageFile } = useImage();
 
   const handleChange = (e) => {
@@ -69,7 +71,7 @@ const AddEntry = () => {
         dispatch(addTag([]));
         dispatch(clearTags());
         dispatch(getEntryList(userId));
-        toast({message:'Success! Your entry has been added!',  duration: 5000 });
+        toast({ message: 'Success! Your entry has been added!', duration: 5000 });
       }
     } catch (err) {
       console.error("Error in handleSubmit:", err);
