@@ -18,6 +18,9 @@ const tripSlice = createSlice({
     setTripsCount: (state, action) => {
       state.tripsCount = action.payload;
     },
+    setCurrentTripId: (state, action) => {
+      state.currentTripId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,5 +80,5 @@ const tripSlice = createSlice({
   }
 });
 
-export const { setTripsCount, setTripDetails, setEntryList } = tripSlice.actions;
+export const { setTripsCount, setTripDetails, setEntryList, setCurrentTripId } = tripSlice.actions;
 export default tripSlice.reducer;

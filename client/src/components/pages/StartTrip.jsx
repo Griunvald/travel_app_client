@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../common/Button';
 import Textarea from '../common/Textarea';
 import Form from '../common/Form';
 import ImageUpload from '../common/ImageUpload';
+import { setCurrentTripId } from '../../features/trip/tripSlice';
 
 function StartTrip() {
   const [imageFile, setImageFile] = useState(null);
@@ -14,17 +15,19 @@ function StartTrip() {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { userId, username } = useSelector(store => store.user);
 
   const handleFileSelect = (file) => {
-    setImageFile(file); // Set the file when it is selected in ImageUpload
+    setImageFile(file);
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     let awsData = {};
 
     try {
@@ -45,7 +48,7 @@ function StartTrip() {
       const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
       const parsed = JSON.parse(responseFromPost);
       if (parsed.tripId) {
-        //setCurrentTripId(parsed.tripId); // Do I need it?
+        dispatch(setCurrentTripId(parsed.tripId))
         navigate('/current-trip');
       }
 
