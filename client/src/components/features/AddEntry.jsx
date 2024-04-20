@@ -31,6 +31,10 @@ const AddEntry = () => {
   const { currentTripId } = useSelector(store => store.trip);
   // const { setPreview, imageFile, setImageFile } = useImage();
 
+  const handleFileSelect = (file) => {
+    setImageFile(file);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -164,7 +168,7 @@ const AddEntry = () => {
             />
           </Tab>
           <Tab tabName="Image">
-            <ImageUpload />
+            <ImageUpload onFileSelect={handleFileSelect} />
           </Tab>
         </TabContainer>
         <TagsArea />
