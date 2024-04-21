@@ -53,9 +53,6 @@ const AddEntry = () => {
     }
   }, [tags, activeTab]);
 
-  console.log("before submit");
-  console.log(preview);
-
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
@@ -74,9 +71,7 @@ const AddEntry = () => {
       };
 
       const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
-      console.log(responseFromPost);
-      console.log("after submit");
-      console.log(preview);
+
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })
         setPreview(null);
