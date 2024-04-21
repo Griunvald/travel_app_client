@@ -1,33 +1,20 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import CloseButton from './CloseButton';
 
-const ImageUpload = ({ onFileSelect }) => {
+const ImageUpload = ({ onFileSelect, preview, setPreview }) => {
   const fileInputRef = useRef(null);
-  const [preview, setPreview] = useState(null);
-  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      console.log("file is: ", file);
-      setImageFile(file);
-      setPreview(URL.createObjectURL(file));
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
+      const previewUrl = URL.createObjectURL(file);
+      setPreview(previewUrl);
       if (onFileSelect) {
         onFileSelect(file);
       }
     } else {
-      setImageFile(null);
-      setPreview(null);
-      if (onFileSelect) {
-        onFileSelect(null);
-      }
+      handleCancel();
     }
-    fileInputRef.current.value = null;
   };
 
   const handleCancel = () => {
@@ -35,10 +22,10 @@ const ImageUpload = ({ onFileSelect }) => {
     if (onFileSelect) {
       onFileSelect(null);
     }
-    fileInputRef.current.value = null;
+    fileInputRef.current.value = "";
   };
-  return (
 
+  return (
     <>
       <div className="relative flex flex-col items-center justify-center mb-4 h-48 border border-primary">
         <input
