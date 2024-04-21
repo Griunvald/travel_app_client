@@ -9,6 +9,7 @@ import { setCurrentTripId } from '../../features/trip/tripSlice';
 
 function StartTrip() {
   const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -146,7 +147,7 @@ function StartTrip() {
           value={formData.description}
           onChange={handleChange}
         />
-        <ImageUpload onFileSelect={handleFileSelect} />
+        <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
         <div className="flex flex-col  md:flex-row justify-end gap-x-5 gap-y-4">
           <Button name="Publish" variant="primary" action="submit" />
         </div>
