@@ -35,7 +35,6 @@ const followSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(getFollowingUsers.fulfilled, (state, action) => {
-         console.log(action.payload.followingUsersIds); // Debug
         state.loading = 'idle';
         state.followingUsersIds = action.payload.followingUsersIds;
         state.follower = action.payload.userId;
@@ -64,7 +63,7 @@ const followSlice = createSlice({
       })
       .addCase(unfollowUser.fulfilled, (state, action) => {
         state.loading = 'idle';
-         state.followingUsersIds = state.followingUsersIds.filter(id => id !== action.payload);
+        state.followingUsersIds = state.followingUsersIds.filter(id => id !== action.payload);
         //state.followingUsersIds = action.payload;
       })
       .addCase(unfollowUser.rejected, (state, action) => {

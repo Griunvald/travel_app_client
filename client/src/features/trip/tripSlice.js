@@ -29,7 +29,6 @@ const tripSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(getAllTripsPreview.fulfilled, (state, action) => {
-        console.log(action);
         state.loading = 'idle';
         state.trips = action.payload;
       })

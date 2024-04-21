@@ -6,8 +6,6 @@ export const getAllTripsPreview = createAsyncThunk(
     try {
       const response = await fetch('http://localhost:3003/api/v1/trip/get-all-trips-preview');
       const data = await response.json();
-      console.log("Data: ", data);
-      console.log("Data type: ", Array.isArray(data)); //true
       return data;
     } catch (error) {
       console.error('Failed to fetch trips:', error);
@@ -43,7 +41,6 @@ export const getFullTrip = createAsyncThunk(
     try {
       const response = await fetch(`http://localhost:3003/api/v1/trip/get-full-trip?userId=${userId}`);
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (err) {
       console.error('Failed to fetch trips:', err);
@@ -69,14 +66,11 @@ export const getCurrentTrip = createAsyncThunk(
       }
 
       const text = await response.text();
-      console.log(text);
       if (!text) {
         return null;
       }
 
       const data = JSON.parse(text);
-      console.log(data);
-      console.log(data.id);
       return data.id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch current trip');

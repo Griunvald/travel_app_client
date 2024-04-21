@@ -28,7 +28,6 @@ function Join() {
     e.preventDefault();
     try {
       const response = await dispatch(joinUser(formData));
-      console.log(response);
       const parsed = await JSON.parse(response.payload);
       if (parsed.username) {
         dispatch(setUsername(parsed.username));

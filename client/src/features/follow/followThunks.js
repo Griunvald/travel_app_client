@@ -11,9 +11,7 @@ export const getFollowingUsers = createAsyncThunk(
 
       if (response.ok) {
         const data = await response.json();
-        const { userId, followingUsersIds } = data.following;
-        console.log(userId, followingUsersIds);
-        return { userId: data.following.userId, followingUsersIds: data.following.followingUsersIds}
+        return { userId: data.following.userId, followingUsersIds: data.following.followingUsersIds }
       } else {
         console.error('Failed to fetch followed users with response status: ', response.status);
       }
@@ -36,11 +34,10 @@ export const followUser = createAsyncThunk(
       })
       if (response.ok) {
         await thunkApi.dispatch(getFollowingUsers());
-        console.log("Start following user with id: ", leaderId);
         return leaderId;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return thunkApi.rejectWithValue(err.message);
     }
   }
@@ -59,7 +56,6 @@ export const unfollowUser = createAsyncThunk(
       })
       if (response.ok) {
         await thunkApi.dispatch(getFollowingUsers());
-        console.log("Stopped to unfollow user with id: ", leaderId);
         return leaderId;
       } else {
         console.error("Failed to unfollow user: ", err);
@@ -86,7 +82,7 @@ export const getFollowStats = createAsyncThunk(
         return data;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return thunkApi.rejectWithValue(err.message);
     }
   }

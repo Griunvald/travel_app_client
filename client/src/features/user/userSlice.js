@@ -43,7 +43,6 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("ACTION: ", action);
         const payload = JSON.parse(action.payload);
         state.username = payload?.username ?? '';
         state.userId = payload?.userId ?? null;
@@ -63,7 +62,7 @@ const userSlice = createSlice({
         state.username = '';
         state.userId = null;
         state.currentTripId = null,
-        state.loading = 'idle';
+          state.loading = 'idle';
       })
 
       .addCase(logoutUser.rejected, (state, action) => {

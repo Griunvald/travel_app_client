@@ -37,7 +37,6 @@ export const profileSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.about = action.payload.about;
         state.loading = 'idle';
       })
