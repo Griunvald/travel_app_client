@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-//import { useImage } from '../../contexts/ImageContext';
 import { addTag, clearTags } from '../../features/tag/tagsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-//import { useToast } from '../../contexts/ToastContext';
 import { useToast } from '../../hooks/useToast';
 import TabButton from '../common/TabButton';
 import Button from '../common/Button';
@@ -20,8 +18,10 @@ const AddEntry = () => {
   const tags = useSelector(store => store.tag.tags);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('Text');
+
   const [preview, setPreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+
   const [formData, setFormData] = useState({
     text: "",
     tags: tags,
@@ -29,10 +29,12 @@ const AddEntry = () => {
 
   const { userId } = useSelector(store => store.user);
   const { currentTripId } = useSelector(store => store.trip);
-  // const { setPreview, imageFile, setImageFile } = useImage();
 
   const handleFileSelect = (file) => {
     setImageFile(file);
+    if (!file) {
+      setImageFile(null);
+    }
   };
 
   const handleChange = (e) => {
@@ -51,7 +53,10 @@ const AddEntry = () => {
     }
   }, [tags, activeTab]);
 
-  const handleSubmit = async (e) => {
+  console.log("before submit");
+  console.log(preview);
+
+  const handleSubmit = async () => {
     setIsLoading(true);
     try {
       let awsData;
@@ -69,9 +74,13 @@ const AddEntry = () => {
       };
 
       const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
+      console.log(responseFromPost);
+      console.log("after submit");
+      console.log(preview);
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })
         setPreview(null);
+        setImageFile(null);
         dispatch(addTag([]));
         dispatch(clearTags());
         dispatch(getEntryList(userId));
@@ -168,7 +177,7 @@ const AddEntry = () => {
             />
           </Tab>
           <Tab tabName="Image">
-            <ImageUpload onFileSelect={handleFileSelect} />
+            <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
           </Tab>
         </TabContainer>
         <TagsArea />
