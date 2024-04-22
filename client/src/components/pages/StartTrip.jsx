@@ -40,8 +40,6 @@ function StartTrip() {
       await putData(presignedAwsUrl, imageFile);
 
       const newData = {
-        userId,
-        username,
         ...formData,
         url: awsObjectKey
       };
