@@ -51,14 +51,14 @@ export const getFullTrip = createAsyncThunk(
 
 export const getCurrentTrip = createAsyncThunk(
   'user/getCurrentTrip',
-  async (userId, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/get-trip', {
-        method: 'POST',
+      const response = await fetch('http://localhost:3003/api/v1/trips/current', {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId }),
+        credentials: 'include',
       });
 
       if (!response.ok) {

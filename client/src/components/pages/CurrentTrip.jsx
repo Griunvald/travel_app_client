@@ -16,12 +16,12 @@ function CurrentTrip() {
       }
 
       try {
-        const response = await fetch('http://localhost:3003/api/v1/trips/get-trip', {
-          method: 'POST',
+        const response = await fetch('http://localhost:3003/api/v1/trips/current', {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId })
+          credentials: 'include',
         });
         const data = await response.json();
         setTrip(data);
