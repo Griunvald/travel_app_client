@@ -46,7 +46,7 @@ function StartTrip() {
         url: awsObjectKey
       };
 
-      const responseFromPost = await postData('http://localhost:3003/api/v1/trip/create-trip', newData);
+      const responseFromPost = await postData('http://localhost:3003/api/v1/trips', newData);
       const parsed = JSON.parse(responseFromPost);
       if (parsed.tripId) {
         dispatch(setCurrentTripId(parsed.tripId))

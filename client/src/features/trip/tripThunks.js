@@ -4,7 +4,7 @@ export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trip/get-all-trips-preview');
+      const response = await fetch('http://localhost:3003/api/v1/trips/get-all-trips-preview');
       const data = await response.json();
       return data;
     } catch (error) {
@@ -19,7 +19,7 @@ export const getTripsCount = createAsyncThunk(
   'trip/getTripsCount',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trip/get-trips-count', {
+      const response = await fetch('http://localhost:3003/api/v1/trips/get-trips-count', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -39,7 +39,7 @@ export const getFullTrip = createAsyncThunk(
   'trip/getFullTrip',
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/trip/get-full-trip?userId=${userId}`);
+      const response = await fetch(`http://localhost:3003/api/v1/trips/get-full-trip?userId=${userId}`);
       const data = await response.json();
       return data;
     } catch (err) {
@@ -53,7 +53,7 @@ export const getCurrentTrip = createAsyncThunk(
   'user/getCurrentTrip',
   async (userId, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trip/get-trip', {
+      const response = await fetch('http://localhost:3003/api/v1/trips/get-trip', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

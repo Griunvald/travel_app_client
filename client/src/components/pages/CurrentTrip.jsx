@@ -16,7 +16,7 @@ function CurrentTrip() {
       }
 
       try {
-        const response = await fetch('http://localhost:3003/api/v1/trip/get-trip', {
+        const response = await fetch('http://localhost:3003/api/v1/trips/get-trip', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
