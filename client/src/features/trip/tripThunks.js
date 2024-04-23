@@ -39,7 +39,7 @@ export const getFullTrip = createAsyncThunk(
   'trip/getFullTrip',
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/trips/get-full-trip?userId=${userId}`);
+      const response = await fetch(`http://localhost:3003/api/v1/trips/full/${userId}`);
       const data = await response.json();
       return data;
     } catch (err) {
