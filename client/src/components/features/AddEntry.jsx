@@ -70,7 +70,7 @@ const AddEntry = () => {
         data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
       };
 
-      const responseFromPost = await postData('http://localhost:3003/api/v1/record/create-record', newData);
+      const responseFromPost = await postData('http://localhost:3003/api/v1/records/', newData);
 
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })
