@@ -4,7 +4,7 @@ export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/get-all-trips-preview');
+      const response = await fetch('http://localhost:3003/api/v1/trips/preview');
       const data = await response.json();
       return data;
     } catch (error) {
