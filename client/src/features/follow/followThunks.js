@@ -3,7 +3,7 @@ export const getFollowingUsers = createAsyncThunk(
   'follow/getFollowingUsers',
   async (_, thunkApi) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/follow/get-following', {
+      const response = await fetch('http://localhost:3003/api/v1/follows/following', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -26,7 +26,7 @@ export const followUser = createAsyncThunk(
   'follow/followUser',
   async (leaderId, thunkApi) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/follow/follow-user', {
+      const response = await fetch(`http://localhost:3003/api/v1/follows/${leaderId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -48,7 +48,7 @@ export const unfollowUser = createAsyncThunk(
   'follow/unfollowUser',
   async (leaderId, thunkApi) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/follow/unfollow-user', {
+      const response = await fetch(`http://localhost:3003/api/v1/follows/${leaderId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -72,7 +72,7 @@ export const getFollowStats = createAsyncThunk(
   'follow/getFollowStats',
   async (_, thunkApi) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/follow/get-follow-stats', {
+      const response = await fetch('http://localhost:3003/api/v1/follows/stats', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
