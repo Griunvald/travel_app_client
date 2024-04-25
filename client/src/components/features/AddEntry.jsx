@@ -58,7 +58,7 @@ const AddEntry = () => {
     try {
       let awsData;
       if (activeTab === "Image") {
-        awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+        awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
         await putData(awsData.presignedAwsUrl, imageFile);
       }
 

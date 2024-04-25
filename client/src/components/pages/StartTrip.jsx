@@ -32,7 +32,7 @@ function StartTrip() {
     let awsData = {};
 
     try {
-      awsData = await getData('http://localhost:3003/api/v1/file/get-signed-url', userId);
+      awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
       let { presignedAwsUrl, awsObjectKey } = awsData;
 
       awsObjectKey = awsObjectKey.replace('undefined', userId);
