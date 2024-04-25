@@ -1,17 +1,13 @@
-// TripPreview.jsx
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserInfo from '../common/UserInfo';
-//import { useUser } from '../../contexts/UserContext';
 import { useSelector, useDispatch } from 'react-redux';
-//import { useFollow } from '../../contexts/FollowContext';
 import { followUser, unfollowUser, getFollowingUsers } from '../../features/follow/followThunks';
 import { setLeaderId } from '../../features/follow/followSlice';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
-    const dispatch = useDispatch();
-  const { username: currentUser, userId, follower } = useSelector(store => store.user);
-  // const { followUser, unfollowUser, fetchFollowingUsers, followingUsersIds, setLeaderId } = useFollow();
+  const dispatch = useDispatch();
+  const { username: currentUser, userId } = useSelector(store => store.user);
 
   const followingUsers = useSelector((store) => store.follow.followingUsersIds);
 
@@ -27,8 +23,6 @@ function TripPreview({ username, userId: leader, title, description, url, create
     await dispatch(getFollowingUsers()).unwrap();
   };
 
-
-
   const showFollowButton = currentUser !== username && userId;
   const isFollowing = followingUsers.includes(leader);
   const menuItems = isFollowing ? [{ label: "Unfollow", action: handleUnfollow }] : [];
@@ -40,8 +34,7 @@ function TripPreview({ username, userId: leader, title, description, url, create
       <img className="w-full md:w-[700px] mt-4" src={url} alt="trip cover image" />
     </>
   );
-    useEffect(() => {
-    //if (!follower) return;
+  useEffect(() => {
     dispatch(getFollowingUsers());
   }, [dispatch]);
 
