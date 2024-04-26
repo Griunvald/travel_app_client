@@ -86,7 +86,9 @@ function App() {
   const userId = useSelector(store => store.user.userId);
   useEffect(() => {
     dispatch(initializeUser());
-    dispatch(getCurrentTrip(userId));
+    if (userId) {
+      dispatch(getCurrentTrip(userId));
+    }
   }, [dispatch, userId]);
   return (
     <>
