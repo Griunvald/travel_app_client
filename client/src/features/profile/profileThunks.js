@@ -24,7 +24,7 @@ export const getProfile = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
   'profile/updateProfile',
-  async ({ userId, data }, thunkApi) => {
+  async (data, thunkApi) => {
     const url = `http://localhost:3003/api/v1/users/profile`;
     try {
       const response = await fetch(url, {

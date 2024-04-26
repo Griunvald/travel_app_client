@@ -7,7 +7,6 @@ import Button from '../common/Button';
 
 function About() {
   const about = useSelector(store => store.profile.about);
-  const userId = useSelector(store => store.user.userId);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -15,8 +14,8 @@ function About() {
   };
 
   const handleSubmit = async () => {
-    await dispatch(updateProfile({ userId, data: { about } }))
-    dispatch(getProfile(userId));
+    await dispatch(updateProfile({ about }))
+    dispatch(getProfile());
   }
 
   return (
