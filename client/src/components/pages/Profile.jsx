@@ -10,11 +10,15 @@ function Profile() {
   const dispatch = useDispatch();
   const userId = useSelector(store => store.user.userId);
   useEffect(() => {
-    getFollowStats();
+    if (userId) {
+      getFollowStats();
+    }
   }, []);
 
   useEffect(() => {
-    dispatch(getProfile());
+    if (userId) {
+      dispatch(getProfile());
+    }
   }, [userId]);
 
   return (
