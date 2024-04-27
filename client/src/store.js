@@ -11,7 +11,7 @@ import entryReducer from './features/entry/entrySlice.js';
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    trip: tripReducer, 
+    trip: tripReducer,
     toast: toastReducer,
     tag: tagsReducer,
     profile: profileReducer,
@@ -19,7 +19,22 @@ export const store = configureStore({
     follow: followReducer,
     entry: entryReducer,
   },
-  devTools: process.env.NODE_ENV !== 'production', 
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
-
+export function makeTestStore(initialState) {
+  return configureStore({
+    reducer: {
+      user: userReducer,
+      trip: tripReducer,
+      toast: toastReducer,
+      tag: tagsReducer,
+      profile: profileReducer,
+      menu: menuReducer,
+      follow: followReducer,
+      entry: entryReducer,
+    },
+    preloadedState: initialState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({})
+  });
+}
