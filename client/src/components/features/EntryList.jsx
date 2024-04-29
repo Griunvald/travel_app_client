@@ -23,6 +23,7 @@ function EntryList() {
         Array.isArray(entryList) && entryList.map(entry => (
           <div key={entry.id}>
             <Entry
+              entryId={entry.id}
               createdAt={entry.createdAt}
               textValue={entry.textValue}
               urlValue={entry.urlValue}
