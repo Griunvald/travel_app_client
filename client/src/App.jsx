@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser } from './features/user/userThunks';
-import { getCurrentTrip } from './features/trip/tripThunks';
+import { getCurrentTripId } from './features/trip/tripThunks';
 
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
@@ -87,7 +87,7 @@ function App() {
   useEffect(() => {
     dispatch(initializeUser());
     if (userId) {
-      dispatch(getCurrentTrip(userId));
+      dispatch(getCurrentTripId(userId));
     }
   }, [dispatch, userId]);
   return (
