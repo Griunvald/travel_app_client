@@ -10,10 +10,9 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
 
   const type = textValue ? 'text' : 'url';
 
-  const handleDelete = () => {
-    console.log('Deleted!');
-    dispatch(deleteEntry({ entryId, type }));
-    dispatch(getEntryList(userId));
+  const handleDelete = async () => {
+    await dispatch(deleteEntry({ entryId, type }));
+    await dispatch(getEntryList(userId));
   }
 
   return (
@@ -21,7 +20,7 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
       <div className="bg-secondary p-2">
         <p className="text-sm font-semibold mb-1 mt-2">{formattedDate}</p> {/* Use the formatted date here */}
         <div className='flex flex-row-reverse gap-2'>
-          <div onClick={handleDelete}>Delete</div>
+          <div className='cursor-pointer' onClick={handleDelete}>Delete</div>
           <div>Edit</div>
         </div>
         {recordTags && (
