@@ -1,36 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import format from 'date-fns/format';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
 import EntryList from '../features/EntryList';
+import { getCurrentTrip } from '../../features/trip/tripThunks';
 
 function CurrentTrip() {
   const { username, userId } = useSelector(store => store.user);
-  const [trip, setTrip] = useState(null);
+  const { trip } = useSelector(store => store.trip);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!userId) {
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:3003/api/v1/trips/current', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        });
-        const data = await response.json();
-        setTrip(data);
-      } catch (error) {
-        console.error('Failed to fetch trips:', error);
-      }
-    };
-
-    fetchData();
+    dispatch(getCurrentTrip(userId))
   }, [userId]);
 
   return (

@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllTripsPreview, getTripsCount, getFullTrip, getCurrentTripId } from './tripThunks';
+import { getAllTripsPreview, getTripsCount, getFullTrip, getCurrentTripId, getCurrentTrip } from './tripThunks';
 
 const initialState = {
+  trip: null,
   trips: [],
   currentTripId: null,
   tripDetails: {},
@@ -59,20 +60,33 @@ const tripSlice = createSlice({
       })
       .addCase(getFullTrip.rejected, (state, action) => {
         state.error = action.payload;
-        state.loading = 'idle'
+        state.loading = 'idle';
       })
-      // Fetch Current Trip
+
+      // Get Current Trip Id
       .addCase(getCurrentTripId.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
       })
-      //const payload = JSON.parse(action.payload);
       .addCase(getCurrentTripId.fulfilled, (state, action) => {
         state.currentTripId = action.payload ?? null;
         state.loading = 'idle';
       })
-
       .addCase(getCurrentTripId.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
+      })
+
+      // Get Current Trip
+      .addCase(getCurrentTrip.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(getCurrentTrip.fulfilled, (state, action) => {
+        state.trip = action.payload ?? null;
+        state.loading = 'idle';
+      })
+      .addCase(getCurrentTrip.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
       })
