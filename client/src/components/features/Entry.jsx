@@ -1,10 +1,11 @@
 import React from 'react';
 import format from 'date-fns/format';
-import { useDispatch } from 'react-redux';
-import { deleteEntry } from '../../features/entry/entryThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteEntry, getEntryList } from '../../features/entry/entryThunks';
 function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
   // Format the createdAt date
   const dispatch = useDispatch()
+  const { userId } = useSelector(store => store.user);
   const formattedDate = format(new Date(createdAt), "MMMM do, yyyy, hh:mm a");
 
   const type = textValue ? 'text' : 'url';
@@ -12,6 +13,7 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
   const handleDelete = () => {
     console.log('Deleted!');
     dispatch(deleteEntry({ entryId, type }));
+    dispatch(getEntryList(userId));
   }
 
   return (
