@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import format from 'date-fns/format';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEntry, getEntryList } from '../../features/entry/entryThunks';
+import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entryThunks';
 import Textarea from '../common/Textarea';
+import Button from '../common/Button';
 import { Form } from 'react-router-dom';
 function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
 
@@ -30,8 +31,8 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
   }
 
   const handleSubmit = async () => {
-    console.log('Submitted: ', editValue);
-    setEditValue(false);
+    await dispatch(editEntry({ entryId, textValue: editValue }));
+    await dispatch(getEntryList(userId));
   }
 
   return (
@@ -58,6 +59,7 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
           <Textarea
             value={editValue}
             onChange={handleChange} />
+          <Button name="Save" variant="primary" type="submit" />
         </Form>
           : null
       }
