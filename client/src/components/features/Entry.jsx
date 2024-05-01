@@ -29,10 +29,14 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
     setEditable(true);
     setEditValue(textValue);
   }
+  const handleCancel = async () => {
+    setEditable(false);
+  }
 
   const handleSubmit = async () => {
     await dispatch(editEntry({ entryId, textValue: editValue }));
     await dispatch(getEntryList(userId));
+    setEditable(false);
   }
 
   return (
@@ -60,6 +64,7 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
             value={editValue}
             onChange={handleChange} />
           <Button name="Save" variant="primary" type="submit" />
+          <Button name="Cancel" variant="secondary" type="button" onClick={handleCancel} />
         </Form>
           : null
       }
