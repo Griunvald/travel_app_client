@@ -39,3 +39,26 @@ export const deleteEntry = createAsyncThunk(
     }
   }
 )
+
+
+export const editEntry = createAsyncThunk(
+  'entry/editEntry',
+  async ({ entryId, textValue }, thunkApi) => {
+    const url = `http://localhost:3003/api/v1/records/text/${entryId}`
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ textValue })
+      });
+      if (response.ok) {
+        return await response.json()
+      } else {
+        console.error("Can't delete entry");
+      }
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
+  }
+)
