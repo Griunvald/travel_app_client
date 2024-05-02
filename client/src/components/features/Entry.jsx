@@ -3,7 +3,9 @@ import format from 'date-fns/format';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entryThunks';
 import Textarea from '../common/Textarea';
+import Modal from '../common/Modal';
 import { Form } from 'react-router-dom';
+
 function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) {
 
   const dispatch = useDispatch()
@@ -12,12 +14,14 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
 
   const [editable, setEditable] = useState(false);
   const [editValue, setEditValue] = useState(textValue);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const type = textValue ? 'text' : 'url';
 
   const handleDelete = async () => {
     await dispatch(deleteEntry({ entryId, type }));
     await dispatch(getEntryList(userId));
+    setShowDeleteModal(false);
   }
 
   const handleChange = (e) => {
@@ -50,11 +54,19 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
                 <div className='cursor-pointer' onClick={handleCancel}>Cancel</div>
               </> :
               <>
-                <div className='cursor-pointer' onClick={handleDelete}>Delete</div>
+                <div className='cursor-pointer' onClick={() => setShowDeleteModal(true)}>Delete</div>
                 <div className='cursor-pointer' onClick={handleEdit}>Edit</div>
               </>
-          )
-          }
+          )}
+          <Modal isOpen={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+            <div className="space-y-4">
+              <h2 className="text-lg">Are you sure you want to delete this entry?</h2>
+              <div className="flex justify-end space-x-2">
+                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleDelete}>Delete</button>
+                <button className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+              </div>
+            </div>
+          </Modal>
         </div>
         {recordTags && (
           <ul className="flex gap-x-2 gap-y-3 flex-wrap mb-1 text-sm">
