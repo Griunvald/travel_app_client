@@ -23,6 +23,7 @@ function EntryList() {
         Array.isArray(entryList) && entryList.map(entry => (
           <div key={entry.id}>
             <Entry
+              author={entry.userId}
               entryId={entry.id}
               createdAt={entry.createdAt}
               textValue={entry.textValue}

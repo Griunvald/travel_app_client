@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entryThunks';
 import Textarea from '../common/Textarea';
 import { Form } from 'react-router-dom';
-function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
+function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) {
 
   const dispatch = useDispatch()
   const { userId } = useSelector(store => store.user);
@@ -43,15 +43,17 @@ function Entry({ entryId, createdAt, textValue, urlValue, recordTags }) {
       <div className="bg-secondary p-2">
         <p className="text-sm font-semibold mb-1 mt-2">{formattedDate}</p> {/* Use the formatted date here */}
         <div className='flex flex-row-reverse gap-2'>
-          {editable ?
-            <>
-              <div className='cursor-pointer' onClick={handleSubmit}>Save</div>
-              <div className='cursor-pointer' onClick={handleCancel}>Cancel</div>
-            </> :
-            <>
-              <div className='cursor-pointer' onClick={handleDelete}>Delete</div>
-              <div className='cursor-pointer' onClick={handleEdit}>Edit</div>
-            </>
+          {author === userId && (
+            editable ?
+              <>
+                <div className='cursor-pointer' onClick={handleSubmit}>Save</div>
+                <div className='cursor-pointer' onClick={handleCancel}>Cancel</div>
+              </> :
+              <>
+                <div className='cursor-pointer' onClick={handleDelete}>Delete</div>
+                <div className='cursor-pointer' onClick={handleEdit}>Edit</div>
+              </>
+          )
           }
         </div>
         {recordTags && (
