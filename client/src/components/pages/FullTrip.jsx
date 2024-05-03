@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import format from 'date-fns/format';
 import TripPreview from '../features/TripPreview';
 import Entry from '../features/Entry';
+import CommentsContainer from '../features/comments/CommentsContainer';
 import { getFollowingUsers } from '../../features/follow/followThunks';
 import { getFullTrip } from '../../features/trip/tripThunks';
 
@@ -51,6 +52,7 @@ function FullTrip() {
           ))
         )
       }
+      <CommentsContainer />
     </>
   );
 };
