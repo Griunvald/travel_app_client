@@ -5,6 +5,7 @@ function Textarea({
   onChange,
   height,
   rows = 5,
+  placeholder,
   maxLength,
 }) {
   return (
@@ -20,6 +21,7 @@ function Textarea({
           value={value}
           onChange={onChange}
           maxLength={maxLength}
+          placeholder={placeholder}
           className={`resize-none overflow-auto bg-white shadow-sm block w-full mb-4  h-${height}`}
         />
         {maxLength && (
