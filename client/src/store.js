@@ -7,19 +7,22 @@ import profileReducer from './features/profile/profileSlice.js';
 import menuReducer from './features/menu/menuSlice.js';
 import followReducer from './features/follow/followSlice.js';
 import entryReducer from './features/entry/entrySlice.js';
+import commentReducer from './features/comment/commentSlice.js';
+
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    trip: tripReducer, 
+    trip: tripReducer,
     toast: toastReducer,
     tag: tagsReducer,
     profile: profileReducer,
     menu: menuReducer,
     follow: followReducer,
     entry: entryReducer,
+    comment: commentReducer,
   },
-  devTools: process.env.NODE_ENV !== 'production', 
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 
