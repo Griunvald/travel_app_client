@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <CurrentTrip />
       },
       {
-        path: '/full-trip/:userId',
+        path: '/full-trip/:userId/:tripId',
         element: <FullTrip />
       },
       {

@@ -5,31 +5,31 @@ import { timeAgo } from '../../utils/date.js';
 import TripPreview from '../features/TripPreview';
 
 function TripsList() {
-    const dispatch = useDispatch();
-    const trips = useSelector(store => store.trip.trips);
-    //TODO: add loader and error message
-    //if (isLoading) return <p>Loading...</p>;
-    //if (error) return <p>Error loading trips!</p>;
-    useEffect(()=> {
-       dispatch(getAllTripsPreview()); 
-    },[]);
+  const dispatch = useDispatch();
+  const trips = useSelector(store => store.trip.trips);
+  //TODO: add loader and error message
+  //if (isLoading) return <p>Loading...</p>;
+  //if (error) return <p>Error loading trips!</p>;
+  useEffect(() => {
+    dispatch(getAllTripsPreview());
+  }, []);
 
-    return (
-        <>
-            {trips.map((trip) => (
-                <TripPreview
-                    key={trip.id}
-                    userId={trip.userId}
-                    username={trip.username}
-                    createdAt={timeAgo(trip.createdAt)}
-                    title={trip.title}
-                    description={trip.description}
-                    url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
-                    link={`/full-trip/${trip.userId}`}
-                />
-            ))}
-        </>
-    );
+  return (
+    <>
+      {trips.map((trip) => (
+        <TripPreview
+          key={trip.id}
+          userId={trip.userId}
+          username={trip.username}
+          createdAt={timeAgo(trip.createdAt)}
+          title={trip.title}
+          description={trip.description}
+          url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
+          link={`/full-trip/${trip.userId}/${trip.id}`}
+        />
+      ))}
+    </>
+  );
 }
 
 export default TripsList;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Textarea from "../../common/Textarea";
 import Form from "../../common/Form";
@@ -15,7 +16,7 @@ function CommentsContainer() {
 
   const dispatch = useDispatch();
   const { comments } = useSelector(store => store.comment.commentsList)
-  const tripId = 1;
+  const { tripId } = useParams();
 
   useEffect(() => {
     async function fetchData() {
