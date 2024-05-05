@@ -41,3 +41,26 @@ export const addComment = createAsyncThunk(
     }
   }
 );
+
+
+export const deleteComment = createAsyncThunk(
+  'comment/deleteComment',
+  async ({ commentId, commentOwner }, thunkApi) => {
+    const url = `http://localhost:3003/api/v1/comments/${commentId}/${commentOwner}`
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const comment = await response.json()
+        return comment;
+      } else {
+        console.error('Failed to delete comment');
+      }
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
+  }
+);
