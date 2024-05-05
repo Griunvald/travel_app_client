@@ -39,7 +39,7 @@ function CommentsContainer() {
         </Form>
         <div className="grid grid-cols-1 divide-y mt-4">
           {comments &&
-            comments.map(comment => <Comment comment={comment} />)
+            comments.map(comment => <Comment comment={comment} key={comment.id} />)
           }
         </div>
       </div >
