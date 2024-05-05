@@ -17,3 +17,27 @@ export const getComments = createAsyncThunk(
     }
   }
 );
+
+
+export const addComment = createAsyncThunk(
+  'comment/addComment',
+  async ({ tripId, comment }, thunkApi) => {
+    const url = `http://localhost:3003/api/v1/comments/${tripId}`
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ body: comment })
+      });
+      if (response.ok) {
+        const comment = await response.json()
+        return comment;
+      } else {
+        console.error('Failed to create comment');
+      }
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
+  }
+);
