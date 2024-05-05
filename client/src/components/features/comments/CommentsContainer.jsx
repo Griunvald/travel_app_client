@@ -19,6 +19,7 @@ function CommentsContainer() {
   const handleSubmit = async () => {
     await dispatch(addComment({ tripId, comment }));
     await dispatch(getComments(tripId))
+    setComment('');
   }
 
   const handleChange = (e) => {
