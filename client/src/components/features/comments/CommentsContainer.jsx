@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Textarea from "../../common/Textarea";
 import Form from "../../common/Form";
 import Comment from "./Comment";
+import Modal from "../../common/Modal.jsx";
 import { getComments, addComment, deleteComment } from '../../../features/comment/commentThunks.js';
 
 
@@ -13,6 +14,8 @@ function CommentsContainer() {
 
 
   const dispatch = useDispatch();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [activeComment, setActiveComment] = useState(null);
   const { comments } = useSelector(store => store.comment.commentsList)
   const { tripId } = useParams();
 
@@ -32,6 +35,8 @@ function CommentsContainer() {
 
   const handleDelete = async (commentId, commentOwner) => {
     await dispatch(deleteComment({ commentId, commentOwner }))
+    setShowDeleteModal(false);
+    setActiveComment(null);
     await dispatch(getComments(tripId))
   }
 
@@ -41,6 +46,7 @@ function CommentsContainer() {
     }
     fetchData();
   }, [tripId]);
+
 
   return (
     <>
@@ -64,10 +70,23 @@ function CommentsContainer() {
               comment={comment}
               key={comment.id}
               onEdit={handleEdit}
-              onDelete={() => handleDelete(comment.id, comment.user_id)}
+              onDelete={() => {
+                setActiveComment({ commentId: comment.id, commentOwner: comment.user_id });
+                setShowDeleteModal(true)
+              }
+              }
             />)
           }
         </div>
+        <Modal isOpen={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+          <div className="space-y-4">
+            <h2 className="text-lg">Are you sure you want to delete this comment?</h2>
+            <div className="flex justify-end space-x-2">
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(activeComment.commentId, activeComment.commentOwner)}>Delete</button>
+              <button className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </Modal>
       </div >
     </>
   );
