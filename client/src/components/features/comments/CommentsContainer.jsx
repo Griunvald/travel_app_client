@@ -4,19 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import Textarea from "../../common/Textarea";
 import Form from "../../common/Form";
 import Comment from "./Comment";
-import { getComments } from '../../../features/comment/commentThunks.js';
+import { getComments, addComment } from '../../../features/comment/commentThunks.js';
+
+
 function CommentsContainer() {
 
   const [comment, setComment] = useState("");
 
-  const handleSubmit = () => { }
-  const handleChange = (e) => {
-    setComment(e.target.value);
-  }
 
   const dispatch = useDispatch();
   const { comments } = useSelector(store => store.comment.commentsList)
   const { tripId } = useParams();
+
+  const handleSubmit = async () => {
+    await dispatch(addComment({ tripId, comment }));
+    await dispatch(getComments(tripId))
+  }
+  const handleChange = (e) => {
+    setComment(e.target.value);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +43,9 @@ function CommentsContainer() {
             placeholder="Add a comment"
             onChange={handleChange}
           />
+          <div className="flex justify-end">
+            <button type="submit">Send</button>
+          </div>
         </Form>
         <div className="grid grid-cols-1 divide-y mt-4">
           {comments &&
