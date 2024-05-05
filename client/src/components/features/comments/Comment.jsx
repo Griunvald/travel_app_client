@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import Avatar from "../../common/Avatar";
 import { timeAgo } from "../../../utils/date";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, onEdit, onDelete }) => {
+
   const { userId } = useSelector(store => store.user)
   const canEdit = comment.user_id == userId;
   return (
@@ -19,7 +20,10 @@ const Comment = ({ comment }) => {
             <button className="text-blue-500 text-sm hover:text-blue-700">Reply</button>
             <button className="text-blue-500 text-sm hover:text-blue-700">Like</button>
             {canEdit && (
-              <button className="text-blue-500 text-xs hover:text-blue-700">Edit</button>
+              <>
+                <button className="text-blue-500 text-xs hover:text-blue-700" onClick={onEdit}>Edit</button>
+                <button className="text-blue-500 text-xs hover:text-blue-700" onClick={onDelete}>Delete</button>
+              </>
             )}
           </div>
         </div>

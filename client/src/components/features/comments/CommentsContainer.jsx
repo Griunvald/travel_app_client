@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Textarea from "../../common/Textarea";
 import Form from "../../common/Form";
 import Comment from "./Comment";
-import { getComments, addComment } from '../../../features/comment/commentThunks.js';
+import { getComments, addComment, deleteComment } from '../../../features/comment/commentThunks.js';
 
 
 function CommentsContainer() {
@@ -20,8 +20,18 @@ function CommentsContainer() {
     await dispatch(addComment({ tripId, comment }));
     await dispatch(getComments(tripId))
   }
+
   const handleChange = (e) => {
     setComment(e.target.value);
+  }
+
+  const handleEdit = () => {
+    //
+  }
+
+  const handleDelete = async (commentId, commentOwner) => {
+    await dispatch(deleteComment({ commentId, commentOwner }))
+    await dispatch(getComments(tripId))
   }
 
   useEffect(() => {
@@ -49,7 +59,12 @@ function CommentsContainer() {
         </Form>
         <div className="grid grid-cols-1 divide-y mt-4">
           {comments &&
-            comments.map(comment => <Comment comment={comment} key={comment.id} />)
+            comments.map(comment => <Comment
+              comment={comment}
+              key={comment.id}
+              onEdit={handleEdit}
+              onDelete={() => handleDelete(comment.id, comment.user_id)}
+            />)
           }
         </div>
       </div >
