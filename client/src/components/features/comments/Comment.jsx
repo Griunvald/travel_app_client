@@ -21,17 +21,19 @@ const Comment = ({ comment, isEditing, onEdit, onEditSave, onCancelEdit, onDelet
           {isEditing ? (
             <>
               <Textarea value={editText} onChange={(e) => setEditText(e.target.value)} />
-              <button onClick={() => onEditSave(editText)}>Save</button>
-              <button onClick={onCancelEdit}>Cancel</button>
+              <div className="flex space-x-2 mt-2">
+                <button onClick={() => onEditSave(editText)}>Save</button>
+                <button onClick={onCancelEdit}>Cancel</button>
+              </div>
             </>
           ) : (
             <>
               <p className="text-base font-normal mt-2">{comment.body}</p>
               {canEdit && (
-                <>
+                <div className="flex space-x-2 mt-2">
                   <button onClick={onEdit}>Edit</button>
                   <button onClick={onDelete}>Delete</button>
-                </>
+                </div>
               )}
             </>
           )}
