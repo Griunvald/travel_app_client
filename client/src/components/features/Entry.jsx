@@ -80,7 +80,7 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
       {textValue && editable == false && (
         <>
           <p className="text-base font-normal my-4 ">{textValue}</p>
-          <Like />
+          <Like type='record' itemId={123} />
         </>
       )}
       {
