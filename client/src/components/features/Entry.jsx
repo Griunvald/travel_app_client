@@ -5,6 +5,7 @@ import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entry
 import Textarea from '../common/Textarea';
 import Modal from '../common/Modal';
 import { Form } from 'react-router-dom';
+import Like from '../common/Like'
 
 function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) {
 
@@ -77,7 +78,10 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
         )}
       </div>
       {textValue && editable == false && (
-        <p className="text-base font-normal my-4 ">{textValue}</p>
+        <>
+          <p className="text-base font-normal my-4 ">{textValue}</p>
+          <Like />
+        </>
       )}
       {
         editable ? <Form onSubmit={handleSubmit}>
