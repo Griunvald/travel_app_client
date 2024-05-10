@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import format from 'date-fns/format';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entryThunks';
@@ -9,13 +10,15 @@ import Like from '../common/Like'
 
 function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const location = useLocation();
   const { userId } = useSelector(store => store.user);
   const formattedDate = format(new Date(createdAt), "MMMM do, yyyy, hh:mm a");
 
   const [editable, setEditable] = useState(false);
   const [editValue, setEditValue] = useState(textValue);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 
   const type = textValue ? 'text' : 'url';
 
@@ -80,7 +83,7 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
       {textValue && editable == false && (
         <>
           <p className="text-base font-normal my-4 ">{textValue}</p>
-          <Like type='record' itemId={entryId} />
+          {location.pathname === '/current-trip' ? null : <Like type='record' itemId={entryId} />}
         </>
       )}
       {
