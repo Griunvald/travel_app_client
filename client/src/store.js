@@ -8,6 +8,7 @@ import menuReducer from './features/menu/menuSlice.js';
 import followReducer from './features/follow/followSlice.js';
 import entryReducer from './features/entry/entrySlice.js';
 import commentReducer from './features/comment/commentSlice.js';
+import likeReducer from './features/like/likeSlice.js';
 
 
 export const store = configureStore({
@@ -21,6 +22,7 @@ export const store = configureStore({
     follow: followReducer,
     entry: entryReducer,
     comment: commentReducer,
+    like: likeReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

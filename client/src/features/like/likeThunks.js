@@ -44,3 +44,26 @@ export const removeLike = createAsyncThunk(
     }
   }
 );
+
+
+export const getItemLikesCountListByType = createAsyncThunk(
+  'like/getItemLikesCountListByType',
+  async ({ type, itemId }, thunkApi) => {
+    try {
+      const response = await fetch(`http://localhost:3003/api/v1/likes/item/${type}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
