@@ -3,6 +3,7 @@ import { useState } from "react";
 import Avatar from "../../common/Avatar";
 import { timeAgo } from "../../../utils/date";
 import Textarea from "../../common/Textarea";
+import Like from "../../common/Like";
 
 const Comment = ({ comment, isEditing, onEdit, onEditSave, onCancelEdit, onDelete }) => {
   const { userId } = useSelector(store => store.user);
@@ -29,11 +30,13 @@ const Comment = ({ comment, isEditing, onEdit, onEditSave, onCancelEdit, onDelet
           ) : (
             <>
               <p className="text-base font-normal mt-2">{comment.body}</p>
+              <Like type={'comment'} itemId={comment.id} />
               {canEdit && (
                 <div className="flex space-x-2 mt-2">
                   <button onClick={onEdit}>Edit</button>
                   <button onClick={onDelete}>Delete</button>
                 </div>
+
               )}
             </>
           )}
