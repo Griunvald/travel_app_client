@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLike, removeLike, getItemLikesCountListByType } from '../../features/like/likeThunks';
 import LikeIcon from '../../assets/Like.svg';
 import UnlikeIcon from '../../assets/Unlike.svg';
 
 function Like({ type, itemId }) {
-  const [like, setLike] = useState(false);
   const dispatch = useDispatch();
   const { likesCountList } = useSelector(store => store.like);
 
@@ -13,24 +12,25 @@ function Like({ type, itemId }) {
     dispatch(getItemLikesCountListByType({ type }));
   }, [dispatch, type]);
 
-  const itemLikeCount = likesCountList.find(item => item.type_id === itemId);
+  const itemLikeDetails = likesCountList.find(item => item.type_id === itemId) || { item_likes_count: 0, liked_by_current_user: false };
 
-  const handleAddLike = async () => {
-    await dispatch(addLike({ type, itemId }));
+  const toggleLike = async () => {
+    if (itemLikeDetails.liked_by_current_user) {
+      await dispatch(removeLike({ type, itemId }));
+    } else {
+      await dispatch(addLike({ type, itemId }));
+    }
     await dispatch(getItemLikesCountListByType({ type }));
-    setLike(true);
-  };
-
-  const handleRemoveLike = async () => {
-    await dispatch(removeLike({ type, itemId }));
-    await dispatch(getItemLikesCountListByType({ type }));
-    setLike(false);
   };
 
   return (
-    <div onClick={like ? handleRemoveLike : handleAddLike}>
-      {like ? <img className='cursor-pointer' src={LikeIcon} alt="Unlike" /> : <img className='cursor-pointer' src={UnlikeIcon} alt="Like" />}
-      <p>{itemLikeCount ? itemLikeCount.item_likes_count : 0}</p>
+    <div onClick={toggleLike}>
+      <img
+        className='cursor-pointer'
+        src={itemLikeDetails.liked_by_current_user ? LikeIcon : UnlikeIcon}
+        alt={itemLikeDetails.liked_by_current_user ? "Unlike" : "Like"}
+      />
+      <p>{itemLikeDetails.item_likes_count}</p>
     </div>
   );
 }
