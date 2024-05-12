@@ -24,7 +24,7 @@ function Like({ type, itemId }) {
   };
 
   return (
-    <div onClick={toggleLike}>
+    <div className='flex gap-1' onClick={toggleLike}>
       <img
         className='cursor-pointer'
         src={itemLikeDetails.liked_by_current_user ? LikeIcon : UnlikeIcon}
