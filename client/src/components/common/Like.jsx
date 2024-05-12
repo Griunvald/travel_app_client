@@ -12,10 +12,10 @@ function Like({ type, itemId }) {
     dispatch(getItemLikesCountListByType({ type }));
   }, [dispatch, type]);
 
-  const itemLikeDetails = likesCountList.find(item => item.type_id === itemId) || { item_likes_count: 0, liked_by_current_user: false };
+  const itemLikeDetails = likesCountList.find(item => item.typeId === itemId) || { itemLikesCount: 0, likedByCurrentUser: false };
 
   const toggleLike = async () => {
-    if (itemLikeDetails.liked_by_current_user) {
+    if (itemLikeDetails.likedByCurrentUser) {
       await dispatch(removeLike({ type, itemId }));
     } else {
       await dispatch(addLike({ type, itemId }));
@@ -27,10 +27,10 @@ function Like({ type, itemId }) {
     <div className='flex gap-1' onClick={toggleLike}>
       <img
         className='cursor-pointer'
-        src={itemLikeDetails.liked_by_current_user ? LikeIcon : UnlikeIcon}
-        alt={itemLikeDetails.liked_by_current_user ? "Unlike" : "Like"}
+        src={itemLikeDetails.likedByCurrentUser ? LikeIcon : UnlikeIcon}
+        alt={itemLikeDetails.likedByCurrentUser ? "Unlike" : "Like"}
       />
-      <p>{itemLikeDetails.item_likes_count}</p>
+      <p>{itemLikeDetails.itemLikesCount}</p>
     </div>
   );
 }
