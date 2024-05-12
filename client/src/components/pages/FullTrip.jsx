@@ -26,6 +26,10 @@ function FullTrip() {
     dispatch(getFullTrip(userId));
   }, [userId]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       {tripDetails &&
