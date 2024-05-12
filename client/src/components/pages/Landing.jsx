@@ -3,22 +3,20 @@ import { useSelector } from 'react-redux';
 import LinkButtonCTA from '../common/LinkButtonCTA';
 
 function Landing() {
-  //const { userId } = useUser();
   const userId = useSelector(store => store.user.userId);
   return (
     <>
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 md:px-10">
-        <h1 className="font-bold text-gray-900 text-4xl md:text-6xl lg:text-8xl leading-tight mb-6">Trace Your Trails: Where Memories Map Out</h1>
-        <h2 className="font-medium text-gray-900 text-xl md:text-2xl lg:text-3xl mb-12">From sunrise city walks to mountain mist sunsets, chart your experiences and share the story of every place.</h2>
+        <h1 className="font-bold text-gray-900 text-4xl md:text-6xl lg:text-8xl leading-tight mb-6">THE WORLD THROUGH YOUR EYES: CAPTURE IT, SHARE IT</h1>
+        <h2 className="font-medium text-gray-700 text-xl md:text-2xl lg:text-3xl mb-12">From sunrise city walks to mountain mist sunsets, chart your experiences and share the story of every place.</h2>
         <div className="w-full flex flex-col md:flex-row justify-center gap-6 px-4 md:px-0">
           <LinkButtonCTA className="w-full md:w-auto" name="Join Now" variant="primary" path={userId ? "/start-trip" : "/join"} />
         </div>
       </section>
-
       <section className="py-20 px-4 md:px-10">
         <h2 className="font-bold text-gray-900 text-3xl md:text-4xl text-center leading-snug md:leading-normal mb-10">How It Works</h2>
         <p className="text-lg text-gray-700 mb-12 text-center">Embarking on a digital journey has never been easier. Follow these simple steps to capture and share every moment of your adventures with the world.</p>
-        
+
         <div className="md:grid md:grid-cols-2 md:gap-12">
           <div className="space-y-8 mb-8 md:mb-0">
             <div>
