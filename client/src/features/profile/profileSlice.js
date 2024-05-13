@@ -3,6 +3,7 @@ import { getProfile, updateProfile } from './profileThunks';
 
 const initialState = {
   about: '',
+  avatar: '',
   loading: 'idle',
   error: null
 }
@@ -38,6 +39,7 @@ export const profileSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.about = action.payload.about;
+        state.avatar = action.payload.avatar;
         state.loading = 'idle';
       })
       .addCase(updateProfile.rejected, (state, action) => {
