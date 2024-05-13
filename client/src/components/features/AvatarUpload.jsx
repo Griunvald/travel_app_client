@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../common/Button";
 import Form from "../common/Form";
 import ImageUpload from "../common/ImageUpload";
+import { updateProfile } from "../../features/profile/profileThunks";
 
 
 function AvatarUpload() {
@@ -12,6 +13,8 @@ function AvatarUpload() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { userId } = useSelector(store => store.user);
+  const { about } = useSelector(store => store.profile);
+  const dispatch = useDispatch();
 
   const handleFileSelect = (file) => {
     setImageFile(file);
@@ -52,6 +55,7 @@ function AvatarUpload() {
       let awsData;
       awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
       console.log(awsData);
+      await dispatch(updateProfile({ about, avatar: awsData.awsObjectKey }));
     } catch (err) {
       console.error("Error in handleSubmit:", err);
     } finally {
