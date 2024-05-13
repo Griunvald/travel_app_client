@@ -23,8 +23,9 @@ export const profileSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(getProfile.fulfilled, (state, action) => {
-        const { about } = action.payload;
+        const { about, avatar } = action.payload;
         state.about = about || '';
+        state.avatar = avatar || '';
         state.loading = 'idle';
       })
       .addCase(getProfile.rejected, (state, action) => {
