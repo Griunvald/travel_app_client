@@ -50,12 +50,34 @@ function AvatarUpload() {
   };
 
 
+  const putData = async (presignedAwsUrl, file) => {
+    try {
+      const response = await fetch(presignedAwsUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type,
+        },
+        body: file,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return presignedAwsUrl;
+    } catch (error) {
+      console.error('There was a problem with the put operation:', error);
+    }
+  };
+
+
   const handleSubmit = async () => {
     try {
       let awsData;
       awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
       console.log(awsData);
       await dispatch(updateProfile({ about, avatar: awsData.awsObjectKey }));
+      await putData(awsData.presignedAwsUrl, imageFile);
     } catch (err) {
       console.error("Error in handleSubmit:", err);
     } finally {
