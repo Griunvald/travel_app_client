@@ -13,7 +13,7 @@ const Comment = ({ comment, isEditing, onEdit, onEditSave, onCancelEdit, onDelet
   return (
     <div className="bg-white border-black border-solid p-4 mb-4">
       <div className="flex items-start space-x-4">
-        <Avatar />
+        <Avatar avatar={comment.avatar} />
         <div className="flex-1">
           <div className="flex items-center justify-between">
             <h5 className="font-bold text-sm">{comment.username}</h5>
