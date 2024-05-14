@@ -7,7 +7,7 @@ import EntryList from '../features/EntryList';
 import { getCurrentTrip } from '../../features/trip/tripThunks';
 
 function CurrentTrip() {
-  const { username, userId } = useSelector(store => store.user);
+  const { username, userId, avatar } = useSelector(store => store.user);
   const { trip } = useSelector(store => store.trip);
   const dispatch = useDispatch();
 
@@ -21,6 +21,7 @@ function CurrentTrip() {
         <TripPreview
           key={trip.id}
           username={username}
+          avatar={avatar}
           createdAt={trip.createdAt ? format(new Date(trip.createdAt), "MMMM do, yyyy, hh:mm a") : ''}
           title={trip.title}
           description={trip.description}
