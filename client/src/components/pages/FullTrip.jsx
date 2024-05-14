@@ -34,6 +34,7 @@ function FullTrip() {
     <>
       {tripDetails &&
         <TripPreview
+          avatar={tripDetails.url}
           username={tripDetails.username}
           createdAt={formattedDate}
           title={tripDetails.title}
