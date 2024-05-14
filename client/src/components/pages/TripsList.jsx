@@ -21,6 +21,7 @@ function TripsList() {
           key={trip.id}
           userId={trip.userId}
           username={trip.username}
+          avatar={trip.avatar}
           createdAt={timeAgo(trip.createdAt)}
           title={trip.title}
           description={trip.description}
