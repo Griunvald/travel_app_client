@@ -61,7 +61,7 @@ export const getItemLikesCountListByType = createAsyncThunk(
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      return data;
+      return { data, type };
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
