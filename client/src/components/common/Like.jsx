@@ -6,13 +6,15 @@ import UnlikeIcon from '../../assets/Unlike.svg';
 
 function Like({ type, itemId }) {
   const dispatch = useDispatch();
-  const { likesCountList } = useSelector(store => store.like);
+  const { recordLikesCountList } = useSelector(store => store.like);
+  const { commentLikesCountList } = useSelector(store => store.like);
 
   useEffect(() => {
     dispatch(getItemLikesCountListByType({ type }));
   }, [dispatch, type]);
 
-  const itemLikeDetails = likesCountList.find(item => item.typeId === itemId) || { itemLikesCount: 0, likedByCurrentUser: false };
+  const list = type === 'record' ? recordLikesCountList : commentLikesCountList
+  const itemLikeDetails = list.find(item => item.typeId === itemId) || { itemLikesCount: 0, likedByCurrentUser: false };
 
   const toggleLike = async () => {
     if (itemLikeDetails.likedByCurrentUser) {
