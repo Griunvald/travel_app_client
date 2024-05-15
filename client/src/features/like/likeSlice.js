@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getItemLikesCountListByType } from './likeThunks';
 
 const initialState = {
-  likesCountList: [],
+  recordLikesCountList: [],
+  commentLikesCountList: [],
   loading: 'idle',
   error: null
 }
@@ -18,7 +19,11 @@ export const likeSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(getItemLikesCountListByType.fulfilled, (state, action) => {
-        state.likesCountList = action.payload;
+        if (action.payload.type === 'record') {
+          state.recordLikesCountList = action.payload.data;
+        } else {
+          state.commentLikesCountList = action.payload.data;
+        }
         state.loading = 'idle';
       })
       .addCase(getItemLikesCountListByType.rejected, (state, action) => {
