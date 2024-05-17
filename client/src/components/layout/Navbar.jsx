@@ -10,7 +10,9 @@ import { useSelector } from 'react-redux';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { username, avatar } = useSelector(store => store.user);
+  const { username } = useSelector(store => store.user);
+  const profile = localStorage.getItem('profile');
+  const { avatar } = JSON.parse(profile);
   const { currentTripId } = useSelector(store => store.trip);
 
   useEffect(() => {
