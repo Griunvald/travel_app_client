@@ -26,8 +26,9 @@ function Login() {
   const handleSubmit = async () => {
     try {
       const actionResult = await dispatch(loginUser(formData));
+      console.log(actionResult);
       if (actionResult.type.includes('fulfilled')) {
-        const { userId } = JSON.parse(actionResult.payload);
+        const userId = actionResult.payload.userInfo.userId;
         if (userId) {
           await dispatch(getCurrentTripId(userId));
           navigate('/trips-list')

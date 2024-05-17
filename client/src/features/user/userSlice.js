@@ -48,10 +48,8 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        const payload = JSON.parse(action.payload);
-        state.username = payload?.username ?? '';
-        state.userId = payload?.userId ?? null;
-        state.avatar = payload?.avatar ?? '';
+        state.username = action.payload?.userInfo.username ?? '';
+        state.userId = action.payload?.userInfo.userId ?? null;
         state.loading = 'idle';
       })
 
