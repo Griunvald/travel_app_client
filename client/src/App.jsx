@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser } from './features/user/userThunks';
 import { getCurrentTripId } from './features/trip/tripThunks';
+import { getProfileAndSaveToLocalStorage, getProfileFromLocalStorage } from './features/profile/profileThunks';
 
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
@@ -86,8 +87,10 @@ function App() {
   const userId = useSelector(store => store.user.userId);
   useEffect(() => {
     dispatch(initializeUser());
+    dispatch(getProfileFromLocalStorage());
     if (userId) {
       dispatch(getCurrentTripId(userId));
+      dispatch(getProfileAndSaveToLocalStorage());
     }
   }, [dispatch, userId]);
   return (
