@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setAbout } from '../../features/profile/profileSlice';
-import { updateProfile, getProfile } from '../../features/profile/profileThunks';
+import { updateProfile, getProfileFromLocalStorage } from '../../features/profile/profileThunks';
 import Form from '../common/Form';
 import Textarea from '../common/Textarea';
 import Button from '../common/Button';
@@ -15,10 +15,10 @@ function About() {
 
   const handleSubmit = async () => {
     await dispatch(updateProfile({ about }))
-    dispatch(getProfile());
+    await dispatch(getProfileFromLocalStorage());
   }
-
   return (
+
     <>
       <h1>About page</h1>
       <Form onSubmit={handleSubmit}>
