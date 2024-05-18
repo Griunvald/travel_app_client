@@ -26,7 +26,6 @@ function Login() {
   const handleSubmit = async () => {
     try {
       const actionResult = await dispatch(loginUser(formData));
-      console.log(actionResult);
       if (actionResult.type.includes('fulfilled')) {
         const userId = actionResult.payload.userInfo.userId;
         const profile = actionResult.payload.profile;
