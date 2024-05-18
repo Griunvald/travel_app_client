@@ -19,9 +19,6 @@ const userSlice = createSlice({
     setUsername(state, action) {
       state.username = action.payload;
     },
-    setAvatar(state, action) {
-      state.avatar = action.payload;
-    },
     setCurrentTripId(state, action) {
       state.currentTripId = action.payload;
     },
@@ -35,7 +32,6 @@ const userSlice = createSlice({
       .addCase(initializeUser.fulfilled, (state, action) => {
         state.username = action.payload?.username ?? '';
         state.userId = action.payload?.userId ?? null;
-        state.avatar = action.payload?.avatar ?? '';
         state.loading = 'idle';
       })
       .addCase(initializeUser.rejected, (state, action) => {
@@ -94,5 +90,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserId, setUsername, setAvatar, setCurrentTripId } = userSlice.actions;
+export const { setUserId, setUsername, setCurrentTripId } = userSlice.actions;
 export default userSlice.reducer;

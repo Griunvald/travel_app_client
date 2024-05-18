@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setUsername, setUserId, setAvatar } from './userSlice';
+import { setUsername, setUserId } from './userSlice';
 import getCookie from '../../utils/cookieUtils';
 
 export const initializeUser = createAsyncThunk(
@@ -11,7 +11,6 @@ export const initializeUser = createAsyncThunk(
         const parsedInfo = JSON.parse(userInfo);
         thunkAPI.dispatch(setUsername(parsedInfo.username));
         thunkAPI.dispatch(setUserId(parsedInfo.userId));
-        thunkAPI.dispatch(setAvatar(parsedInfo.avatar));
         return parsedInfo;
       }
       return null;
