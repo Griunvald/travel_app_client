@@ -29,7 +29,6 @@ export const getProfileFromLocalStorage = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const profile = JSON.parse(localStorage.getItem('profile'));
-      console.log(profile);
       return profile;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -43,7 +42,7 @@ export const updateProfile = createAsyncThunk(
     const url = `http://localhost:3003/api/v1/users/profile`;
     try {
       const response = await fetch(url, {
-        method: 'PUT',
+        method: 'PATCH',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +53,6 @@ export const updateProfile = createAsyncThunk(
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      //TODO: save profile data to local storage
       const result = await response.json();
       return result;
     } catch (error) {
@@ -62,6 +60,4 @@ export const updateProfile = createAsyncThunk(
     }
   }
 );
-
-
 
