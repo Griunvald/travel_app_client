@@ -83,11 +83,14 @@ export const joinUser = createAsyncThunk(
         },
         body: JSON.stringify(data),
       });
+
+      const responseData = await response.json();
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return thunkAPI.rejectWithValue(responseData.error);
       }
-      const result = await response.json();
-      return result;
+
+      return responseData;
     } catch (error) {
       console.error('There was a problem with the join operation:', error);
       return thunkAPI.rejectWithValue(error.message || 'Unable to join');
