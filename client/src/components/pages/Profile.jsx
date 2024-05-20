@@ -19,9 +19,9 @@ function Profile() {
   return (
     <div className="w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4">
       <About />
+      <AvatarUpload />
       <FollowStats />
       <TripsListHistory />
-      <AvatarUpload />
       <Logout />
     </div>
   );
