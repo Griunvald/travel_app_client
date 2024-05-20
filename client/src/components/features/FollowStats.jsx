@@ -16,13 +16,14 @@ function FollowStats() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
+      <h2 className="font-medium text-xl text-left mb-6">My stats</h2>
       <div className="flex gap-4 w-full md:w-[700px] mx-auto pt-4 md:pt-6 mb-4">
         <div>Trips: {tripsCount}</div>
         <div>Followers: {followersCount}</div>
         <div>Following: {followingCount}</div>
       </div>
-    </>
+    </div>
   );
 }
 

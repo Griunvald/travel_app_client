@@ -21,7 +21,7 @@ function About() {
   return (
 
     <div className='mb-10'>
-      <h2 className='mb-4'>About me</h2>
+      <h2 className="font-medium text-xl text-left mb-6">About me</h2>
       <Form onSubmit={handleSubmit}>
         <Textarea
           value={about}
@@ -29,7 +29,7 @@ function About() {
           placeholder={'Write about yourself'}
         />
         <div className="flex flex-col md:flex-row md:justify-end mt-1">
-          <Button name="Save" variant="primary" action="submit" />
+          <Button name="Save" variant="secondary" action="submit" />
         </div>
       </Form>
     </div>

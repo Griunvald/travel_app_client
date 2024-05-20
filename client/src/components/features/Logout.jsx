@@ -8,7 +8,7 @@ import { useToast } from '../../hooks/useToast';
 
 function Logout() {
   //const { setUsername, setUserId, setCurrentTripId } = useUser();
-//  const { showToast } = useToast();
+  //  const { showToast } = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,13 +17,13 @@ function Logout() {
   const handleLogout = async () => {
     try {
       const actionResult = await dispatch(logoutUser());
-      if(actionResult.type.includes('fulfilled')){
-      navigate('/');
-     // showToast('Successfully logged out!' , {duration: 5000});
-      toast({message:'Successfully logged out!',  duration: 5000 });
+      if (actionResult.type.includes('fulfilled')) {
+        navigate('/');
+        // showToast('Successfully logged out!' , {duration: 5000});
+        toast({ message: 'Successfully logged out!', duration: 5000 });
       }
     } catch (error) {
-      toast({message:'Action failed: ' + error.message,  duration: 5000 });
+      toast({ message: 'Action failed: ' + error.message, duration: 5000 });
       console.error('Error during logout:', error);
     }
   };
@@ -31,7 +31,7 @@ function Logout() {
   return (
     <div>
       <section>
-        <Button variant="primary" name="Logout" onClick={handleLogout} />
+        <Button variant="secondary" name="Logout" onClick={handleLogout} />
       </section>
     </div>
   );

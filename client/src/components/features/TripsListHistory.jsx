@@ -16,6 +16,7 @@ function TripsListHistory() {
 
   return (
     <div className="my-8">
+      <h2 className="font-medium text-xl text-left mb-6">My trips</h2>
       <table className="table-auto w-full">
         <thead>
           <tr>

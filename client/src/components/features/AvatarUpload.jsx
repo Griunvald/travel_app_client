@@ -88,11 +88,12 @@ function AvatarUpload() {
   };
 
   return (
-    <div>
+    <div className="mb-10">
+      <h2 className="font-medium text-xl text-left mb-6">Avatar</h2>
       <Form onSubmit={handleSubmit}>
         <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
         <div className="flex flex-col md:flex-row justify-end gap-x-4 gap-y-4 pt-1">
-          <Button name="Upload" variant="primary" type="submit"
+          <Button name="Upload" variant="secondary" type="submit"
             disabled={isLoading} inProgressText="UploadingPublishing..." />
         </div>
       </Form>
