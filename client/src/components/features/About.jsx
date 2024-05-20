@@ -20,18 +20,19 @@ function About() {
   }
   return (
 
-    <>
-      <h1>About page</h1>
+    <div className='mb-10'>
+      <h2 className='mb-4'>About me</h2>
       <Form onSubmit={handleSubmit}>
         <Textarea
           value={about}
           onChange={handleChange}
+          placeholder={'Write about yourself'}
         />
-        <div className="flex flex-col md:flex-row md:justify-end">
+        <div className="flex flex-col md:flex-row md:justify-end mt-1">
           <Button name="Save" variant="primary" action="submit" />
         </div>
       </Form>
-    </>
+    </div>
   );
 };
 
