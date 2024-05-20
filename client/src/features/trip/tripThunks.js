@@ -107,3 +107,33 @@ export const getCurrentTrip = createAsyncThunk(
     }
   }
 );
+
+
+export const getTripsList = createAsyncThunk(
+  'trip/getTripList',
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch('http://localhost:3003/api/v1/trips/list', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const text = await response.text();
+      if (!text) {
+        return null;
+      }
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = JSON.parse(text);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message || 'Failed to fetch trips list');
+    }
+  }
+);
+
