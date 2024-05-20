@@ -22,7 +22,6 @@ function TripsListHistory() {
             <th className="text-left">Trip Title</th>
             <th className="text-left">Created at</th>
             <th className="text-left">Status</th>
-            <th className="text-left">     </th>
           </tr>
         </thead>
         <tbody>
