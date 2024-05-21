@@ -137,3 +137,23 @@ export const getTripsList = createAsyncThunk(
   }
 );
 
+
+export const closeTrip = createAsyncThunk(
+  'trip/closeTrip',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('http://localhost:3003/api/v1/trips/close', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      })
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (err) {
+      console.error('Failed to end trip: ', err);
+      return rejectWithValue(err.message);
+    }
+  }
+);
