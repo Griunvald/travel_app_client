@@ -129,7 +129,6 @@ export const getTripsList = createAsyncThunk(
         throw new Error('Network response was not ok');
       }
       const data = JSON.parse(text);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch trips list');

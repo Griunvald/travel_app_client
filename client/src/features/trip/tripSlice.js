@@ -98,7 +98,6 @@ const tripSlice = createSlice({
         state.error = null;
       })
       .addCase(getTripsList.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.tripsList = action.payload ?? null;
         state.loading = 'idle';
       })
@@ -113,7 +112,6 @@ const tripSlice = createSlice({
         state.error = null;
       })
       .addCase(closeTrip.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.currentTripId = null;
         state.loading = 'idle';
       })
