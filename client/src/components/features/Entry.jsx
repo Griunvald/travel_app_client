@@ -6,10 +6,10 @@ import { deleteEntry, editEntry, getEntryList } from '../../features/entry/entry
 import Textarea from '../common/Textarea';
 import Modal from '../common/Modal';
 import { Form } from 'react-router-dom';
-import Like from '../common/Like'
+import Like from '../common/Like';
+import ImageUpload from '../common/ImageUpload';
 
 function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) {
-
   const dispatch = useDispatch();
   const location = useLocation();
   const { userId } = useSelector(store => store.user);
@@ -18,15 +18,24 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
   const [editable, setEditable] = useState(false);
   const [editValue, setEditValue] = useState(textValue);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+  const [preview, setPreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const type = textValue ? 'text' : 'url';
+
+  const handleFileSelect = (file) => {
+    setImageFile(file);
+    if (!file) {
+      setImageFile(null);
+    }
+  };
 
   const handleDelete = async () => {
     await dispatch(deleteEntry({ entryId, type }));
     await dispatch(getEntryList(userId));
     setShowDeleteModal(false);
-  }
+  };
 
   const handleChange = (e) => {
     setEditValue(e.target.value);
@@ -35,26 +44,122 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
   const handleEdit = async () => {
     setEditable(true);
     setEditValue(textValue);
-  }
+  };
+
   const handleCancel = async () => {
     setEditable(false);
-  }
+  };
 
   const handleSubmit = async () => {
     await dispatch(editEntry({ entryId, textValue: editValue }));
     await dispatch(getEntryList(userId));
     setEditable(false);
-  }
+  };
+
+  const patchData = async (url, data) => {
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Failed to patch data:', error);
+      throw error;
+    }
+  };
+
+  const handleSubmitImage = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
+
+      await putData(awsData.presignedAwsUrl, imageFile);
+
+      const updatedData = {
+        urlValue: awsData.awsObjectKey,
+      };
+
+      const response = await patchData(`http://localhost:3003/api/v1/records/image/${entryId}`, updatedData);
+
+      if (response.message === 'Record was successfully edited!') {
+        await dispatch(getEntryList(userId));
+        setEditable(false);
+      } else {
+        throw new Error('Failed to update image URL');
+      }
+    } catch (err) {
+      console.error("Error updating image:", err);
+    } finally {
+      setIsLoading(false);
+      setPreview(null);
+      setImageFile(null);
+    }
+  };
+
+  const getData = async (apiUrl) => {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return {
+        presignedAwsUrl: result.signedUrl.url,
+        awsObjectKey: result.signedUrl.key
+      };
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      throw error;
+    }
+  };
+
+  const putData = async (presignedAwsUrl, file) => {
+    try {
+      const response = await fetch(presignedAwsUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type,
+        },
+        body: file,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return presignedAwsUrl;
+    } catch (error) {
+      console.error('There was a problem with the put operation:', error);
+      throw error;
+    }
+  };
 
   return (
     <div className="w-full md:w-[700px] mx-auto">
       <div className="bg-secondary p-2">
-        <p className="text-sm font-semibold mb-1 mt-2">{formattedDate}</p> {/* Use the formatted date here */}
+        <p className="text-sm font-semibold mb-1 mt-2">{formattedDate}</p>
         <div className='flex flex-row-reverse gap-2'>
           {author === userId && (
             editable ?
               <>
-                <div className='cursor-pointer' onClick={handleSubmit}>Save</div>
+                <div className='cursor-pointer' onClick={type === 'text' ? handleSubmit : handleSubmitImage}>Save</div>
                 <div className='cursor-pointer' onClick={handleCancel}>Cancel</div>
               </> :
               <>
@@ -87,15 +192,17 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
         </>
       )}
       {
-        editable ? <Form onSubmit={handleSubmit}>
-          <Textarea
-            value={editValue}
-            onChange={handleChange} />
-        </Form>
+        editable ?
+          <Form onSubmit={type === 'text' ? handleSubmit : handleSubmitImage}>
+            {
+              type === 'text' ?
+                <Textarea value={editValue} onChange={handleChange} /> :
+                <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
+            }
+          </Form>
           : null
       }
       {urlValue && (
-        //TODO: Add Like here
         <>
           <img className="w-full md:w-[800px] my-4"
             src={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${urlValue}`} alt="" />
