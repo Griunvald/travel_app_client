@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { getAllTripsPreview, getTripsCount, getFullTrip, getCurrentTripId, getCurrentTrip, getTripsList, closeTrip } from './tripThunks';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   trip: null,
@@ -9,6 +9,7 @@ const initialState = {
   tripDetails: {},
   entryList: [],
   tripsCount: 0,
+  hasMore:true,
   loading: 'idle',
   error: null
 }
@@ -30,9 +31,14 @@ const tripSlice = createSlice({
       .addCase(getAllTripsPreview.pending, (state) => {
         state.loading = 'pending';
       })
-      .addCase(getAllTripsPreview.fulfilled, (state, action) => {
+    .addCase(getAllTripsPreview.fulfilled, (state, action) => {
         state.loading = 'idle';
-        state.trips = action.payload;
+        const existingTripIds = new Set(state.trips.map(trip => trip.id));
+        const newTrips = action.payload.filter(trip => !existingTripIds.has(trip.id));
+        state.trips.push(...newTrips);
+        if (action.payload.length === 0) {
+          state.hasMore = false;
+        }
       })
       .addCase(getAllTripsPreview.rejected, (state, action) => {
         state.loading = 'idle';

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTripsPreview } from '../../features/trip/tripThunks';
 import { timeAgo } from '../../utils/date.js';
@@ -6,13 +6,28 @@ import TripPreview from '../features/TripPreview';
 
 function TripsList() {
   const dispatch = useDispatch();
-  const trips = useSelector(store => store.trip.trips);
-  //TODO: add loader and error message
-  //if (isLoading) return <p>Loading...</p>;
-  //if (error) return <p>Error loading trips!</p>;
+  const {trips, loading, hasMore} = useSelector(store => store.trip);
+
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
+  console.log({offset, limit});
+
   useEffect(() => {
-    dispatch(getAllTripsPreview({limit: 3, offset: 0}));
-  }, []);
+    dispatch(getAllTripsPreview({limit, offset}));
+  }, [dispatch, limit, offset, hasMore]);
+
+const handleScroll = () => {
+    if (loading === 'pending' || !hasMore) return;
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    if (scrollHeight - scrollTop <= clientHeight + 50) {
+      setOffset(prevOffset => prevOffset + limit);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, hasMore]);
 
   return (
     <>
@@ -29,6 +44,8 @@ function TripsList() {
           link={`/full-trip/${trip.userId}/${trip.id}`}
         />
       ))}
+      {loading === 'pending' && <p>Loading more trips...</p>}
+      {!hasMore && <p>No more trips to load.</p>}
     </>
   );
 }
