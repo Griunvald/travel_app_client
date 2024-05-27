@@ -11,7 +11,7 @@ function TripsList() {
   //if (isLoading) return <p>Loading...</p>;
   //if (error) return <p>Error loading trips!</p>;
   useEffect(() => {
-    dispatch(getAllTripsPreview());
+    dispatch(getAllTripsPreview({limit: 3, offset: 0}));
   }, []);
 
   return (

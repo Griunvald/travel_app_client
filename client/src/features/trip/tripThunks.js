@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
-  async (_, { rejectWithValue }) => {
+  async ({limit,offset}, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/preview');
+      const response = await fetch(`http://localhost:3003/api/v1/trips/preview/${limit}/${offset}`);
       const data = await response.json();
       return data;
     } catch (error) {
