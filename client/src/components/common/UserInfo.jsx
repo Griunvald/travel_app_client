@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Avatar from './Avatar';
 import FollowButton from './FollowButton';
 import ThreeDotsMenu from './ThreeDotsMenu';
@@ -7,6 +8,9 @@ import AboutPreview from '../features/AboutPreview';
 const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowButton, onFollowClick, followingUsers }) => {
   const [hover, setHover] = useState(false);
   const isFollowing = followingUsers.includes(leader);
+  const { profilesList } = useSelector(store => store.profile);
+  const userProfile = profilesList.find(profile => profile.userId === leader);
+
   return (
     <div className="relative flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full">
       <div className="flex gap-2 items-end">
@@ -16,8 +20,8 @@ const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowBu
           onMouseLeave={() => setHover(false)}
           className="relative"
         >
+          {hover && <AboutPreview about={userProfile?.about} />}
           <p className="font-semibold text-sm">{username}</p>
-          {hover && <AboutPreview />}
           <p className="text-sm">{createdAt}</p>
         </div>
       </div>
