@@ -61,3 +61,26 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+
+
+export const getProfilesList = createAsyncThunk(
+  'profile/getProfilesList',
+  async ({ limit, offset }, thunkApi) => {
+    try {
+      const response = await fetch(`http://localhost:3003/api/v1/users/profiles/${limit}/${offset}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
