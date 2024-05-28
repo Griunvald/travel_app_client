@@ -37,6 +37,7 @@ const handleScroll = () => {
           userId={trip.userId}
           username={trip.username}
           avatar={trip.avatar}
+          about={trip.about}
           createdAt={timeAgo(trip.createdAt)}
           title={trip.title}
           description={trip.description}

@@ -5,11 +5,9 @@ import FollowButton from './FollowButton';
 import ThreeDotsMenu from './ThreeDotsMenu';
 import AboutPreview from '../features/AboutPreview';
 
-const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowButton, onFollowClick, followingUsers }) => {
+const UserInfo = ({ leader, avatar, about, username, createdAt, menuItems, showFollowButton, onFollowClick, followingUsers }) => {
   const [hover, setHover] = useState(false);
   const isFollowing = followingUsers.includes(leader);
-  const { profilesList } = useSelector(store => store.profile);
-  const userProfile = profilesList.find(profile => profile.userId === leader);
 
   return (
     <div className="relative flex justify-between mt-2 mb-6 py-2 pb-2 items-center w-full">
@@ -20,7 +18,9 @@ const UserInfo = ({ leader, avatar, username, createdAt, menuItems, showFollowBu
           onMouseLeave={() => setHover(false)}
           className="relative"
         >
-          {hover && <AboutPreview about={userProfile?.about} />}
+          {hover && 
+            <AboutPreview about={about} />
+          }
           <p className="font-semibold text-sm">{username}</p>
           <p className="text-sm">{createdAt}</p>
         </div>

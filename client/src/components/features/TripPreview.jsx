@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { followUser, unfollowUser, getFollowingUsers } from '../../features/follow/followThunks';
 import { setLeaderId } from '../../features/follow/followSlice';
 
-function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, link = null }) {
+function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, about, link = null }) {
   const dispatch = useDispatch();
   const { username: currentUser, userId } = useSelector(store => store.user);
 
@@ -44,6 +44,7 @@ function TripPreview({ username, userId: leader, title, description, url, create
       <UserInfo
         leader={leader}
         avatar={avatar}
+        about={about}
         username={username}
         createdAt={createdAt}
         onFollowClick={handleFollow}
