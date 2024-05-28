@@ -44,14 +44,11 @@ function Login() {
         const userId = actionResult.payload.userInfo.userId;
         const profile = actionResult.payload.profile;
         localStorage.setItem('profile', JSON.stringify(profile));
-        if (userId) {
-          await dispatch(getCurrentTripId(userId));
-          navigate('/trips-list')
-        }
+        await dispatch(getCurrentTripId(userId));
+        navigate('/trips-list')
       }
     } catch (err) {
       console.error(err);
-      navigate('/landing')
     }
   };
 
