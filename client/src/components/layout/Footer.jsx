@@ -1,9 +1,10 @@
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import Logo from '../common/Logo';
+import Link from '../common/Link'
 
 function Footer() {
   return (
-    <footer className="bg-secondary text-black py-6 mt-8">
+    <footer className="bg-secondary text-black py-6 mt-28">
       <div className="max-w-full mx-auto px-4 flex flex-col md:flex-row md:justify-between items-start md:items-end space-y-6 md:space-y-0">
         <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-6 w-full md:w-auto">
           <div className="mb-4 md:mb-0">
@@ -11,10 +12,10 @@ function Footer() {
           </div>
 
           <div className="flex flex-col md:flex-row md:gap-x-5 mb-4 md:mb-0 space-y-2 md:space-y-0">
-            <a href="/about" className="text-black hover:underline">About Us</a>
-            <a href="/tutorial" className="text-black hover:underline">Tutorial</a>
-            <a href="/terms" className="text-black hover:underline">Terms & Conditions</a>
-            <a href="/privacy" className="text-black hover:underline">Privacy Policy</a>
+            <Link name="About" path='/aboutme'/>
+            <Link name="Terms & Conditions" path='/terms'/>
+            <Link name="Tutorial" path='/tutorial'/>
+            <Link name="Privacy Policy" path='/privacy'/>
           </div>
           
           <div className="text-center md:text-left mt-4 md:mt-0">
