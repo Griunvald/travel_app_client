@@ -25,7 +25,7 @@ function TripsListHistory() {
     <div className="my-8">
       <h2 className="font-medium text-xl text-left mb-6">My trips</h2>
       <div className="flex flex-col md:flex-row md:justify-end mb-4">
-        <Button name="End Trip" variant="secondary" onClick={handleClick} />
+        <Button name="End Trip" variant="primary" onClick={handleClick} />
       </div>
       <table className="table-auto w-full">
         <thead>

@@ -93,7 +93,7 @@ function AvatarUpload() {
       <Form onSubmit={handleSubmit}>
         <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
         <div className="flex flex-col md:flex-row justify-end gap-x-4 gap-y-4 pt-1">
-          <Button name="Upload" variant="secondary" type="submit"
+          <Button name="Upload" variant="primary" type="submit"
             disabled={isLoading} inProgressText="UploadingPublishing..." />
         </div>
       </Form>

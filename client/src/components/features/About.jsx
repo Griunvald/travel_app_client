@@ -29,7 +29,7 @@ function About() {
           placeholder={'Write about yourself'}
         />
         <div className="flex flex-col md:flex-row md:justify-end mt-1">
-          <Button name="Save" variant="secondary" action="submit" />
+          <Button name="Save" variant="primary" action="submit" />
         </div>
       </Form>
     </div>
