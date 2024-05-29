@@ -7,7 +7,8 @@ import EntryList from '../features/EntryList';
 import { getCurrentTrip } from '../../features/trip/tripThunks';
 
 function CurrentTrip() {
-  const { username, userId, avatar } = useSelector(store => store.user);
+  const { username, userId } = useSelector(store => store.user);
+  const { avatar} = useSelector(store => store.profile);
   const { trip } = useSelector(store => store.trip);
   const dispatch = useDispatch();
 
