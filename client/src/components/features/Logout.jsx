@@ -30,9 +30,9 @@ function Logout() {
 
   return (
     <div>
-      <section>
-        <Button variant="secondary" name="Logout" onClick={handleLogout} />
-      </section>
+      <div className="flex flex-col md:flex-row md:justify-end mb-4">
+        <Button variant="primary" name="Logout" onClick={handleLogout} />
+      </div>
     </div>
   );
 }
