@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-//import { useUser } from '../../contexts/UserContext';
 import LinkButton from '../common/LinkButton.jsx';
 import LinkNavbar from '../common/LinkNavbar.jsx';
 import Logo from '../common/Logo.jsx';
@@ -12,8 +11,6 @@ function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { username } = useSelector(store => store.user);
   const { avatar } = useSelector(store => store.profile);
-  //const profile = localStorage.getItem('profile');
-  //const { avatar } = JSON.parse(profile) || '';
   const { currentTripId } = useSelector(store => store.trip);
 
   useEffect(() => {
