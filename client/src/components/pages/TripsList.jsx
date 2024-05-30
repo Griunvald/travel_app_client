@@ -10,7 +10,6 @@ function TripsList() {
 
   const [offset, setOffset] = useState(0);
   const limit = 5;
-  console.log({offset, limit});
 
   useEffect(() => {
     dispatch(getAllTripsPreview({limit, offset}));
