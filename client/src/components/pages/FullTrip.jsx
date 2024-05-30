@@ -12,6 +12,7 @@ function FullTrip() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const leaderId = useSelector(store => store.follow.leaderId);
+  const username = useSelector(store => store.user.username);
   const ID = Number(userId);
 
   const { tripDetails, entryList } = useSelector((state) => state.trip);
@@ -19,7 +20,9 @@ function FullTrip() {
   const formattedDate = tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
 
   useEffect(() => {
-    dispatch(getFollowingUsers());
+    if(username){
+      dispatch(getFollowingUsers());
+    }
   }, [leaderId]);
 
   useEffect(() => {
