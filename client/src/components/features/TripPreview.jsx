@@ -35,7 +35,9 @@ function TripPreview({ username, userId: leader, title, description, url, create
     </>
   );
   useEffect(() => {
-    dispatch(getFollowingUsers());
+    if(userId){
+      dispatch(getFollowingUsers());
+    }
   }, [dispatch]);
 
 
