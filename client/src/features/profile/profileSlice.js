@@ -24,7 +24,7 @@ export const profileSlice = createSlice({
         state.loading = 'pending';
       })
       .addCase(getProfileFromLocalStorage.fulfilled, (state, action) => {
-        const { about, avatar } = action.payload;
+        const { about, avatar } = action.payload || {};
         state.about = about || '';
         state.avatar = avatar || '';
         state.loading = 'idle';
