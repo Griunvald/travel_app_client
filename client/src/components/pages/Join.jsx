@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { joinUser } from '../../features/user/userThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsername, setUserId } from '../../features/user/userSlice';
+import { getProfileAndSaveToLocalStorage} from '../../features/profile/profileThunks.js'
 import Button from '../common/Button';
 import Link from '../common/Link';
 import Input from '../common/Input';
@@ -45,6 +46,7 @@ function Join() {
       const parsed = actionResult.payload;
       dispatch(setUsername(parsed.username));
       dispatch(setUserId(parsed.userId));
+     dispatch(getProfileAndSaveToLocalStorage());
       navigate('/trips-list');
     } else if (joinUser.rejected.match(actionResult)) {
       setErrors({ form: actionResult.payload });
