@@ -19,29 +19,29 @@ function TripsListHistory() {
       await dispatch(getTripsList());
     }
     getList();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="my-8">
       <h2 className="font-medium text-xl text-left mb-6">My trips</h2>
-      { currentTripId ? 
-      <div className="flex flex-col md:flex-row md:justify-end mb-4">
-        <Button name="End Trip" variant="primary" onClick={handleClick} />
-      </div> : null }
       <table className="table-auto w-full">
         <thead>
           <tr>
-            <th className="text-left">Trip Title</th>
-            <th className="text-left">Created at</th>
-            <th className="text-left">Status</th>
+            <th className="text-left px-2">Trip Title</th>
+            <th className="text-left px-2">Date</th>
+            <th className="text-left px-2">Status</th>
+            <th className="text-left px-2">Action</th>
           </tr>
         </thead>
         <tbody>
           {tripsList && tripsList.map(trip => (
             <tr key={trip.id}>
-              <td>{trip.title}</td>
-              <td>{format(new Date(trip.createdAt), "MMMM do, yyyy")}</td>
-              <td>{trip.status}</td>
+              <td className="text-left px-2 break-words">{trip.title}</td>
+              <td className="text-left px-2 whitespace-nowrap">{format(new Date(trip.createdAt), "MMMM do, yyyy")}</td>
+              <td className="text-left px-2 capitalize whitespace-nowrap">{trip.status}</td>
+              <td className="text-left px-2 cursor-pointer underline whitespace-nowrap" onClick={handleClick}>
+                {currentTripId ? "End trip" : null}</td>
+
             </tr>
           ))}
         </tbody>
@@ -51,3 +51,4 @@ function TripsListHistory() {
 }
 
 export default TripsListHistory;
+
