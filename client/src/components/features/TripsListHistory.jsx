@@ -7,7 +7,7 @@ import Button from "../common/Button";
 
 function TripsListHistory() {
   const dispatch = useDispatch();
-  const { tripsList } = useSelector(store => store.trip)
+  const { tripsList, currentTripId } = useSelector(store => store.trip)
 
   const handleClick = async () => {
     await dispatch(closeTrip());
@@ -24,9 +24,10 @@ function TripsListHistory() {
   return (
     <div className="my-8">
       <h2 className="font-medium text-xl text-left mb-6">My trips</h2>
+      { currentTripId ? 
       <div className="flex flex-col md:flex-row md:justify-end mb-4">
         <Button name="End Trip" variant="primary" onClick={handleClick} />
-      </div>
+      </div> : null }
       <table className="table-auto w-full">
         <thead>
           <tr>
