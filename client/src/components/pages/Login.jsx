@@ -6,7 +6,7 @@ import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../features/user/userThunks';
-
+import { getProfileFromLocalStorage } from '../../features/profile/profileThunks.js'
 import { getCurrentTripId } from '../../features/trip/tripThunks';
 
 function Login() {
@@ -45,6 +45,7 @@ function Login() {
         const profile = actionResult.payload.profile;
         localStorage.setItem('profile', JSON.stringify(profile));
         await dispatch(getCurrentTripId(userId));
+        await dispatch(getProfileFromLocalStorage());
         navigate('/trips-list')
       }
     } catch (err) {
