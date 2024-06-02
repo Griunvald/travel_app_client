@@ -18,6 +18,7 @@ function Logout() {
     try {
       const actionResult = await dispatch(logoutUser());
       if (actionResult.type.includes('fulfilled')) {
+        localStorage.removeItem('profile');
         navigate('/');
         // showToast('Successfully logged out!' , {duration: 5000});
         toast({ message: 'Successfully logged out!', duration: 5000 });
