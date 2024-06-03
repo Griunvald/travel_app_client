@@ -17,6 +17,7 @@ import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
 import AboutMe from './components/pages/AboutMe';
+import Tutorial from './components/pages/Tutorial';
 import Toast from './components/common/Toast';
 
 const NavbarWrapper = () => {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: '/aboutme',
         element: <AboutMe />
+      },
+      {
+        path: '/tutorial',
+        element: <Tutorial />
       },
       {
         path: '*',
