@@ -10,6 +10,7 @@ import { setCurrentTripId } from '../../features/trip/tripSlice';
 function StartTrip() {
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -29,6 +30,7 @@ function StartTrip() {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     let awsData = {};
 
     try {
@@ -53,6 +55,8 @@ function StartTrip() {
 
     } catch (err) {
       console.error("Error in handleSubmit:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -147,7 +151,8 @@ function StartTrip() {
         />
         <ImageUpload onFileSelect={handleFileSelect} preview={preview} setPreview={setPreview} />
         <div className="flex flex-col  md:flex-row justify-end gap-x-5 gap-y-4">
-          <Button name="Publish" variant="primary" action="submit" />
+          <Button name="Publish" variant="primary" type="submit"
+            disabled={isLoading} inProgressText="Publishing..." />
         </div>
       </Form>
     </div>
