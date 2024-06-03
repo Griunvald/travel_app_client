@@ -1,6 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 function Tutorial() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">How to Use the App</h1>
