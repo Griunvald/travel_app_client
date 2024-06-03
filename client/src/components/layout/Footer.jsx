@@ -13,8 +13,8 @@ function Footer() {
 
           <div className="flex flex-col md:flex-row md:gap-x-5 mb-4 md:mb-0 space-y-2 md:space-y-0">
             <Link name="About" path='/aboutme'/>
-            <Link name="Terms & Conditions" path='/terms'/>
             <Link name="Tutorial" path='/tutorial'/>
+            <Link name="Terms & Conditions" path='/terms'/>
             <Link name="Privacy Policy" path='/privacy'/>
           </div>
           
