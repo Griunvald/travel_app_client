@@ -44,8 +44,10 @@ const handleScroll = () => {
           link={`/full-trip/${trip.userId}/${trip.id}`}
         />
       ))}
+    <div className="w-full text-center mt-20">
       {loading === 'pending' && <p>Loading more trips...</p>}
-      {!hasMore && <p>No more trips to load.</p>}
+      {!hasMore && <p>No more trips in this list... maybe check your suitcase for a hidden one?</p>}
+      </div>
     </>
   );
 }
