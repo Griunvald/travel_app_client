@@ -1,13 +1,10 @@
-//import { useMenu } from '../../contexts/MenuContext';
 import { toggleMenu } from '../../features/menu/menuSlice';
 import { useRef, useEffect } from 'react';
-//import { useUser } from '../../contexts/UserContext';
 import LinkButton from  '../common/LinkButton.jsx';
+import LinkNavbar from '../common/LinkNavbar.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Sidebar = () => {
-  //const { isOpen, toggleMenu } = useMenu();
- // const { username, currentTripId } = useUser();
   const dispatch = useDispatch();
   const sidebarRef = useRef();
   const isOpen = useSelector(store => store.menu.isOpen);
@@ -41,7 +38,10 @@ const Sidebar = () => {
              {currentTripId ? 
                 (<LinkButton name="Current Trip" variant="primary" path="/current-trip" onClick={()=> dispatch(toggleMenu())}/>):
                  (
-                <LinkButton name="Start Trip" variant="primary" path="/create-trip" onClick={()=>dispatch(toggleMenu())}/>
+                  <>
+                    <LinkButton name="Start Trip" variant="primary" path="/create-trip" onClick={()=>dispatch(toggleMenu())}/>
+                    <LinkNavbar name="Discover Journeys" path="/trips-list"  onClick={()=>dispatch(toggleMenu())}/>
+                </>
                  )
              }
           </>)
