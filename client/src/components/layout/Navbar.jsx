@@ -31,10 +31,10 @@ function Navbar() {
         </div>
         <div className="max-w-full flex content-center">
           <div className="flex justify-end items-center gap-x-5 mr-4.5">
-            <LinkNavbar name="Discover Journeys" path="/trips-list" />
             {windowWidth > 768 ? (
               username ?
                 (<>
+                  <LinkNavbar name="Discover Journeys" path="/trips-list" />
                   <Link to="/profile">
                     <Avatar avatar={avatar} size="big" />
                   </Link>
