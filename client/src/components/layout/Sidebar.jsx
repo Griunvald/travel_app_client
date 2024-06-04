@@ -47,6 +47,7 @@ const Sidebar = () => {
           (<>
            <LinkButton variant="secondary" name="Log in" path="/login" onClick={()=>dispatch(toggleMenu())}/>
            <LinkButton variant="primary" name="Join" path="/join" onClick={()=>dispatch(toggleMenu())}/>
+           <LinkNavbar name="Discover Journeys" path="/trips-list"  onClick={()=>dispatch(toggleMenu())}/>
           </>)
       }
       </div>
