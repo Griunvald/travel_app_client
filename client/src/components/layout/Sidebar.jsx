@@ -8,7 +8,8 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const sidebarRef = useRef();
   const isOpen = useSelector(store => store.menu.isOpen);
-  const { username, currentTripId } = useSelector(store => store.user);
+  const { username } = useSelector(store => store.user);
+  const { currentTripId } = useSelector(store => store.trip);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,15 +37,11 @@ const Sidebar = () => {
       { username ? 
          (<>
              {currentTripId ? 
-                (<LinkButton name="Current Trip" variant="primary" path="/current-trip" onClick={()=> dispatch(toggleMenu())}/>):
-                 (
-                  <>
-                    <LinkButton name="Start Trip" variant="primary" path="/create-trip" onClick={()=>dispatch(toggleMenu())}/>
-                    <LinkNavbar name="Discover Journeys" path="/trips-list"  onClick={()=>dispatch(toggleMenu())}/>
-                    <LinkNavbar name="Profile" path="/profile"  onClick={()=>dispatch(toggleMenu())}/>
-                </>
-                 )
+                <LinkButton name="Current Trip" variant="primary" path="/current-trip" onClick={()=> dispatch(toggleMenu())}/>:
+                <LinkButton name="Start Trip" variant="primary" path="/create-trip" onClick={()=>dispatch(toggleMenu())}/>
              }
+                <LinkNavbar name="Discover Journeys" path="/trips-list"  onClick={()=>dispatch(toggleMenu())}/>
+                <LinkNavbar name="Profile" path="/profile"  onClick={()=>dispatch(toggleMenu())}/>
           </>)
           :
           (<>
