@@ -58,7 +58,7 @@ const AddEntry = () => {
     try {
       let awsData;
       if (activeTab === "Image") {
-        awsData = await getData(`${apiUrl}/files/signed-url`, userId);
+        awsData = await getData(`${process.env.REACT_APP_API_URL}/files/signed-url`, userId);
         await putData(awsData.presignedAwsUrl, imageFile);
       }
 
@@ -70,7 +70,7 @@ const AddEntry = () => {
         data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
       };
 
-      const responseFromPost = await postData(`${apiUrl}/records/`, newData);
+      const responseFromPost = await postData(`${process.env.REACT_APP_API_URL}/records/`, newData);
 
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })

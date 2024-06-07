@@ -34,7 +34,7 @@ function StartTrip() {
     let awsData = {};
 
     try {
-      awsData = await getData(`${apiUrl}/files/signed-url`, userId);
+      awsData = await getData(`${process.env.REACT_APP_API_URL}/files/signed-url`, userId);
       let { presignedAwsUrl, awsObjectKey } = awsData;
 
       awsObjectKey = awsObjectKey.replace('undefined', userId);
@@ -46,7 +46,7 @@ function StartTrip() {
         url: awsObjectKey
       };
 
-      const responseFromPost = await postData(`${apiUrl}/trips`, newData);
+      const responseFromPost = await postData(`${process.env.REACT_APP_API_URL}/trips`, newData);
       const parsed = JSON.parse(responseFromPost);
       if (parsed.tripId) {
         dispatch(setCurrentTripId(parsed.tripId))

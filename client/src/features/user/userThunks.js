@@ -24,7 +24,7 @@ export const initializeUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (formData, thunkAPI) => {
-    const url = `${apiUrl}/auth/login`;
+    const url = `${process.env.REACT_APP_API_URL}/auth/login`;
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -51,7 +51,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   'user/logoutUser',
   async (_, thunkAPI) => {
-    const url = `${apiUrl}/auth/logout`;
+    const url = `${process.env.REACT_APP_API_URL}/auth/logout`;
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -73,7 +73,7 @@ export const logoutUser = createAsyncThunk(
 export const joinUser = createAsyncThunk(
   'user/joinUser',
   async (data, thunkAPI) => {
-    const url = `${apiUrl}/auth/register`;
+    const url = `${process.env.REACT_APP_API_URL}/auth/register`;
     try {
       const response = await fetch(url, {
         method: 'POST',
