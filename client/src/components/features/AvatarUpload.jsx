@@ -74,7 +74,7 @@ function AvatarUpload() {
   const handleSubmit = async () => {
     try {
       let awsData;
-      awsData = await getData(`${process.env.REACT_APP_API_URL}/files/signed-url`, userId);
+      awsData = await getData(`${import.meta.env.VITE_API_URL}/files/signed-url`, userId);
       await putData(awsData.presignedAwsUrl, imageFile);
       await dispatch(updateProfile({ avatar: awsData.awsObjectKey }))
       await dispatch(getProfileAndSaveToLocalStorage());

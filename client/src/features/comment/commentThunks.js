@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const getComments = createAsyncThunk(
   'comment/getComments',
   async (tripId, thunkApi) => {
-    const url = `${process.env.REACT_APP_API_URL}/comments/${tripId}`
+    const url = `${import.meta.env.VITE_API_URL}/comments/${tripId}`
     try {
       const response = await fetch(url);
       if (response.ok) {
@@ -22,7 +22,7 @@ export const getComments = createAsyncThunk(
 export const addComment = createAsyncThunk(
   'comment/addComment',
   async ({ tripId, comment }, thunkApi) => {
-    const url = `${process.env.REACT_APP_API_URL}/comments/${tripId}`
+    const url = `${import.meta.env.VITE_API_URL}/comments/${tripId}`
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -46,7 +46,7 @@ export const addComment = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
   'comment/deleteComment',
   async ({ commentId, commentOwner }, thunkApi) => {
-    const url = `${process.env.REACT_APP_API_URL}/comments/${commentId}/${commentOwner}`
+    const url = `${import.meta.env.VITE_API_URL}/comments/${commentId}/${commentOwner}`
     try {
       const response = await fetch(url, {
         method: 'DELETE',
@@ -68,7 +68,7 @@ export const deleteComment = createAsyncThunk(
 export const editComment = createAsyncThunk(
   'comment/editComment',
   async ({ commentId, commentOwner, comment }, thunkApi) => {
-    const url = `${process.env.REACT_APP_API_URL}/comments/${commentId}/${commentOwner}`;
+    const url = `${import.meta.env.VITE_API_URL}/comments/${commentId}/${commentOwner}`;
     try {
       const response = await fetch(url, {
         method: 'PUT',

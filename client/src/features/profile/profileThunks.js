@@ -4,7 +4,7 @@ export const getProfileAndSaveToLocalStorage = createAsyncThunk(
   'profile/getProfileAndSaveToLocalStorage',
   async (_, thunkApi) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/profile`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/profile`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -39,7 +39,7 @@ export const getProfileFromLocalStorage = createAsyncThunk(
 export const updateProfile = createAsyncThunk(
   'profile/updateProfile',
   async (data, thunkApi) => {
-    const url = `${process.env.REACT_APP_API_URL}/users/profile`;
+    const url = `${import.meta.env.VITE_API_URL}/users/profile`;
     try {
       const response = await fetch(url, {
         method: 'PATCH',

@@ -3,7 +3,7 @@ export const getFollowingUsers = createAsyncThunk(
   'follow/getFollowingUsers',
   async (_, thunkApi) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/follows/following`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/follows/following`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -26,7 +26,7 @@ export const followUser = createAsyncThunk(
   'follow/followUser',
   async (leaderId, thunkApi) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/follows/${leaderId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/follows/${leaderId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -48,7 +48,7 @@ export const unfollowUser = createAsyncThunk(
   'follow/unfollowUser',
   async (leaderId, thunkApi) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/follows/${leaderId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/follows/${leaderId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -72,7 +72,7 @@ export const getFollowStats = createAsyncThunk(
   'follow/getFollowStats',
   async (_, thunkApi) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/follows/stats`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/follows/stats`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
