@@ -34,7 +34,7 @@ function StartTrip() {
     let awsData = {};
 
     try {
-      awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
+      awsData = await getData(`${apiUrl}/files/signed-url`, userId);
       let { presignedAwsUrl, awsObjectKey } = awsData;
 
       awsObjectKey = awsObjectKey.replace('undefined', userId);
@@ -46,7 +46,7 @@ function StartTrip() {
         url: awsObjectKey
       };
 
-      const responseFromPost = await postData('http://localhost:3003/api/v1/trips', newData);
+      const responseFromPost = await postData(`${apiUrl}/trips`, newData);
       const parsed = JSON.parse(responseFromPost);
       if (parsed.tripId) {
         dispatch(setCurrentTripId(parsed.tripId))

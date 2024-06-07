@@ -4,7 +4,7 @@ export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
   async ({limit,offset}, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/trips/preview/${limit}/${offset}`);
+      const response = await fetch(`${apiUrl}/trips/preview/${limit}/${offset}`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -19,7 +19,7 @@ export const getTripsCount = createAsyncThunk(
   'trip/getTripsCount',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/count', {
+      const response = await fetch(`${apiUrl}/trips/count`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -39,7 +39,7 @@ export const getFullTrip = createAsyncThunk(
   'trip/getFullTrip',
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/trips/full/${userId}`);
+      const response = await fetch(`${apiUrl}/trips/full/${userId}`);
       const data = await response.json();
       return data;
     } catch (err) {
@@ -53,7 +53,7 @@ export const getCurrentTripId = createAsyncThunk(
   'trip/getCurrentTripId',
   async (_, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/current', {
+      const response = await fetch(`${apiUrl}/trips/current`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const getCurrentTrip = createAsyncThunk(
   'trip/getCurrentTrip',
   async (_, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/current', {
+      const response = await fetch(`${apiUrl}/trips/current`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ export const getTripsList = createAsyncThunk(
   'trip/getTripList',
   async (_, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/list', {
+      const response = await fetch(`${apiUrl}/trips/list`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export const closeTrip = createAsyncThunk(
   'trip/closeTrip',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3003/api/v1/trips/close', {
+      const response = await fetch(`${apiUrl}/trips/close`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

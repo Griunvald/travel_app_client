@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const getEntryList = createAsyncThunk(
   'entry/setEntryList',
   async (userId, thunkApi) => {
-    const url = `http://localhost:3003/api/v1/trips/current/records/tags?userId=${userId}`
+    const url = `${apiUrl}/trips/current/records/tags?userId=${userId}`
     try {
       const response = await fetch(url);
       if (response.ok) {
@@ -21,7 +21,7 @@ export const getEntryList = createAsyncThunk(
 export const deleteEntry = createAsyncThunk(
   'entry/deleteEntry',
   async ({ entryId, type }, thunkApi) => {
-    const url = `http://localhost:3003/api/v1/records/text/${entryId}`
+    const url = `${apiUrl}/records/text/${entryId}`
     try {
       const response = await fetch(url, {
         method: 'DELETE',
@@ -44,7 +44,7 @@ export const deleteEntry = createAsyncThunk(
 export const editEntry = createAsyncThunk(
   'entry/editEntry',
   async ({ entryId, textValue }, thunkApi) => {
-    const url = `http://localhost:3003/api/v1/records/text/${entryId}`
+    const url = `${apiUrl}/records/text/${entryId}`
     try {
       const response = await fetch(url, {
         method: 'PATCH',

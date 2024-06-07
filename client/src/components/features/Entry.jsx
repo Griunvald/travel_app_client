@@ -80,7 +80,7 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
     e.preventDefault();
     setIsLoading(true);
     try {
-      const awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
+      const awsData = await getData(`${apiUrl}/files/signed-url`, userId);
 
       await putData(awsData.presignedAwsUrl, imageFile);
 
@@ -88,7 +88,7 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
         urlValue: awsData.awsObjectKey,
       };
 
-      const response = await patchData(`http://localhost:3003/api/v1/records/image/${entryId}`, updatedData);
+      const response = await patchData(`${apiUrl}/records/image/${entryId}`, updatedData);
 
       if (response.message === 'Record was successfully edited!') {
         await dispatch(getEntryList(userId));

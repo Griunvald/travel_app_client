@@ -58,7 +58,7 @@ const AddEntry = () => {
     try {
       let awsData;
       if (activeTab === "Image") {
-        awsData = await getData('http://localhost:3003/api/v1/files/signed-url', userId);
+        awsData = await getData(`${apiUrl}/files/signed-url`, userId);
         await putData(awsData.presignedAwsUrl, imageFile);
       }
 
@@ -70,7 +70,7 @@ const AddEntry = () => {
         data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
       };
 
-      const responseFromPost = await postData('http://localhost:3003/api/v1/records/', newData);
+      const responseFromPost = await postData(`${apiUrl}/records/`, newData);
 
       if (responseFromPost.message === "Record created!") {
         setFormData({ text: "" })

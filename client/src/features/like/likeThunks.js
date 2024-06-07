@@ -4,7 +4,7 @@ export const addLike = createAsyncThunk(
   'like/addLike',
   async ({ type, itemId }, thunkApi) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/likes/${type}/${itemId}`, {
+      const response = await fetch(`${apiUrl}/likes/${type}/${itemId}`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -27,7 +27,7 @@ export const removeLike = createAsyncThunk(
   'like/removeLike',
   async ({ type, itemId }, thunkApi) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/likes/${type}/${itemId}`, {
+      const response = await fetch(`${apiUrl}/likes/${type}/${itemId}`, {
         method: 'DELETE',
         credentials: 'include',
         headers: {
@@ -50,7 +50,7 @@ export const getItemLikesCountListByType = createAsyncThunk(
   'like/getItemLikesCountListByType',
   async ({ type, itemId }, thunkApi) => {
     try {
-      const response = await fetch(`http://localhost:3003/api/v1/likes/item/${type}`, {
+      const response = await fetch(`${apiUrl}/likes/item/${type}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
