@@ -43,7 +43,7 @@ function FullTrip() {
           createdAt={formattedDate}
           title={tripDetails.title}
           description={tripDetails.description}
-          url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${tripDetails.url}`}
+          url={`${import.meta.env.VITE_AWS_S3_URL}/${tripDetails.url}`}
           userId={ID}
         />
       }

@@ -26,7 +26,7 @@ function CurrentTrip() {
           createdAt={trip.createdAt ? format(new Date(trip.createdAt), "MMMM do, yyyy, hh:mm a") : ''}
           title={trip.title}
           description={trip.description}
-          url={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${trip.url}`}
+          url={`${import.meta.env.VITE_AWS_S3_URL}/${trip.url}`}
         />
       )}
 

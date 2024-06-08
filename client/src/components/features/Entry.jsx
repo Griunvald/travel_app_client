@@ -205,7 +205,7 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
       {urlValue && (
         <>
           <img className="w-full md:w-[800px] my-4"
-            src={`https://travel-app-dev.s3.il-central-1.amazonaws.com/${urlValue}`} alt="" />
+            src={`${import.meta.env.VITE_AWS_S3_URL}/${urlValue}`} alt="" />
           {location.pathname === '/current-trip' ? null : <Like type='record' itemId={entryId} />}
         </>
       )}
