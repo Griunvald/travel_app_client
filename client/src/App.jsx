@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser } from './features/user/userThunks';
 import { getCurrentTripId } from './features/trip/tripThunks';
-import { getProfileAndSaveToLocalStorage, getProfileFromLocalStorage} from './features/profile/profileThunks';
+import { getProfileAndSaveToLocalStorage, getProfileFromLocalStorage } from './features/profile/profileThunks';
 
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Outlet, useLocation } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
@@ -19,8 +19,17 @@ import Profile from './components/pages/Profile';
 import AboutMe from './components/pages/AboutMe';
 import Tutorial from './components/pages/Tutorial';
 import Toast from './components/common/Toast';
+import ReactGA from 'react-ga4';
+
+ReactGA.initialize(import.meta.env.VITE_GA_TRACKING_ID);
 
 const NavbarWrapper = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
+  }, [location]);
+
   return (
     <>
       <Navbar />
@@ -32,8 +41,8 @@ const NavbarWrapper = () => {
       </main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
 const router = createBrowserRouter([
   {
@@ -83,13 +92,14 @@ const router = createBrowserRouter([
         path: '*',
         element: <NotFound />
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
 function App() {
   const dispatch = useDispatch();
-  const userId = useSelector(store => store.user.userId);
+  const userId = useSelector((store) => store.user.userId);
+
   useEffect(() => {
     dispatch(initializeUser());
     dispatch(getProfileFromLocalStorage());
@@ -98,6 +108,7 @@ function App() {
       dispatch(getProfileAndSaveToLocalStorage());
     }
   }, [dispatch, userId]);
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -105,7 +116,8 @@ function App() {
         <RouterProvider router={router} />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
