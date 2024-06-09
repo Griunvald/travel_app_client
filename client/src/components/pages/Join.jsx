@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { joinUser } from '../../features/user/userThunks';
 import { useDispatch } from 'react-redux';
@@ -19,8 +19,14 @@ function Join() {
   const [errors, setErrors] = useState({});
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isFormFilled = Object.values(formData).every(value => value.trim() !== '');
+    setIsFormValid(isFormFilled && agreed);
+  }, [formData, agreed]);
 
   const validateForm = () => {
     const errors = {};
@@ -98,10 +104,12 @@ function Join() {
 
         <div className="flex flex-col md:flex-row md:justify-end mt-4">
           <Button 
-            name={isLoading ? "Joining..." : "Join"} 
+            name="Join" 
             variant="primary" 
             action="submit" 
-            disabled={isLoading || !agreed} 
+            disabled={isLoading || !isFormValid} 
+            inProgressText="Joining..."
+            isLoading={isLoading}
           />
         </div>
       </Form>
@@ -112,3 +120,4 @@ function Join() {
 }
 
 export default Join;
+
