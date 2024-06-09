@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { joinUser } from '../../features/user/userThunks';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUsername, setUserId } from '../../features/user/userSlice';
-import { getProfileAndSaveToLocalStorage} from '../../features/profile/profileThunks.js'
+import { getProfileAndSaveToLocalStorage } from '../../features/profile/profileThunks.js';
 import Button from '../common/Button';
 import Link from '../common/Link';
 import Input from '../common/Input';
@@ -17,6 +17,8 @@ function Join() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  const [agreed, setAgreed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,6 +32,7 @@ function Join() {
     if (!formData.fullname) errors.fullname = "Full name is required";
     if (!formData.email) errors.email = "Email is required";
     if (!formData.password) errors.password = "Password is required";
+    if (!agreed) errors.agreed = "You must agree to the terms and conditions";
     return errors;
   };
 
@@ -43,6 +46,10 @@ function Join() {
     setFormData({ ...formData, username: value.toLowerCase() });
   };
 
+  const handleCheckboxChange = (e) => {
+    setAgreed(e.target.checked);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
@@ -50,21 +57,28 @@ function Join() {
       setErrors(formErrors);
       return;
     }
-    const actionResult = await dispatch(joinUser(formData));
-    if (joinUser.fulfilled.match(actionResult)) {
-      const parsed = actionResult.payload;
-      dispatch(setUsername(parsed.username));
-      dispatch(setUserId(parsed.userId));
-      dispatch(getProfileAndSaveToLocalStorage());
-      navigate('/trips-list');
-    } else if (joinUser.rejected.match(actionResult)) {
-      setErrors({ form: actionResult.payload });
+    setIsLoading(true);
+    try {
+      const actionResult = await dispatch(joinUser(formData));
+      if (joinUser.fulfilled.match(actionResult)) {
+        const parsed = actionResult.payload;
+        dispatch(setUsername(parsed.username));
+        dispatch(setUserId(parsed.userId));
+        dispatch(getProfileAndSaveToLocalStorage());
+        navigate('/trips-list');
+      } else if (joinUser.rejected.match(actionResult)) {
+        setErrors({ form: actionResult.payload });
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="w-full md:w-[400px] mx-auto md:shadow-soft md:border md:border-primary px-2 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
-      <h2 className="font-medium text-2xl text-center mb-6">Join Road Chronicles</h2>
+      <h2 className="font-medium text-2xl text-center mb-6">Join Road Cronicles</h2>
 
       <Form onSubmit={handleSubmit}>
         <Input label="Email" name="email" value={formData.email} onChange={handleChange} error={errors.email} />
@@ -72,10 +86,23 @@ function Join() {
         <Input label="Username" name="username" value={formData.username} onChange={handleUsernameChange} error={errors.username} />
         <Input label="Password" type="password" name="password" value={formData.password} onChange={handleChange} error={errors.password} />
 
+        <div className="mt-4">
+          <label className="flex items-center">
+            <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} className="mr-2" />
+            <span>I agree to the <Link name="Terms and Conditions" path="/terms" /></span>
+          </label>
+          {errors.agreed && <p className="text-red-500 text-sm">{errors.agreed}</p>}
+        </div>
+
         {errors.form && <p className="text-red-500 text-sm">{errors.form}</p>}
 
-        <div className="flex flex-col md:flex-row md:justify-end">
-          <Button name="Join" variant="primary" action="submit" />
+        <div className="flex flex-col md:flex-row md:justify-end mt-4">
+          <Button 
+            name={isLoading ? "Joining..." : "Join"} 
+            variant="primary" 
+            action="submit" 
+            disabled={isLoading || !agreed} 
+          />
         </div>
       </Form>
 
@@ -85,4 +112,3 @@ function Join() {
 }
 
 export default Join;
-
