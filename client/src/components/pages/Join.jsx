@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { joinUser } from '../../features/user/userThunks';
 import { useDispatch } from 'react-redux';
@@ -19,14 +19,8 @@ function Join() {
   const [errors, setErrors] = useState({});
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const isFormFilled = Object.values(formData).every(value => value.trim() !== '');
-    setIsFormValid(isFormFilled && agreed);
-  }, [formData, agreed]);
 
   const validateForm = () => {
     const errors = {};
@@ -95,7 +89,7 @@ function Join() {
         <div className="mt-4">
           <label className="flex items-center">
             <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} className="mr-2" />
-            <span className="text-sm">I agree to the <Link name="Terms and Conditions" path="/terms" /></span>
+            <span className="text-sm">I agree to the <Link name="Terms and Conditions" path="/terms" newTab={true} /></span>
           </label>
           {errors.agreed && <p className="text-red-500 text-sm">{errors.agreed}</p>}
         </div>
@@ -104,10 +98,10 @@ function Join() {
 
         <div className="flex flex-col md:flex-row md:justify-end mt-4">
           <Button 
-            name="Join" 
+            name={isLoading ? "Joining..." : "Join"} 
             variant="primary" 
             action="submit" 
-            disabled={isLoading || !isFormValid} 
+            disabled={isLoading || !agreed} 
             inProgressText="Joining..."
             isLoading={isLoading}
           />
