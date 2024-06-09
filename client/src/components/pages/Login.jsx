@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
-import Link from '../common/Link'
+import Link from '../common/Link';
 import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../features/user/userThunks';
-import { getProfileFromLocalStorage } from '../../features/profile/profileThunks.js'
+import { getProfileFromLocalStorage } from '../../features/profile/profileThunks.js';
 import { getCurrentTripId } from '../../features/trip/tripThunks';
 
 function Login() {
@@ -28,7 +28,7 @@ function Login() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: name === 'input' ? value.toLowerCase() : value });
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +46,7 @@ function Login() {
         localStorage.setItem('profile', JSON.stringify(profile));
         await dispatch(getCurrentTripId(userId));
         await dispatch(getProfileFromLocalStorage());
-        navigate('/trips-list')
+        navigate('/trips-list');
       }
     } catch (err) {
       console.error(err);
@@ -55,7 +55,7 @@ function Login() {
 
   return (
     <div className="w-full md:w-[400px] mx-auto md:border md:border-primary md:shadow-soft px-1 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
-      <h2 className="font-medium text-2xl text-center mb-6">Log In to Road Cronicles</h2>
+      <h2 className="font-medium text-2xl text-center mb-6">Log In to Road Chronicles</h2>
 
       <Form onSubmit={handleSubmit}>
         <Input
