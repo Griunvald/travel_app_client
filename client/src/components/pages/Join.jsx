@@ -95,7 +95,7 @@ function Join() {
         <div className="mt-4">
           <label className="flex items-center">
             <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} className="mr-2" />
-            <span>I agree to the <Link name="Terms and Conditions" path="/terms" /></span>
+            <span className="text-sm">I agree to the <Link name="Terms and Conditions" path="/terms" /></span>
           </label>
           {errors.agreed && <p className="text-red-500 text-sm">{errors.agreed}</p>}
         </div>
