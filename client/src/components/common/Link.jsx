@@ -1,10 +1,13 @@
-import { Link as RouterLink } from 'react-router-dom';
-
-function Link({ name, path }) {
+function Link({ name, path, newTab = false }) {
   return (
-        <RouterLink to={path} className={`underline decoration-solid font-medium`}>
-          {name}
-        </RouterLink>
+    <a 
+      href={path} 
+      className="underline decoration-solid font-medium"
+      target={newTab ? "_blank" : "_self"} 
+      rel={newTab ? "noopener noreferrer" : ""}
+    >
+      {name}
+    </a>
   );
 }
 
