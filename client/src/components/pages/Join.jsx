@@ -22,7 +22,11 @@ function Join() {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.username) errors.username = "Username is required";
+    if (!formData.username) {
+      errors.username = "Username is required";
+    } else if (!/^[a-z0-9]+$/.test(formData.username)) {
+      errors.username = "Username can only contain lowercase letters and numbers";
+    }
     if (!formData.fullname) errors.fullname = "Full name is required";
     if (!formData.email) errors.email = "Email is required";
     if (!formData.password) errors.password = "Password is required";
@@ -32,6 +36,11 @@ function Join() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleUsernameChange = (e) => {
+    const { value } = e.target;
+    setFormData({ ...formData, username: value.toLowerCase() });
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +55,7 @@ function Join() {
       const parsed = actionResult.payload;
       dispatch(setUsername(parsed.username));
       dispatch(setUserId(parsed.userId));
-     dispatch(getProfileAndSaveToLocalStorage());
+      dispatch(getProfileAndSaveToLocalStorage());
       navigate('/trips-list');
     } else if (joinUser.rejected.match(actionResult)) {
       setErrors({ form: actionResult.payload });
@@ -60,7 +69,7 @@ function Join() {
       <Form onSubmit={handleSubmit}>
         <Input label="Email" name="email" value={formData.email} onChange={handleChange} error={errors.email} />
         <Input label="Full name" name="fullname" value={formData.fullname} onChange={handleChange} error={errors.fullname} />
-        <Input label="Username" name="username" value={formData.username} onChange={handleChange} error={errors.username} />
+        <Input label="Username" name="username" value={formData.username} onChange={handleUsernameChange} error={errors.username} />
         <Input label="Password" type="password" name="password" value={formData.password} onChange={handleChange} error={errors.password} />
 
         {errors.form && <p className="text-red-500 text-sm">{errors.form}</p>}
