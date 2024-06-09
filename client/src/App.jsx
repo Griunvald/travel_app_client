@@ -18,6 +18,7 @@ import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
 import AboutMe from './components/pages/AboutMe';
 import Tutorial from './components/pages/Tutorial';
+import TermsAndConditions from './components/pages/TermsAndConditions.jsx';
 import Toast from './components/common/Toast';
 import ReactGA from 'react-ga4';
 
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: '/tutorial',
         element: <Tutorial />
+      },
+      {
+        path: '/terms',
+        element: <TermsAndConditions />
       },
       {
         path: '*',
