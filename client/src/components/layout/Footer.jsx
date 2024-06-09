@@ -25,10 +25,10 @@ function Footer() {
 
         <div className="flex flex-col items-center md:items-end space-y-4 md:space-y-6 w-full md:w-auto">
           <div className="flex justify-center md:justify-end space-x-4 mt-4 md:mt-0">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600">
+            <a href="https://www.instagram.com/roadcronicles/" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600">
               <FaInstagram size={24} />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600">
+            <a href="https://twitter.com/roadcronicles" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600">
               <FaTwitter size={24} />
             </a>
           </div>
