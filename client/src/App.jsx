@@ -19,6 +19,7 @@ import Profile from './components/pages/Profile';
 import AboutMe from './components/pages/AboutMe';
 import Tutorial from './components/pages/Tutorial';
 import TermsAndConditions from './components/pages/TermsAndConditions.jsx';
+import PrivacyPolicy from './components/pages/PrivacyPolicy.jsx';
 import Toast from './components/common/Toast';
 import ReactGA from 'react-ga4';
 
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: '/terms',
         element: <TermsAndConditions />
+      },
+      {
+        path: '/privacy',
+        element: <PrivacyPolicy />
       },
       {
         path: '*',
