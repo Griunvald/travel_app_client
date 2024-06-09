@@ -1,4 +1,4 @@
-function Button({ name, variant, action, disabled, inProgressText, onClick }) {
+function Button({ name, variant, action, disabled, inProgressText, isLoading, onClick }) {
   return (
     <button 
       className={`md:max-w-max px-8 py-2 text-base font-medium rounded 
@@ -8,7 +8,7 @@ function Button({ name, variant, action, disabled, inProgressText, onClick }) {
       disabled={disabled}
       onClick={onClick}
     >
-      {disabled && inProgressText ? inProgressText : name}
+      {isLoading ? inProgressText : name}
     </button>
   );
 }
