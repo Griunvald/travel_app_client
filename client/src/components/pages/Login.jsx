@@ -15,6 +15,7 @@ function Login() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const errorMessage = useSelector((state) => state.user.error);
@@ -38,6 +39,7 @@ function Login() {
       setErrors(formErrors);
       return;
     }
+    setIsLoading(true);
     try {
       const actionResult = await dispatch(loginUser(formData));
       if (actionResult.type.includes('fulfilled')) {
@@ -50,12 +52,14 @@ function Login() {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="w-full md:w-[400px] mx-auto md:border md:border-primary md:shadow-soft px-1 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
-      <h2 className="font-medium text-2xl text-center mb-6">Log In to Road Chronicles</h2>
+      <h2 className="font-medium text-2xl text-center mb-6">Log In to Road Cronicles</h2>
 
       <Form onSubmit={handleSubmit}>
         <Input
@@ -78,7 +82,14 @@ function Login() {
         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
         <div className="flex flex-col md:flex-row md:justify-end">
-          <Button name="Log in" variant="primary" action="submit" />
+          <Button 
+            name={isLoading ? "Logging in..." : "Log in"} 
+            variant="primary" 
+            action="submit" 
+            disabled={isLoading} 
+            inProgressText="Logging in..."
+            isLoading={isLoading}
+          />
         </div>
       </Form>
       <p className="mt-4 text-sm">Don't have an account? <Link name="Join" path="/join" /></p>
