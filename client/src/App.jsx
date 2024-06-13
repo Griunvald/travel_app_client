@@ -111,11 +111,11 @@ function App() {
   const userId = useSelector((store) => store.user.userId);
 
   useEffect(() => {
-    dispatch(initializeUser());
-    dispatch(getProfileFromLocalStorage());
     if (userId) {
+      dispatch(initializeUser());
       dispatch(getCurrentTripId(userId));
       dispatch(getProfileAndSaveToLocalStorage());
+      dispatch(getProfileFromLocalStorage());
     }
   }, [dispatch, userId]);
 
