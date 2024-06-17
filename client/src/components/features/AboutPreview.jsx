@@ -9,7 +9,7 @@ function AboutPreview({ about, leader }) {
     <div className="absolute w-80 p-4 bg-white border border-gray-300 shadow-lg z-50">
       <p>{truncatedAbout}</p>
       {about.length > 70 && (
-        <Link name="Read more" path={`/full-profile/${leader}`} />
+        <Link name="Read more" path={`/public-profile/${leader}`} />
       )}
     </div>
   );
