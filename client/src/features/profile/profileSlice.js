@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateProfile, getProfileFromLocalStorage } from './profileThunks';
+import { getProfile, updateProfile, getProfileFromLocalStorage } from './profileThunks';
 
 const initialState = {
   about: '',
   avatar: '',
+  publicProfile: { about: '', avatar: ''},
   loading: 'idle',
   error: null
 }
@@ -19,7 +20,7 @@ export const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       //TODO: get data from localStorage
-      // getProfile
+      // getProfileFromLocalStorage
       .addCase(getProfileFromLocalStorage.pending, (state) => {
         state.loading = 'pending';
       })
@@ -30,6 +31,20 @@ export const profileSlice = createSlice({
         state.loading = 'idle';
       })
       .addCase(getProfileFromLocalStorage.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.payload;
+      })
+      // getProfile
+      .addCase(getProfile.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getProfile.fulfilled, (state, action) => {
+        const { about, avatar } = action.payload || {};
+        state.publicProfile.about = about || '';
+        state.publicProfile.avatar = avatar || '';
+        state.loading = 'idle';
+      })
+      .addCase(getProfile.rejected, (state, action) => {
         state.loading = 'idle';
         state.error = action.payload;
       })

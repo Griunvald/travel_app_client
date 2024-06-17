@@ -16,6 +16,7 @@ import CurrentTrip from './components/pages/CurrentTrip';
 import NotFound from './components/pages/NotFound';
 import FullTrip from './components/pages/FullTrip';
 import Profile from './components/pages/Profile';
+import PublicProfile from './components/pages/PublicProfile';
 import AboutMe from './components/pages/AboutMe';
 import Tutorial from './components/pages/Tutorial';
 import TermsAndConditions from './components/pages/TermsAndConditions.jsx';
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />
+      },
+      {
+        path: '/public-profile/:userId',
+        element: <PublicProfile />
       },
       {
         path: '/aboutme',
