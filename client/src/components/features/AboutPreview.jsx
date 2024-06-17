@@ -1,10 +1,19 @@
-function AboutPreview({ about }) {
-  if (!about) return;
+import Link from '../common/Link';
+
+function AboutPreview({ about, leader }) {
+  if (!about) return null;
+
+  const truncatedAbout = about.length > 70 ? `${about.substring(0, 70)}...` : about;
+
   return (
     <div className="absolute w-80 p-4 bg-white border border-gray-300 shadow-lg z-50">
-      <p>{about}</p>
+      <p>{truncatedAbout}</p>
+      {about.length > 70 && (
+        <Link name="Read more" path={`/full-profile/${leader}`} />
+      )}
     </div>
   );
 }
 
 export default AboutPreview;
+
