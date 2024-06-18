@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { getAllTripsPreview } from '../../features/trip/tripThunks';
 import { timeAgo } from '../../utils/date.js';
 import TripPreview from '../features/TripPreview';
 
 function TripsList() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const {trips, loading, hasMore} = useSelector(store => store.trip);
 
   const [offset, setOffset] = useState(0);
@@ -24,6 +26,17 @@ const handleScroll = () => {
   };
 
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, hasMore]);
+
+    useEffect(() => {
+    if (location.state && location.state.scrollPosition) {
+      window.scrollTo(0, location.state.scrollPosition);
+    }
+  }, [location]);
+
+    useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore]);

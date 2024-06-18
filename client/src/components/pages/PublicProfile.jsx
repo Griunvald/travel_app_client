@@ -15,9 +15,9 @@ function PublicProfile(){
   }, [userId]);
 
     const handleBackClick = () => {
-    const { from } = location.state || {};
+    const { from, scrollPosition } = location.state || {};
     if (from) {
-      navigate(from);
+      navigate(from, {state: { scrollPosition }});
     } else {
       navigate('/trips-list');
     }

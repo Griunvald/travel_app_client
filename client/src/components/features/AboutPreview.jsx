@@ -6,7 +6,8 @@ function AboutPreview({ about, leader }) {
   const truncatedAbout = about.length > 70 ? `${about.substring(0, 70)}...` : about;
 
   const handleReadMoreClick = () => {
-    navigate(`/public-profile/${leader}`, { state: { from: window.location.pathname } });
+    const scrollPosition = window.scrollY;
+    navigate(`/public-profile/${leader}`, { state: { from: window.location.pathname, scrollPosition} });
   };
 
   return (
