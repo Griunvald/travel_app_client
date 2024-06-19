@@ -7,6 +7,7 @@ import Entry from '../features/Entry';
 import CommentsContainer from '../features/comments/CommentsContainer';
 import { getFollowingUsers } from '../../features/follow/followThunks';
 import { getFullTrip } from '../../features/trip/tripThunks';
+import BackButton from '../common/BackButton'
 
 function FullTrip() {
   const { userId } = useParams();
@@ -60,6 +61,7 @@ function FullTrip() {
     };
   }, []);
 
+
   return (
     <div className="relative pb-20"> {/* Add padding to the bottom to prevent content from being hidden behind the button */}
       {tripDetails &&
@@ -91,13 +93,8 @@ function FullTrip() {
       }
       <CommentsContainer />
       <div style={{ bottom: `${buttonBottom}px` }} className="fixed left-0 w-full flex justify-center py-4">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="px-4 py-2 bg-white text-black border border-primary rounded"
-        >
-          Back to Trips List
-        </button>
-      </div>
+        <BackButton name="Back to Trips List"  onClick={() => navigate(-1)}/>
+        </div>
     </div>
   );
 };
