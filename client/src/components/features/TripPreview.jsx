@@ -30,8 +30,8 @@ function TripPreview({ username, userId: leader, title, description, url, create
   const Content = (
     <>
       <h1 className="font-bold text-gray-900 text-3xl md:text-4xl leading-snug md:leading-normal">{title}</h1>
+      <img className="w-full md:w-[700px] my-6" src={url} alt="trip cover image" />
       <p className="text-base font-normal">{description}</p>
-      <img className="w-full md:w-[700px] mt-4" src={url} alt="trip cover image" />
     </>
   );
   useEffect(() => {
