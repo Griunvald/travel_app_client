@@ -59,6 +59,29 @@ export const getProfile = createAsyncThunk(
   }
 );
 
+
+export const getProfileById = createAsyncThunk(
+  'profile/getProfile',
+  async (userId, thunkApi) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/profile/${userId}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const updateProfile = createAsyncThunk(
   'profile/updateProfile',
   async (data, thunkApi) => {

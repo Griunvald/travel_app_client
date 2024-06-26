@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfile } from '../../features/profile/profileThunks.js'
+import { getProfileById } from '../../features/profile/profileThunks.js'
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 function PublicProfile(){
@@ -11,7 +11,7 @@ function PublicProfile(){
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getProfile(userId));
+    dispatch(getProfileById(userId));
   }, [userId]);
 
     const handleBackClick = () => {
