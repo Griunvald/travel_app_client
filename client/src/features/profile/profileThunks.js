@@ -41,7 +41,7 @@ export const getProfile = createAsyncThunk(
   'profile/getProfile',
   async (userId, thunkApi) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/profile/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/profile`, {
         method: 'GET',
         credentials: 'include',
         headers: {
