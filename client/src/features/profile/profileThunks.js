@@ -39,7 +39,7 @@ export const getProfileFromLocalStorage = createAsyncThunk(
 
 export const getProfile = createAsyncThunk(
   'profile/getProfile',
-  async (userId, thunkApi) => {
+  async (_, thunkApi) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/users/profile`, {
         method: 'GET',
