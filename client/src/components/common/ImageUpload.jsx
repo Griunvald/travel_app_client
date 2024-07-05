@@ -1,16 +1,27 @@
 import { useRef } from 'react';
 import CloseButton from './CloseButton';
+import imageCompression from 'browser-image-compression';
 
 const ImageUpload = ({ onFileSelect, preview, setPreview }) => {
   const fileInputRef = useRef(null);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setPreview(previewUrl);
-      if (onFileSelect) {
-        onFileSelect(file);
+      try {
+        const compressedFile = await imageCompression(file, {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1024,
+          useWebWorker: true,
+        });
+        const previewUrl = URL.createObjectURL(compressedFile);
+        setPreview(previewUrl);
+        if (onFileSelect) {
+          onFileSelect(compressedFile);
+        }
+      } catch (error) {
+        console.error('Error during image compression:', error);
+        handleCancel();
       }
     } else {
       handleCancel();
