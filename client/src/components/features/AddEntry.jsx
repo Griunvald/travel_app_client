@@ -53,7 +53,7 @@ const AddEntry = () => {
     }
   }, [tags, activeTab]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     setIsLoading(true);
     try {
       let awsData;
@@ -177,8 +177,14 @@ const AddEntry = () => {
         </TabContainer>
         <TagsArea />
         <div className="flex flex-col md:flex-row justify-end gap-x-5 gap-y-4 pt-4">
-          <Button name="Publish" variant="primary" type="submit"
-            disabled={isLoading} inProgressText="Publishing..." />
+          <Button 
+            name="Publish" 
+            variant="primary" 
+            type="submit"
+            disabled={isLoading} 
+            inProgressText="Publishing..." 
+            isLoading={isLoading} 
+          />
         </div>
       </Form>
       <div className="mt-4">1. Write Text or Upload Image, 2. Add tags, 3. Hit 'Publish' when done.</div>
