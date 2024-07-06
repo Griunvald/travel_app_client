@@ -19,6 +19,9 @@ function FullTrip() {
 
   const { tripDetails, entryList } = useSelector((state) => state.trip);
   const [buttonBottom, setButtonBottom] = useState(0);
+  
+  const Open = () => (<p className="text-center font-bold mt-6">To be continued...</p>);
+  const Closed = () => (<p className="text-center font-bold mt-6">The end</p>);
 
   const formattedDate = tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
 
@@ -90,6 +93,9 @@ function FullTrip() {
             </div>
           ))
         )
+      }
+      {
+       tripDetails.status === "open" ? <Open /> : <Closed />
       }
       <CommentsContainer />
       <div style={{ bottom: `${buttonBottom}px` }} className="fixed left-0 w-full flex justify-center py-4">
