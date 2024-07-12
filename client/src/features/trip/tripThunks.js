@@ -2,18 +2,20 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
-  async ({limit,offset}, { rejectWithValue }) => {
+  async ({ limit, offset }, { rejectWithValue }) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/preview/${limit}/${offset}`);
-      const data = await response.json();
-      return data;
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch trips preview');
+      }
     } catch (error) {
-      console.error('Failed to fetch trips:', error);
       return rejectWithValue(error.message);
     }
   }
 );
-
 
 export const getTripsCount = createAsyncThunk(
   'trip/getTripsCount',
@@ -23,27 +25,33 @@ export const getTripsCount = createAsyncThunk(
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-      })
+      });
       if (response.ok) {
         const data = await response.json();
         return data;
+      } else {
+        throw new Error('Failed to fetch trips count');
       }
-    } catch (err) {
-      console.error('Failed to get trips count: ', err);
-      return rejectWithValue(err.message);
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const getFullTrip = createAsyncThunk(
   'trip/getFullTrip',
-  async (userId, { rejectWithValue }) => {
+  async ({ userId, tripId }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/full/${userId}`);
-      const data = await response.json();
-      return data;
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/full/${userId}/${tripId}`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Fetched full trip data:', data); // Add a log to verify data
+        return data;
+      } else {
+        return rejectWithValue('Failed to fetch trip details');
+      }
     } catch (err) {
-      console.error('Failed to fetch trips:', err);
+      console.error('Failed to fetch trip details:', err);
       return rejectWithValue(err.message);
     }
   }
@@ -60,16 +68,13 @@ export const getCurrentTripId = createAsyncThunk(
         },
         credentials: 'include',
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const text = await response.text();
       if (!text) {
         return null;
       }
-
       const data = JSON.parse(text);
       return data.id;
     } catch (error) {
@@ -78,29 +83,19 @@ export const getCurrentTripId = createAsyncThunk(
   }
 );
 
-
 export const getCurrentTrip = createAsyncThunk(
   'trip/getCurrentTrip',
   async (_, thunkAPI) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/current`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
-      const text = await response.text();
-      if (!text) {
-        return null;
-      }
-
-      const data = JSON.parse(text);
+      const data = await response.json();
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch current trip');
@@ -108,9 +103,8 @@ export const getCurrentTrip = createAsyncThunk(
   }
 );
 
-
 export const getTripsList = createAsyncThunk(
-  'trip/getTripList',
+  'trip/getTripsList',
   async (_, thunkAPI) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/list`, {
@@ -120,13 +114,12 @@ export const getTripsList = createAsyncThunk(
         },
         credentials: 'include',
       });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const text = await response.text();
       if (!text) {
         return null;
-      }
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
       }
       const data = JSON.parse(text);
       return data;
@@ -136,7 +129,6 @@ export const getTripsList = createAsyncThunk(
   }
 );
 
-
 export const closeTrip = createAsyncThunk(
   'trip/closeTrip',
   async (_, { rejectWithValue }) => {
@@ -145,14 +137,16 @@ export const closeTrip = createAsyncThunk(
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-      })
+      });
       if (response.ok) {
         const data = await response.json();
         return data;
+      } else {
+        throw new Error('Failed to close trip');
       }
-    } catch (err) {
-      console.error('Failed to end trip: ', err);
-      return rejectWithValue(err.message);
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );
+

@@ -7,15 +7,14 @@ import Entry from '../features/Entry';
 import CommentsContainer from '../features/comments/CommentsContainer';
 import { getFollowingUsers } from '../../features/follow/followThunks';
 import { getFullTrip } from '../../features/trip/tripThunks';
-import BackButton from '../common/BackButton'
+import BackButton from '../common/BackButton';
 
 function FullTrip() {
-  const { userId } = useParams();
+  const { userId, tripId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const leaderId = useSelector(store => store.follow.leaderId);
   const username = useSelector(store => store.user.username);
-  const ID = Number(userId);
 
   const { tripDetails, entryList } = useSelector((state) => state.trip);
   const [buttonBottom, setButtonBottom] = useState(0);
@@ -23,7 +22,7 @@ function FullTrip() {
   const Open = () => (<p className="text-center font-bold mt-6">To be continued...</p>);
   const Closed = () => (<p className="text-center font-bold mt-6">The end</p>);
 
-  const formattedDate = tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
+  const formattedDate = tripDetails && tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
 
   useEffect(() => {
     if (username) {
@@ -32,8 +31,8 @@ function FullTrip() {
   }, [leaderId]);
 
   useEffect(() => {
-    dispatch(getFullTrip(userId));
-  }, [userId]);
+    dispatch(getFullTrip({ userId, tripId }));
+  }, [userId, tripId, dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,7 +63,6 @@ function FullTrip() {
     };
   }, []);
 
-
   return (
     <div className="relative pb-20"> {/* Add padding to the bottom to prevent content from being hidden behind the button */}
       {tripDetails &&
@@ -76,12 +74,12 @@ function FullTrip() {
           title={tripDetails.title}
           description={tripDetails.description}
           url={`${import.meta.env.VITE_AWS_S3_URL}/${tripDetails.url}`}
-          userId={ID}
+          userId={userId}
         />
       }
       {
-        entryList && (
-          Array.isArray(entryList) && entryList.map(entry => (
+        entryList && entryList.length > 0 ? (
+          entryList.map(entry => (
             <div key={entry.id}>
               <Entry
                 entryId={entry.id}
@@ -92,15 +90,17 @@ function FullTrip() {
               />
             </div>
           ))
+        ) : (
+          <p>No entries found for this trip.</p>
         )
       }
       {
-       tripDetails.status === "open" ? <Open /> : <Closed />
+       tripDetails && tripDetails.status === "open" ? <Open /> : <Closed />
       }
       <CommentsContainer />
       <div style={{ bottom: `${buttonBottom}px` }} className="fixed left-0 w-full flex justify-center py-4">
-        <BackButton name="Back to Trips List"  onClick={() => navigate(-1)}/>
-        </div>
+        <BackButton name="Back to Trips List" onClick={() => navigate(-1)} />
+      </div>
     </div>
   );
 };

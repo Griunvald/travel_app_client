@@ -1,5 +1,5 @@
-import { getAllTripsPreview, getTripsCount, getFullTrip, getCurrentTripId, getCurrentTrip, getTripsList, closeTrip } from './tripThunks';
 import { createSlice } from '@reduxjs/toolkit';
+import { getFullTrip, getAllTripsPreview, getTripsCount, getCurrentTripId, getCurrentTrip, getTripsList, closeTrip } from './tripThunks';
 
 const initialState = {
   trip: null,
@@ -9,10 +9,10 @@ const initialState = {
   tripDetails: {},
   entryList: [],
   tripsCount: 0,
-  hasMore:true,
+  hasMore: true,
   loading: 'idle',
   error: null
-}
+};
 
 const tripSlice = createSlice({
   name: 'trip',
@@ -23,15 +23,14 @@ const tripSlice = createSlice({
     },
     setCurrentTripId: (state, action) => {
       state.currentTripId = action.payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
-      // getAllTripsPreview
       .addCase(getAllTripsPreview.pending, (state) => {
         state.loading = 'pending';
       })
-    .addCase(getAllTripsPreview.fulfilled, (state, action) => {
+      .addCase(getAllTripsPreview.fulfilled, (state, action) => {
         state.loading = 'idle';
         const existingTripIds = new Set(state.trips.map(trip => trip.id));
         const newTrips = action.payload.filter(trip => !existingTripIds.has(trip.id));
@@ -44,7 +43,6 @@ const tripSlice = createSlice({
         state.loading = 'idle';
         state.error = action.payload;
       })
-      // getTripsCounts
       .addCase(getTripsCount.pending, (state) => {
         state.loading = 'pending';
       })
@@ -56,21 +54,19 @@ const tripSlice = createSlice({
         state.loading = 'idle';
         state.error = action.payload;
       })
-      // GetFullTrip
       .addCase(getFullTrip.pending, (state) => {
-        state.loading = 'pending'
+        state.loading = 'pending';
       })
       .addCase(getFullTrip.fulfilled, (state, action) => {
         state.tripDetails = action.payload.tripDetails;
-        state.entryList = action.payload.records.rows;
-        state.loading = 'idle'
+        state.entryList = action.payload.records;
+        state.loading = 'idle';
+        console.log('State updated with full trip:', state); // Log the updated state
       })
       .addCase(getFullTrip.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
       })
-
-      // Get Current Trip Id
       .addCase(getCurrentTripId.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
@@ -83,8 +79,6 @@ const tripSlice = createSlice({
         state.error = action.payload;
         state.loading = 'idle';
       })
-
-      // Get Current Trip
       .addCase(getCurrentTrip.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
@@ -97,8 +91,6 @@ const tripSlice = createSlice({
         state.error = action.payload;
         state.loading = 'idle';
       })
-
-      // Get Trips List
       .addCase(getTripsList.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
@@ -111,8 +103,6 @@ const tripSlice = createSlice({
         state.error = action.payload;
         state.loading = 'idle';
       })
-
-      // Close trip 
       .addCase(closeTrip.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
@@ -124,9 +114,10 @@ const tripSlice = createSlice({
       .addCase(closeTrip.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
-      })
+      });
   }
 });
 
-export const { setTripsCount, setTripDetails, setEntryList, setCurrentTripId } = tripSlice.actions;
+export const { setTripsCount, setCurrentTripId } = tripSlice.actions;
 export default tripSlice.reducer;
+
