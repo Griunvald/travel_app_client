@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFullTrip, getAllTripsPreview, getTripsCount, getCurrentTripId, getCurrentTrip, getTripsList, closeTrip } from './tripThunks';
+import { getAllTripsPreview, getTripsCount, getCurrentTripId, getCurrentTrip, getTripsList, closeTrip, getFullCurrentTrip, getFullTrip } from './tripThunks';
 
 const initialState = {
   trip: null,
@@ -61,9 +61,20 @@ const tripSlice = createSlice({
         state.tripDetails = action.payload.tripDetails;
         state.entryList = action.payload.records;
         state.loading = 'idle';
-        console.log('State updated with full trip:', state); // Log the updated state
       })
       .addCase(getFullTrip.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = 'idle';
+      })
+      .addCase(getFullCurrentTrip.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getFullCurrentTrip.fulfilled, (state, action) => {
+        state.tripDetails = action.payload.tripDetails;
+        state.entryList = action.payload.records;
+        state.loading = 'idle';
+      })
+      .addCase(getFullCurrentTrip.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = 'idle';
       })

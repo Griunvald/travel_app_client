@@ -4,32 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import TripPreview from '../features/TripPreview';
 import AddEntry from '../features/AddEntry';
 import EntryList from '../features/EntryList';
-import { getCurrentTrip } from '../../features/trip/tripThunks';
+import { getFullCurrentTrip } from '../../features/trip/tripThunks';
 
 function CurrentTrip() {
   const { username, userId } = useSelector(store => store.user);
-  const { avatar} = useSelector(store => store.profile);
-  const { trip } = useSelector(store => store.trip);
+  const { avatar } = useSelector(store => store.profile);
+  const { tripDetails } = useSelector(store => store.trip);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentTrip(userId))
-  }, [userId]);
+    if (userId) {
+      dispatch(getFullCurrentTrip(userId));
+    }
+  }, [userId, dispatch]);
 
   return (
     <>
-      {trip && (
+      {tripDetails && (
         <TripPreview
-          key={trip.id}
+          key={tripDetails.id}
           username={username}
           avatar={avatar}
-          createdAt={trip.createdAt ? format(new Date(trip.createdAt), "MMMM do, yyyy, hh:mm a") : ''}
-          title={trip.title}
-          description={trip.description}
-          url={`${import.meta.env.VITE_AWS_S3_URL}/${trip.url}`}
+          createdAt={tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : ''}
+          title={tripDetails.title}
+          description={tripDetails.description}
+          url={`${import.meta.env.VITE_AWS_S3_URL}/${tripDetails.url}`}
         />
       )}
-
       <EntryList />
       <AddEntry />
     </>
@@ -37,3 +38,4 @@ function CurrentTrip() {
 }
 
 export default CurrentTrip;
+

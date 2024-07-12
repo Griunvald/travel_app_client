@@ -1,25 +1,12 @@
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Entry from './Entry';
-import { getEntryList } from '../../features/entry/entryThunks';
-import { setEntryList } from '../../features/entry/entrySlice';
-import { useSelector, useDispatch } from 'react-redux';
 
 function EntryList() {
-  const dispatch = useDispatch();
-  const userId = useSelector(store => store.user.userId);
-  const entryList = useSelector(store => store.entry.entryList);
-  const currentTripId = useSelector(store => store.trip.currentTripId);
-
-  useEffect(() => {
-    if (userId) {
-      dispatch(getEntryList(userId));
-      dispatch(setEntryList(currentTripId));
-    }
-  }, [userId, useDispatch]);
+  const entryList = useSelector(store => store.trip.entryList);
 
   return (
-    <div>{
-      entryList && (
+    <div>
+      {entryList && (
         Array.isArray(entryList) && entryList.map(entry => (
           <div key={entry.id}>
             <Entry
@@ -31,11 +18,11 @@ function EntryList() {
               recordTags={entry.recordTags}
             />
           </div>
-
         ))
-      )
-    }</div>
-  )
+      )}
+    </div>
+  );
 }
 
 export default EntryList;
+

@@ -15,14 +15,15 @@ function FullTrip() {
   const navigate = useNavigate();
   const leaderId = useSelector(store => store.follow.leaderId);
   const username = useSelector(store => store.user.username);
+  const ID = Number(userId);
 
   const { tripDetails, entryList } = useSelector((state) => state.trip);
   const [buttonBottom, setButtonBottom] = useState(0);
-  
+
   const Open = () => (<p className="text-center font-bold mt-6">To be continued...</p>);
   const Closed = () => (<p className="text-center font-bold mt-6">The end</p>);
 
-  const formattedDate = tripDetails && tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
+  const formattedDate = tripDetails.createdAt ? format(new Date(tripDetails.createdAt), "MMMM do, yyyy, hh:mm a") : null;
 
   useEffect(() => {
     if (username) {
@@ -32,7 +33,7 @@ function FullTrip() {
 
   useEffect(() => {
     dispatch(getFullTrip({ userId, tripId }));
-  }, [userId, tripId, dispatch]);
+  }, [userId, tripId]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,8 +65,8 @@ function FullTrip() {
   }, []);
 
   return (
-    <div className="relative pb-20"> {/* Add padding to the bottom to prevent content from being hidden behind the button */}
-      {tripDetails &&
+    <div className="relative pb-20">
+      {tripDetails && (
         <TripPreview
           avatar={tripDetails.avatar}
           about={tripDetails.about}
@@ -74,36 +75,30 @@ function FullTrip() {
           title={tripDetails.title}
           description={tripDetails.description}
           url={`${import.meta.env.VITE_AWS_S3_URL}/${tripDetails.url}`}
-          userId={userId}
+          userId={ID}
         />
-      }
-      {
-        entryList && entryList.length > 0 ? (
-          entryList.map(entry => (
-            <div key={entry.id}>
-              <Entry
-                entryId={entry.id}
-                createdAt={entry.createdAt}
-                textValue={entry.textValue}
-                urlValue={entry.urlValue}
-                recordTags={entry.recordTags}
-              />
-            </div>
-          ))
-        ) : (
-          <p>No entries found for this trip.</p>
-        )
-      }
-      {
-       tripDetails && tripDetails.status === "open" ? <Open /> : <Closed />
-      }
+      )}
+      {entryList && (
+        Array.isArray(entryList) && entryList.map(entry => (
+          <div key={entry.id}>
+            <Entry
+              entryId={entry.id}
+              createdAt={entry.createdAt}
+              textValue={entry.textValue}
+              urlValue={entry.urlValue}
+              recordTags={entry.recordTags}
+            />
+          </div>
+        ))
+      )}
+      {tripDetails.status === "open" ? <Open /> : <Closed />}
       <CommentsContainer />
       <div style={{ bottom: `${buttonBottom}px` }} className="fixed left-0 w-full flex justify-center py-4">
         <BackButton name="Back to Trips List" onClick={() => navigate(-1)} />
       </div>
     </div>
   );
-};
+}
 
 export default FullTrip;
 
