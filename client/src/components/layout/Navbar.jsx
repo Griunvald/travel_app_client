@@ -5,13 +5,19 @@ import Logo from '../common/Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Avatar from '../common/Avatar';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileFromLocalStorage } from '../../features/profile/profileThunks';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const dispatch = useDispatch();
   const { username } = useSelector(store => store.user);
   const { avatar } = useSelector(store => store.profile);
   const { currentTripId } = useSelector(store => store.trip);
+
+  useEffect(() => {
+    dispatch(getProfileFromLocalStorage());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,3 +67,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

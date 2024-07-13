@@ -6,7 +6,7 @@ import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, initializeUser } from '../../features/user/userThunks';
-import { getProfileFromLocalStorage } from '../../features/profile/profileThunks.js';
+import { getProfileAndSaveToLocalStorage } from '../../features/profile/profileThunks';
 import { getCurrentTripId } from '../../features/trip/tripThunks';
 
 function Login() {
@@ -27,9 +27,11 @@ function Login() {
 
   useEffect(() => {
     if (userId) {
-      navigate('/trips-list');
+      dispatch(getProfileAndSaveToLocalStorage()).then(() => {
+        navigate('/trips-list');
+      });
     }
-  }, [userId, navigate]);
+  }, [dispatch, userId, navigate]);
 
   const validateForm = () => {
     const errors = {};
@@ -55,10 +57,8 @@ function Login() {
       const actionResult = await dispatch(loginUser(formData));
       if (actionResult.type.includes('fulfilled')) {
         const userId = actionResult.payload.userInfo.userId;
-        const profile = actionResult.payload.profile;
-        localStorage.setItem('profile', JSON.stringify(profile));
         await dispatch(getCurrentTripId(userId));
-        await dispatch(getProfileFromLocalStorage());
+        await dispatch(getProfileAndSaveToLocalStorage());
         navigate('/trips-list');
       }
     } catch (err) {

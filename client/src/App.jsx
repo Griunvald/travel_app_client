@@ -120,7 +120,6 @@ function App() {
     if (userId) {
       dispatch(getCurrentTripId(userId));
       dispatch(getProfileAndSaveToLocalStorage());
-      dispatch(getProfileFromLocalStorage());
     }
   }, [dispatch, userId]);
 
