@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import Link from '../common/Link';
 import Input from '../common/Input';
 import Form from '../common/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../features/user/userThunks';
+import { loginUser, initializeUser } from '../../features/user/userThunks';
 import { getProfileFromLocalStorage } from '../../features/profile/profileThunks.js';
 import { getCurrentTripId } from '../../features/trip/tripThunks';
 
@@ -18,7 +18,18 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const errorMessage = useSelector((state) => state.user.error);
+  const { userId, username, error: errorMessage } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    dispatch(initializeUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (userId) {
+      navigate('/trips-list');
+    }
+  }, [userId, navigate]);
 
   const validateForm = () => {
     const errors = {};
@@ -56,6 +67,10 @@ function Login() {
       setIsLoading(false);
     }
   };
+
+  if (userId) {
+    return null;
+  }
 
   return (
     <div className="w-full md:w-[400px] mx-auto md:border md:border-primary md:shadow-soft px-1 md:px-12 pt-6 pb-6 mt-6 md:mt-24">
