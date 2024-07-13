@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// Define the thunk for getting the full trip by userId and tripId
 export const getFullTrip = createAsyncThunk(
   'trip/getFullTrip',
   async ({ userId, tripId }, { rejectWithValue }) => {
@@ -20,12 +19,11 @@ export const getFullTrip = createAsyncThunk(
   }
 );
 
-// Define the thunk for getting the full current trip by userId
 export const getFullCurrentTrip = createAsyncThunk(
   'trip/getFullCurrentTrip',
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/current/full/${userId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/full/current/${userId}`);
       if (response.ok) {
         const data = await response.json();
         console.log('Fetched full current trip data:', data);
@@ -40,7 +38,6 @@ export const getFullCurrentTrip = createAsyncThunk(
   }
 );
 
-// Export other thunks as needed
 export const getAllTripsPreview = createAsyncThunk(
   'trip/getAllTripsPreview',
   async ({ limit, offset }, { rejectWithValue }) => {
