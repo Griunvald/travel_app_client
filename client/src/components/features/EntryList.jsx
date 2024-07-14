@@ -1,23 +1,32 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Entry from './Entry';
+import { getEntryList } from '../../features/entry/entryThunks';
 
 function EntryList() {
-  const entryList = useSelector(store => store.trip.entryList);
+  const dispatch = useDispatch();
+  const entryList = useSelector(store => store.entry.entryList);
+  const { userId } = useSelector(store => store.user);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getEntryList(userId));
+    }
+  }, [userId, dispatch]);
 
   return (
     <div>
       {entryList && (
         Array.isArray(entryList) && entryList.map(entry => (
-          <div key={entry.id}>
-            <Entry
-              author={entry.userId}
-              entryId={entry.id}
-              createdAt={entry.createdAt}
-              textValue={entry.textValue}
-              urlValue={entry.urlValue}
-              recordTags={entry.recordTags}
-            />
-          </div>
+          <Entry
+            key={entry.id} 
+            author={entry.userId}
+            entryId={entry.id}
+            createdAt={entry.createdAt}
+            textValue={entry.textValue}
+            urlValue={entry.urlValue}
+            recordTags={entry.recordTags}
+          />
         ))
       )}
     </div>

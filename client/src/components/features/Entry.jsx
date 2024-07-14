@@ -13,7 +13,14 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
   const dispatch = useDispatch();
   const location = useLocation();
   const { userId } = useSelector(store => store.user);
-  const formattedDate = format(new Date(createdAt), "MMMM do, yyyy, hh:mm a");
+
+  // Validate and format the date
+  let formattedDate;
+  try {
+    formattedDate = format(new Date(createdAt), "MMMM do, yyyy, hh:mm a");
+  } catch (error) {
+    formattedDate = "Invalid date";
+  }
 
   const [editable, setEditable] = useState(false);
   const [editValue, setEditValue] = useState(textValue);
@@ -180,12 +187,12 @@ function Entry({ author, entryId, createdAt, textValue, urlValue, recordTags }) 
         {recordTags && (
           <ul className="flex gap-x-2 gap-y-3 flex-wrap mb-1 text-sm">
             {recordTags.map((tag) => (
-              <li key={tag.id}>{tag.tagName}</li>
+              <li key={tag.id} className="rounded px-2 py-1">{tag.tagName}</li>
             ))}
           </ul>
         )}
       </div>
-      {textValue && editable == false && (
+      {textValue && !editable && (
         <>
           <p className="text-base font-normal my-4 ">{textValue}</p>
           {location.pathname === '/current-trip' ? null : <Like type='record' itemId={entryId} />}

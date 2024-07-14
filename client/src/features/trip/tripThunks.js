@@ -26,7 +26,6 @@ export const getFullCurrentTrip = createAsyncThunk(
       const response = await fetch(`${import.meta.env.VITE_API_URL}/trips/full/current/${userId}`);
       if (response.ok) {
         const data = await response.json();
-        console.log('Fetched full current trip data:', data);
         return data;
       } else {
         return rejectWithValue('Failed to fetch current trip details');

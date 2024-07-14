@@ -10,7 +10,7 @@ import TabContainer from '../common/TabContainer';
 import Tab from '../common/Tab';
 import TagsArea from '../common/TagsArea';
 import Form from '../common/Form';
-import { getEntryList } from '../../features/entry/entryThunks';
+import { getEntryList, addEntry } from '../../features/entry/entryThunks';
 
 const AddEntry = () => {
   const { toast } = useToast();
@@ -54,6 +54,7 @@ const AddEntry = () => {
   }, [tags, activeTab]);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     try {
       let awsData;
@@ -70,15 +71,15 @@ const AddEntry = () => {
         data: activeTab === "Text" ? formData.text : awsData ? awsData.awsObjectKey : "",
       };
 
-      const responseFromPost = await postData(`${import.meta.env.VITE_API_URL}/records/`, newData);
+      const actionResult = await dispatch(addEntry(newData));
 
-      if (responseFromPost.message === "Record created!") {
-        setFormData({ text: "" })
+      if (addEntry.fulfilled.match(actionResult)) {
+        setFormData({ text: "" });
         setPreview(null);
         setImageFile(null);
         dispatch(addTag([]));
         dispatch(clearTags());
-        dispatch(getEntryList(userId));
+        dispatch(getEntryList(userId)); // Fetch the updated entry list
         toast({ message: 'Success! Your entry has been added!', duration: 5000 });
       }
     } catch (err) {
