@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ReadMoreLink from '../common/Link'
 import UserInfo from '../common/UserInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { followUser, unfollowUser, getFollowingUsers } from '../../features/follow/followThunks';
@@ -7,6 +9,7 @@ import { setLeaderId } from '../../features/follow/followSlice';
 
 function TripPreview({ username, userId: leader, title, description, url, createdAt, avatar, about, link = null }) {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { username: currentUser, userId } = useSelector(store => store.user);
 
   const followingUsers = useSelector((store) => store.follow.followingUsersIds);
@@ -32,6 +35,7 @@ function TripPreview({ username, userId: leader, title, description, url, create
       <h1 className="font-bold text-gray-900 text-3xl md:text-4xl leading-snug md:leading-normal">{title}</h1>
       <img className="w-full md:w-[700px] my-6" src={url} alt="trip cover image" />
       <p className="text-base font-normal">{description}</p>
+          {location.pathname === '/trips-list' && <ReadMoreLink path={link} name="Read more"/>}
     </>
   );
   useEffect(() => {
